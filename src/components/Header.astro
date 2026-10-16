@@ -1,0 +1,71 @@
+---
+const nav = [
+  { href: "#equipos", label: "Equipos", index: "01" },
+  { href: "#ciclo", label: "Servicios", index: "02" },
+  { href: "#capacidad", label: "Capacidad", index: "03" },
+  { href: "#proyectos", label: "Proyectos", index: "04" },
+];
+---
+
+<header class="site-header" data-header>
+  <div class="wrap">
+    <div class="site-header__bar">
+      <a href="#inicio" class="site-header__logo" aria-label="COLCRANES — Inicio">
+        <img
+          class="logo--ink"
+          src="/images/colcranes-logo-oscura.png"
+          alt="COLCRANES · Heavy Lifting Engineering"
+          width="1200"
+          height="360"
+        />
+        <img
+          class="logo--paper"
+          src="/images/colcranes-logo-clara.png"
+          alt=""
+          aria-hidden="true"
+          width="1200"
+          height="360"
+        />
+      </a>
+
+      <nav class="site-nav" aria-label="Navegación principal">
+        {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+
+      <div class="site-header__actions">
+        <a class="header-tel utility" href="tel:+573156293396">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M4 4h4l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v4a1 1 0 0 1-1 1A17 17 0 0 1 3 5a1 1 0 0 1 1-1Z" />
+          </svg>
+          +57 315 629 3396
+        </a>
+        <button class="btn btn--signal header-cta" type="button" data-quote-open>Cotizar</button>
+        <button class="menu-toggle" type="button" data-drawer-toggle aria-expanded="false" aria-controls="menu-movil">
+          <span data-drawer-label>Menú</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-drawer" id="menu-movil" data-drawer data-open="false">
+    <div class="mobile-drawer__inner">
+      <div class="wrap">
+        <nav aria-label="Navegación móvil">
+          {nav.map((item) => (
+            <a href={item.href}>
+              {item.label}
+              <span>{item.index}</span>
+            </a>
+          ))}
+          <a href="#cotizar" data-quote-open>
+            Cotizar proyecto
+            <span>05</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,102 @@
+---
+/**
+ * Servicios presentados como el ciclo de vida real de un sistema de izaje.
+ * Cada etapa reúne los servicios que Colcranes efectivamente ofrece
+ * (tomados del sitio corporativo) en lugar de repetir tarjetas iguales.
+ */
+const stages = [
+  {
+    num: "01",
+    name: "Asesoría e ingeniería",
+    body:
+      "Levantamiento en planta, definición de luz, altura y ciclo de trabajo, y cálculo de la solución con la información real de la operación.",
+    refs: ["Asesorías integrales de ingeniería"],
+  },
+  {
+    num: "02",
+    name: "Diseño y fabricación",
+    body:
+      "Fabricación propia de la estructura del puente, testeros y componentes, con dimensionamiento estructural a la medida de la nave.",
+    refs: ["Fabricación de puentes grúa"],
+  },
+  {
+    num: "03",
+    name: "Montaje y puesta en marcha",
+    body:
+      "Izaje e instalación en planta, alineación de la vía de rodadura, conexión eléctrica y pruebas de funcionamiento con carga.",
+    refs: ["Montaje y puesta en marcha de grúas"],
+  },
+  {
+    num: "04",
+    name: "Servicio y garantía",
+    body:
+      "Acompañamiento posterior a la entrega, atención de garantías y soporte técnico sobre los equipos suministrados.",
+    refs: ["Servicios técnicos", "Servicio de garantías"],
+  },
+  {
+    num: "05",
+    name: "Operación y mantenimiento",
+    body:
+      "Programas de mantenimiento preventivo e inspección de seguridad, o contratos anuales con cobertura de repuestos.",
+    refs: ["Mantenimiento preventivo", "Contratos de mantenimiento y repuestos"],
+  },
+  {
+    num: "06",
+    name: "Reposición y accesorios",
+    body:
+      "Suministro de repuestos originales y de accesorios de elevación bajo gancho para sostener la continuidad de la operación.",
+    refs: [
+      "Suministro de repuestos",
+      "Accesorios de elevación bajo gancho",
+    ],
+  },
+  {
+    num: "07",
+    name: "Modernización",
+    body:
+      "Actualización de sistemas y componentes de equipos en servicio para recuperar confiabilidad o ampliar la capacidad instalada.",
+    refs: ["Modernización de puente grúa"],
+  },
+];
+---
+
+<section class="lifecycle band" id="ciclo">
+  <div class="wrap">
+    <header class="sec-head sec-head--split lifecycle__head">
+      <div>
+        <p class="eyebrow eyebrow--light" data-reveal>Servicios</p>
+        <h2 class="d2" style="margin-top:1.25rem;color:#fff" data-reveal>
+          El ciclo completo<br />de un sistema de izaje
+        </h2>
+      </div>
+      <div data-reveal>
+        <p class="lede lede--light">
+          Un puente grúa no termina cuando se entrega. Colcranes interviene en las siete etapas
+          que definen la vida útil del equipo, con ingeniería propia y repuestos de las firmas que
+          representa.
+        </p>
+      </div>
+    </header>
+
+    <div class="rail" data-rail>
+      <span class="rail__line" aria-hidden="true"></span>
+      <span class="rail__node-line" data-rail-line aria-hidden="true"></span>
+
+      <ul class="rail__stops">
+        {stages.map((stage, index) => (
+          <li class={`stop ${index === 0 ? "is-active" : ""}`}>
+            <span class="stop__dot" aria-hidden="true"></span>
+            <button class="stop__toggle" type="button" aria-pressed={index === 0 ? "true" : "false"}>
+              <span class="stop__num">{stage.num}</span>
+              <span class="stop__name">{stage.name}</span>
+            </button>
+            <p class="stop__body">{stage.body}</p>
+            <ul class="stop__refs">
+              {stage.refs.map((ref) => <li>{ref}</li>)}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

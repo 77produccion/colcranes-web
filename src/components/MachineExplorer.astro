@@ -1,0 +1,319 @@
+---
+/**
+ * Explorador de maquinaria.
+ * Pestañas implementadas con radios nativos: funcionan sin JavaScript y el
+ * contenido completo queda en el HTML (indexable). GSAP sólo añade el
+ * desplazamiento del carro y el revelado de anotaciones.
+ */
+type Family = {
+  id: string;
+  num: string;
+  name: string;
+  short: string;
+  copy: string;
+  image: string;
+  alt: string;
+  diagram?: boolean;
+  photo?: boolean;
+  notes: { text: string; pos: "tl" | "tr" | "bl" | "br" }[];
+  specs: { label: string; value: string }[];
+  tags: string[];
+};
+
+const families: Family[] = [
+  {
+    id: "fam-puentes",
+    num: "01",
+    name: "Puente grúa",
+    short: "Monoviga y biviga",
+    copy:
+      "Equipo principal de elevación en naves industriales. Se dimensiona según la luz entre rieles, la altura de izaje, el recorrido, la carga y el régimen de trabajo real de la operación. Se fabrica en configuración monoviga o biviga.",
+    image: "/images/crane-160t.webp",
+    alt: "Puente grúa biviga de gran capacidad con polipasto de cable y gancho de carga",
+    notes: [
+      { text: "Viga principal biviga", pos: "tl" },
+      { text: "Polipasto de cable", pos: "tr" },
+      { text: "Gancho de carga", pos: "br" },
+    ],
+    specs: [
+      { label: "Configuración", value: "Monoviga · Biviga" },
+      { label: "Capacidad documentada", value: "1 – 15 t" },
+      { label: "Alcance", value: "Diseño, fabricación, montaje" },
+    ],
+    tags: ["Siderurgia", "Bodegas de acero", "Manufactura"],
+  },
+  {
+    id: "fam-portico",
+    num: "02",
+    name: "Grúa pórtico",
+    short: "Pórtico y semipórtico",
+    copy:
+      "Solución de izaje para patios, naves sin columnas o zonas donde la estructura no admite una vía de rodadura elevada. Los apoyos se calculan según el terreno y la luz libre requerida.",
+    image: "/images/grua-portico.webp",
+    alt: "Grúa semipórtico amarilla con viga principal y polipasto sobre estructura de apoyo",
+    notes: [
+      { text: "Viga principal", pos: "tl" },
+      { text: "Apoyo de pórtico", pos: "br" },
+    ],
+    specs: [
+      { label: "Configuración", value: "Pórtico · Semipórtico" },
+      { label: "Capacidad documentada", value: "hasta 17 t" },
+      { label: "Alcance", value: "Diseño, fabricación, modificación" },
+    ],
+    tags: ["Patios de acopio", "Naves sin columnas", "Obra"],
+  },
+  {
+    id: "fam-bandera",
+    num: "03",
+    name: "Grúa bandera",
+    short: "De columna y de pared",
+    copy:
+      "Grúa de servicio localizado para puestos de trabajo: cubre un área de radio fijo alrededor de una columna o un muro. Se dimensiona según el radio de giro, la altura bajo gancho y la carga puntual de la estación.",
+    image: "",
+    alt: "Diagrama de elevación de una grúa bandera con columna, brazo giratorio y alcance radial",
+    diagram: true,
+    notes: [
+      { text: "Radio de giro", pos: "tr" },
+      { text: "Brazo giratorio", pos: "tl" },
+      { text: "Columna", pos: "bl" },
+    ],
+    specs: [
+      { label: "Configuración", value: "Columna · Pared" },
+      { label: "Capacidad", value: "Según estación de trabajo" },
+      { label: "Alcance", value: "Diseño, fabricación, montaje" },
+    ],
+    tags: ["Puestos de trabajo", "Carga puntual", "Mantenimiento"],
+  },
+  {
+    id: "fam-cable",
+    num: "04",
+    name: "Polipastos",
+    short: "Cable y cadena · Servicio pesado",
+    copy:
+      "Polipastos de cable para servicio pesado y ciclos intensivos. También se suministran polipastos de cadena de las líneas R&M LK y Black Bear para capacidades y frecuencias de uso menores.",
+    image: "/images/hoist-double-girder.png",
+    alt: "Polipasto de cable para puente grúa biviga con carro motorizado",
+    notes: [
+      { text: "Carro motorizado", pos: "tl" },
+      { text: "Tambor de cable", pos: "br" },
+    ],
+    specs: [
+      { label: "Línea", value: "Spacemaster SX" },
+      { label: "Montaje", value: "Viga simple · doble" },
+      { label: "Alcance", value: "Suministro, repuestos, retrofit" },
+    ],
+    tags: ["Ciclos intensivos", "Servicio pesado", "Naves de gran altura"],
+  },
+  {
+    id: "fam-kit",
+    num: "05",
+    name: "Kit puente grúa",
+    short: "Testeros, motorización y control",
+    copy:
+      "Conjuntos de testeros, motorización y control para montar sobre una viga puente de fabricación propia. Permiten estandarizar el equipo sin renunciar al cálculo estructural a medida.",
+    image: "/images/crane-kit.png",
+    alt: "Kit de puente grúa con testero motorizado, ruedas y bastidor de acero",
+    notes: [
+      { text: "Testero motorizado", pos: "tl" },
+      { text: "Rueda de rodadura", pos: "br" },
+    ],
+    specs: [
+      { label: "Contenido", value: "Testeros · Motorización · Control" },
+      { label: "Montaje", value: "Sobre viga de fabricación propia" },
+      { label: "Alcance", value: "Suministro, montaje, puesta en marcha" },
+    ],
+    tags: ["Fabricación propia", "Estandarización", "Montaje rápido"],
+  },
+  {
+    id: "fam-electrico",
+    num: "06",
+    name: "Sistema de electrificación",
+    short: "Recorrido, alimentación y bajo gancho",
+    copy:
+      "Sistemas de alimentación eléctrica del puente y del carro, accesorios de elevación bajo gancho y componentes de reposición. Cierran el circuito completo del sistema de izaje.",
+    image: "/images/crane-runway.webp",
+    alt: "Carro de traslación de un puente grúa sobre su vía de rodadura, junto a la línea de alimentación por barras",
+    photo: true,
+    notes: [
+      { text: "Carro de traslación", pos: "tl" },
+      { text: "Línea de alimentación", pos: "br" },
+    ],
+    specs: [
+      { label: "Incluye", value: "Alimentación · Bajo gancho" },
+      { label: "Líneas", value: "Conductix · Autec · DIEPA" },
+      { label: "Alcance", value: "Suministro, instalación, repuestos" },
+    ],
+    tags: ["Recorrido del puente", "Toma de corriente", "Reposición"],
+  },
+];
+
+const familyOrder = ["fam-cable", "fam-puentes", "fam-bandera", "fam-kit", "fam-electrico", "fam-portico"];
+families.sort((a, b) => familyOrder.indexOf(a.id) - familyOrder.indexOf(b.id));
+families.forEach((family, index) => { family.num = String(index + 1).padStart(2, "0"); });
+
+/* Pestañas sin JavaScript: las reglas enlazan cada radio con su panel y su fila. */
+const tabRules = families
+  .map(
+    (family) => `
+.explorer__grid #${family.id}:checked ~ .stage-holder #${family.id}-panel { display: block; }
+.explorer__grid #${family.id}:checked ~ .index-list label[for="${family.id}"] { color: var(--ink); padding-left: 1.6rem; }
+.explorer__grid #${family.id}:checked ~ .index-list label[for="${family.id}"] .index-row__num { color: var(--signal-deep); }
+.explorer__grid #${family.id}:focus-visible ~ .index-list label[for="${family.id}"] { outline: 3px solid var(--cyan); outline-offset: 2px; }`
+  )
+  .join("");
+---
+
+<section class="explorer band" id="equipos">
+  <div class="wrap">
+    <header class="sec-head sec-head--split">
+      <div>
+        <h2 class="d2 explorer__title" data-reveal>
+          Nuestros productos
+        </h2>
+      </div>
+      <div data-reveal>
+        <p class="lede">
+          <span class="explorer__experience">Más de 25 años de <strong>EXPERIENCIA</strong> en el mercado</span>
+          <span class="explorer__description">Ofrecemos una gran variedad de equipos de carga de las más prestigiosas compañías en el ámbito del manejo de carga del mundo con el fin de adaptarnos a sus necesidades.</span>
+        </p>
+      </div>
+    </header>
+
+    <div class="explorer__grid" data-explorer>
+      {families.map((family, index) => (
+        <input
+          type="radio"
+          name="familia-colcranes"
+          id={family.id}
+          checked={index === 0}
+          aria-label={`${family.num} ${family.name} — ${family.short}`}
+        />
+      ))}
+
+      <div class="index-list">
+        <span class="index-list__rail" aria-hidden="true"></span>
+        <span class="index-list__marker" data-marker aria-hidden="true"></span>
+        {families.map((family) => (
+          <label class="index-row" for={family.id}>
+            <span class="index-row__num">{family.num}</span>
+            <span class="index-row__name">
+              {family.name}
+              <span
+                style="display:block;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:400;color:var(--steel-500);margin-top:.4rem"
+              >
+                {family.short}
+              </span>
+            </span>
+          </label>
+        ))}
+      </div>
+
+      <div class="stage-holder">
+        {families.map((family, index) => (
+          <div
+            class={`family ${index === 0 ? "is-active" : ""}`}
+            id={`${family.id}-panel`}
+            role="tabpanel"
+            aria-label={family.name}
+          >
+            <div class="stage">
+              <header class="stage__head">
+                <p class="mono" style="margin:0">
+                  {family.num} · {family.name}
+                </p>
+                <p class="mono" style="margin:0;color:var(--steel-500)">
+                  Referencia {family.num} / 07
+                </p>
+              </header>
+
+              <div class="stage__media">
+                <figure class={`stage__fig ${index === 0 ? "is-active" : ""} ${family.photo ? "is-photo" : ""}`}>
+                  {family.diagram ? (
+                    <svg
+                      viewBox="0 0 720 420"
+                      width="100%"
+                      role="img"
+                      aria-label={family.alt}
+                      style="display:block;color:var(--ink)"
+                    >
+                      <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square">
+                        <path d="M120 380 h48" stroke-width="6" />
+                        <path d="M96 372 h96" stroke-width="6" />
+                        <path d="M144 372 V96" />
+                        <path d="M144 96 h330" stroke-width="5" />
+                        <path d="M144 78 h330" stroke-width="2" opacity=".45" />
+                        <path d="M144 114 h330" stroke-width="2" opacity=".45" />
+                        <path d="M474 96 v22" stroke-width="5" />
+                        <path d="M144 96 L120 372" stroke-width="2" opacity=".35" />
+                      </g>
+                      <g stroke="var(--signal)" fill="none" stroke-width="3">
+                        <rect x="330" y="78" width="58" height="36" fill="#fff" />
+                        <path d="M359 114 v70" stroke-dasharray="6 5" />
+                        <path d="M359 184 q11 12 0 24 q-11 12 0 24" stroke-width="4" />
+                        <path
+                          d="M150 130 A300 300 0 0 1 470 130"
+                          fill="none"
+                          stroke-width="1.5"
+                          stroke-dasharray="4 6"
+                        />
+                      </g>
+                      <g fill="var(--ink)">
+                        <circle cx="144" cy="96" r="5" />
+                        <circle cx="474" cy="96" r="5" />
+                      </g>
+                      <text x="150" y="404" font-family="var(--font-mono)" font-size="12" fill="var(--steel-500)">
+                        Ø RADIO DE GIRO
+                      </text>
+                    </svg>
+                  ) : (
+                    <img src={family.image} alt={family.alt} loading="lazy" decoding="async" />
+                  )}
+
+                  {family.notes.map((note) => (
+                    <span class={`note note--${note.pos}`}>{note.text}</span>
+                  ))}
+                </figure>
+              </div>
+
+              <div class="stage__foot">
+                <div>
+                  <p class="body-copy">{family.copy}</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:.4rem .75rem;margin-top:1rem">
+                    {family.tags.map((tag) => (
+                      <span class="mono" style="color:var(--steel-500)">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+                <dl class="spec-grid">
+                  {family.specs.map((spec) => (
+                    <div>
+                      <dt>{spec.label}</dt>
+                      <dd>{spec.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div
+      style="display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--line-dark)"
+    >
+      <p class="mono" style="margin:0;color:var(--steel-500);max-width:62ch;line-height:1.8">
+        Los rangos de capacidad corresponden a equipos documentados en el archivo técnico de
+        proyectos. El dimensionamiento de cada equipo se confirma con el levantamiento en planta.
+      </p>
+      <a class="link-arrow" href="#cotizar">
+        Especificar un equipo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="M5 12h14M13 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <style is:global set:html={tabRules}></style>
+</section>

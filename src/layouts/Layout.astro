@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "COLCRANES | Fabricación, montaje y mantenimiento de puentes grúa y polipastos",
+  description =
+    "Más de 25 años fabricando, montando, manteniendo y modernizando puentes grúa, pórticos, grúas bandera y polipastos para la industria colombiana.",
+} = Astro.props;
+
+const site = "https://colcranes.com";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={site} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="COLCRANES" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${site}/images/hero-crane.jpg`} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,600..800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "COLCRANES S.A.S.",
+        url: site,
+        description,
+        email: "comercial@colcranes.com",
+        telephone: "+57 315 629 3396",
+        address: [
+          { "@type": "PostalAddress", addressLocality: "Barranquilla", addressCountry: "CO" },
+          { "@type": "PostalAddress", addressLocality: "Bogotá", addressCountry: "CO" },
+        ],
+        areaServed: "Colombia",
+      })}
+    />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <slot />
+
+    <script>
+      import '../scripts/motion.ts';
+    </script>
+  </body>
+</html>

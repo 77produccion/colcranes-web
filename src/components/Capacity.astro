@@ -1,0 +1,146 @@
+---
+/**
+ * Capacidad, planta y compañía.
+ * Los valores de la tabla de datos están tomados del sitio corporativo
+ * (ver CONTENT_AUDIT_COLCRANES.md). No se publican cifras sin respaldo.
+ */
+const capabilities = [
+  {
+    num: "01",
+    title: "Fabricación propia",
+    text: "La estructura del puente, los testeros y los componentes del sistema de izaje se fabrican en Colcranes, no se revenden.",
+  },
+  {
+    num: "02",
+    title: "Ingeniería de cálculo",
+    text: "Cada equipo se dimensiona con la luz real entre rieles, la altura de izaje disponible, la carga y el régimen de trabajo de la operación.",
+  },
+  {
+    num: "03",
+    title: "Montaje en planta",
+    text: "Equipos de campo para izaje e instalación, alineación de la vía de rodadura y pruebas de funcionamiento en la instalación del cliente.",
+  },
+  {
+    num: "04",
+    title: "Cobertura nacional",
+    text: "Dos sedes —Barranquilla y Bogotá— y desplazamiento de personal técnico a plantas en todo el territorio colombiano.",
+  },
+];
+
+const companyData = [
+  { label: "Trayectoria", value: "+25 años", src: "colcranes.com" },
+  { label: "Proyectos entregados", value: "+800", src: "colcranes.com" },
+  { label: "Sedes", value: "Barranquilla · Bogotá", src: "colcranes.com" },
+  { label: "Atención", value: "Lun–Vie 07:30–17:30", src: "colcranes.com" },
+  { label: "Actividad", value: "Fabricación, montaje, mantenimiento", src: "colcranes.com" },
+];
+---
+
+<section class="capacity band" id="capacidad">
+  <div class="wrap">
+    <header class="sec-head sec-head--split">
+      <div>
+        <p class="eyebrow" data-reveal>Capacidad y planta</p>
+        <h2 class="d2" style="margin-top:1.25rem" data-reveal>
+          Ingeniería colombiana<br />para operaciones reales
+        </h2>
+      </div>
+      <div data-reveal>
+        <p class="lede">
+          Colcranes reúne en una misma estructura el cálculo, la fabricación y el trabajo de campo.
+          Eso permite responder por el equipo completo —estructura, mecanismos, montaje y
+          mantenimiento— en lugar de delegar cada etapa en un tercero.
+        </p>
+      </div>
+    </header>
+
+    <div class="plate" data-reveal-group>
+      <figure class="plate__main" data-reveal>
+        <img
+          src="/images/planta-bodega.webp"
+          alt="Puente grúa amarillo instalado sobre su vía de rodadura en una bodega de acero en operación"
+          width="1800"
+          height="1108"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="figcap">
+          Puente grúa en operación sobre vía de rodadura · bodega de lámina de acero
+        </figcaption>
+      </figure>
+
+      <figure class="plate__secondary" data-reveal>
+        <img
+          src="/images/planta-puente-marca.webp"
+          alt="Puente grúa Colcranes rotulado en su vía de rodadura dentro de una bodega industrial"
+          width="1200"
+          height="892"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="figcap">Puente grúa rotulado · izaje de servicio en planta</figcaption>
+      </figure>
+    </div>
+
+    <div class="capacity__intro">
+      <div class="capabilities" data-reveal-group>
+        {capabilities.map((item) => (
+          <article class="capability" data-reveal>
+            <span class="capability__num">{item.num}</span>
+            <div>
+              <h3 class="d3">{item.title}</h3>
+              <p class="body-copy">{item.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div data-reveal>
+        <table class="data-table">
+          <caption>Datos de la compañía · fuente: sitio corporativo</caption>
+          <tbody>
+            {companyData.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td class="data-table__value">{row.value}</td>
+                <td class="data-table__src">{row.src}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="note-src">
+          La capacidad máxima por familia se confirma con el levantamiento en planta. Los rangos
+          publicados en la sección de equipos corresponden a proyectos documentados en el archivo
+          técnico de Colcranes.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="margin-top:clamp(2.5rem,5vw,4.5rem)">
+    <div class="detail-pair" data-reveal-group>
+      <figure data-reveal style="margin:0">
+        <img
+          src="/images/hoist-100t.webp"
+          alt="Polipasto de cable para servicio pesado sobre fondo blanco"
+          width="1700"
+          height="1300"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="figcap">Polipasto de cable para servicio pesado</figcaption>
+      </figure>
+      <figure data-reveal style="margin:0">
+        <img
+          src="/images/hoist-open-winch.webp"
+          alt="Conjunto de izado con tambor de cable y guías"
+          width="1700"
+          height="1230"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="figcap">Conjunto de izado: tambor, guías y freno</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

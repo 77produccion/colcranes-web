@@ -1,0 +1,61 @@
+---
+/**
+ * Escena de apertura.
+ * Fotografía industrial a sangre completa; la tipografía se apoya sobre la
+ * imagen sin competir con ella. Los datos de la banda inferior provienen del
+ * sitio corporativo (ver CONTENT_AUDIT_COLCRANES.md).
+ */
+const readouts = [
+  { label: "Proyectos entregados", value: "+800", accent: false },
+  { label: "Trayectoria", value: "+25 años", accent: true },
+  { label: "Sedes", value: "Barranquilla · Bogotá", accent: false },
+  { label: "Atención", value: "Lun–Vie 07:30–17:30", accent: false },
+];
+---
+
+<section class="hero" id="inicio" data-hero>
+  <div class="hero__media" data-hero-media>
+    <img
+      data-hero-slide
+      src="/images/hero-crane.jpg"
+      alt="Puente grúa de gran capacidad operando en la nave de una acería"
+      width="2048"
+      height="1220"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <img data-hero-slide src="/images/planta-puente-marca.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+    <img data-hero-slide src="/images/grua-portico.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+    <img data-hero-slide src="/images/crane-runway.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+  <div class="hero__axis" aria-hidden="true"></div>
+
+  <div class="wrap hero__inner">
+    <h1 class="d1 hero__title">
+      <span class="line" data-hero-line><span>Ingeniería para</span></span>
+      <span class="line" data-hero-line><span class="accent">mover grandes cargas.</span></span>
+    </h1>
+
+    <div class="hero__foot">
+      <div>
+        <div class="hero__ctas" data-hero-fade>
+          <button class="btn btn--signal" type="button" data-quote-open>
+            Solicitar cotización técnica
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </button>
+          <a class="btn btn--ghost-light" href="#equipos">Explorar equipos</a>
+        </div>
+        <p class="hero__locale" data-hero-fade>
+          <span>Cobertura nacional</span>
+          <span>Fabricación propia</span>
+          <span>Ingeniería de elevación</span>
+        </p>
+      </div>
+
+      <!-- Métricas reservadas para reubicarlas en otra sección. -->
+    </div>
+  </div>
+</section>

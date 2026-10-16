@@ -1,0 +1,299 @@
+---
+/**
+ * Cotización.
+ * Tres rutas de solicitud —proyecto, servicio y repuestos— replican los tres
+ * formularios del sitio corporativo, sin convertirlo en un asistente por pasos.
+ * Los datos de contacto provienen de colcranes.com.
+ */
+const channels = [
+  {
+    label: "Línea nacional · Ventas",
+    value: "+57 315 629 3396",
+    href: "tel:+573156293396",
+    note: "Cotización de proyectos y equipos nuevos",
+  },
+  {
+    label: "Soporte técnico",
+    value: "+57 310 704 3333",
+    href: "tel:+573107043333",
+    note: "Fallas, mantenimiento y equipos en operación",
+  },
+  {
+    label: "Servicio al cliente",
+    value: "+57 322 249 2904 · +57 315 306 5795",
+    href: "tel:+573222492904",
+    note: "Contratos, repuestos y accesorios",
+  },
+];
+
+const equipmentOptions = [
+  "Puente grúa monoviga o biviga",
+  "Grúa pórtico o semipórtico",
+  "Grúa bandera",
+  "Polipasto de cable",
+  "Polipasto de cadena",
+  "Kit de puente grúa",
+  "Electrificación o accesorios",
+  "Mantenimiento, repuestos o modernización",
+  "Aún no lo tengo definido",
+];
+---
+
+<section class="quote-drawer" id="cotizar" data-quote-drawer aria-hidden="true" inert>
+  <button class="quote-drawer__scrim" type="button" data-quote-close aria-label="Cerrar formulario"></button>
+  <div class="quote-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="quote-title" tabindex="-1">
+    <button class="quote-drawer__close" type="button" data-quote-close aria-label="Cerrar formulario">×</button>
+    <div class="quote__grid">
+      <div class="quote__aside">
+        <div data-reveal>
+          <p class="eyebrow eyebrow--light">Cotización</p>
+          <h2 class="d2" id="quote-title" style="margin-top:1.25rem">
+            Cotice su<br />proyecto de izaje
+          </h2>
+          <p class="lede lede--light" style="margin-top:1.25rem">
+            Con la luz entre rieles, la altura de izaje y la carga a mover podemos dimensionar la
+            solución. Si aún no tiene esos datos, un ingeniero los levanta en planta.
+          </p>
+        </div>
+
+        <div class="quote-contacts" data-reveal>
+          <details class="quote-contacts__accordion">
+            <summary aria-label="Mostrar otros teléfonos" title="Mostrar otros teléfonos">
+              <span class="quote-contacts__primary"><span>Línea principal · Ventas</span><a href="tel:+573156293396">+57 315 629 3396</a></span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </summary>
+            <div class="quote-contacts__details">
+              {channels.slice(1).map((channel) => (
+                <p><span>{channel.label}</span><a href={channel.href}>{channel.value}</a><small>{channel.note}</small></p>
+              ))}
+            </div>
+          </details>
+          <div class="quote-contacts__extras">
+            <p><span>Correo comercial</span><a href="mailto:comercial@colcranes.com">comercial@colcranes.com</a></p>
+            <p><span>Sedes</span><span>Cra. 67 # Vía 40-62, piso 3 · Barranquilla<br />Cra. 128 # 14B-31 · Bogotá</span></p>
+          </div>
+        </div>
+
+        <a
+          class="btn btn--signal"
+          href="https://wa.me/573156293396"
+          style="align-self:start"
+          data-reveal
+        >
+          Escribir por WhatsApp
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="quote__main">
+        <form class="form-grid" id="form-cotizacion" novalidate data-quote-form>
+          <fieldset class="fieldset-reset">
+            <legend class="mono" style="color:var(--steel-500);margin-bottom:.75rem">
+              Tipo de solicitud
+            </legend>
+            <div class="request-types">
+              <label>
+                <input type="radio" name="tipo" value="proyecto" checked />
+                <span>
+                  <span class="t-name">Proyecto nuevo</span>
+                  <span class="t-desc">Equipos y montaje</span>
+                </span>
+              </label>
+              <label>
+                <input type="radio" name="tipo" value="servicio" />
+                <span>
+                  <span class="t-name">Servicio</span>
+                  <span class="t-desc">Mantenimiento e inspección</span>
+                </span>
+              </label>
+              <label>
+                <input type="radio" name="tipo" value="repuestos" />
+                <span>
+                  <span class="t-name">Repuestos</span>
+                  <span class="t-desc">Polipastos y accesorios</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="form-grid form-grid--2">
+            <div class="field">
+              <label for="c-nombre">Nombre y apellido <span class="req">*</span></label>
+              <input id="c-nombre" name="nombre" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="c-empresa">Empresa o planta <span class="req">*</span></label>
+              <input id="c-empresa" name="empresa" type="text" required autocomplete="organization" />
+            </div>
+          </div>
+
+          <div class="form-grid form-grid--2">
+            <div class="field">
+              <label for="c-correo">Correo corporativo <span class="req">*</span></label>
+              <input id="c-correo" name="correo" type="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="c-telefono">Teléfono <span class="req">*</span></label>
+              <input id="c-telefono" name="telefono" type="tel" required autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="form-grid form-grid--2">
+            <div class="field">
+              <label for="c-equipo">Equipo de interés</label>
+              <select id="c-equipo" name="equipo">
+                {equipmentOptions.map((option) => <option>{option}</option>)}
+              </select>
+            </div>
+            <div class="field">
+              <label for="c-ciudad">Ciudad de la instalación</label>
+              <input id="c-ciudad" name="ciudad" type="text" autocomplete="address-level2" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="c-detalle">Datos de la operación</label>
+            <textarea
+              id="c-detalle"
+              name="detalle"
+              placeholder="Luz entre rieles, altura de izaje, recorrido, carga a mover y régimen de trabajo. Si no los tiene, indíquelo y coordinamos el levantamiento."
+            ></textarea>
+          </div>
+
+          <div class="field">
+            <label style="display:flex;gap:.7rem;align-items:flex-start;letter-spacing:0;text-transform:none;font-size:.8rem;line-height:1.5">
+              <input type="checkbox" name="politica" required style="width:1rem;height:1rem;margin-top:.2rem;flex:none" />
+              <span>
+                Autorizo el tratamiento de mis datos personales conforme a la política de
+                privacidad de Colcranes S.A.S.
+              </span>
+            </label>
+          </div>
+
+          <div class="form-status" role="status" aria-live="polite" data-quote-status></div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
+            <button class="btn btn--ink" type="submit">
+              Enviar solicitud
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </button>
+            <p class="field__hint" style="margin:0">
+              Respondemos con una propuesta técnica, no con una lista de precios.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  /**
+   * Recepción de solicitudes.
+   *
+   * El sitio es estático y todavía no tiene endpoint propio. Un formulario
+   * que responde "registrado" sin enviar nada es peor que uno que falla, así
+   * que mientras no exista backend la solicitud se compone y se entrega al
+   * canal verificado (WhatsApp de la línea de ventas), que sí produce efecto.
+   *
+   * Para conectar el endpoint real basta con asignar ENDPOINT: el envío pasa
+   * a hacerse por POST y se deja de usar el canal alternativo.
+   */
+  const ENDPOINT: string | null = null; // p. ej. "https://formspree.io/f/xxxxxxxx"
+  const WHATSAPP = "573156293396";
+
+  const TIPO = { proyecto: "Proyecto nuevo", servicio: "Servicio", repuestos: "Repuestos" } as const;
+
+  const form = document.querySelector<HTMLFormElement>("[data-quote-form]");
+  const status = document.querySelector<HTMLElement>("[data-quote-status]");
+
+  if (form && status) {
+    const render = (state: string, message: string, link?: { href: string; label: string }) => {
+      status.dataset.state = state;
+      status.textContent = "";
+
+      const text = document.createElement("span");
+      text.textContent = message;
+      status.append(text);
+
+      /* El enlace se crea como nodo: el contenido del formulario es entrada
+         del usuario y nunca debe interpretarse como HTML. */
+      if (link) {
+        const anchor = document.createElement("a");
+        anchor.className = "link-arrow";
+        anchor.href = link.href;
+        anchor.target = "_blank";
+        anchor.rel = "noopener";
+        anchor.textContent = link.label;
+        status.append(anchor);
+      }
+    };
+
+    const compose = (data: FormData) =>
+      [
+        "Solicitud desde colcranes.com",
+        `Tipo: ${TIPO[(data.get("tipo") as keyof typeof TIPO) ?? "proyecto"] ?? "Proyecto nuevo"}`,
+        `Nombre: ${data.get("nombre")}`,
+        `Empresa o planta: ${data.get("empresa")}`,
+        `Correo: ${data.get("correo")}`,
+        `Teléfono: ${data.get("telefono")}`,
+        `Equipo de interés: ${data.get("equipo")}`,
+        `Ciudad de la instalación: ${data.get("ciudad") || "sin indicar"}`,
+        "",
+        "Datos de la operación:",
+        String(data.get("detalle") || "sin indicar"),
+      ].join("\n");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        render("error", "Revise los campos obligatorios marcados antes de enviar.");
+        return;
+      }
+
+      const data = new FormData(form);
+
+      if (ENDPOINT) {
+        render("loading", "Enviando la solicitud…");
+        try {
+          const response = await fetch(ENDPOINT, {
+            method: "POST",
+            body: data,
+            headers: { Accept: "application/json" },
+          });
+          if (!response.ok) throw new Error(String(response.status));
+          render(
+            "ok",
+            "Solicitud enviada. Un ingeniero de proyectos se pondrá en contacto para confirmar los datos de la operación."
+          );
+          form.reset();
+        } catch {
+          render(
+            "error",
+            "No se pudo enviar la solicitud. Escríbanos por WhatsApp o llame a la línea de ventas.",
+            { href: `https://wa.me/${WHATSAPP}`, label: "Abrir WhatsApp" }
+          );
+        }
+        return;
+      }
+
+      const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(compose(data))}`;
+      const opened = window.open(url, "_blank", "noopener");
+
+      render(
+        "ok",
+        opened
+          ? "Se abrió WhatsApp con la solicitud redactada: envíela desde allí para que llegue al equipo de proyectos. También puede llamar al +57 315 629 3396."
+          : "Su navegador bloqueó la ventana de WhatsApp. Use el enlace para enviar la solicitud.",
+        opened ? undefined : { href: url, label: "Abrir WhatsApp" }
+      );
+      form.reset();
+    });
+  }
+</script>

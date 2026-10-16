@@ -1,0 +1,39 @@
+---
+/**
+ * Firmas y fabricantes presentes en el catálogo y el archivo técnico.
+ * Los logos con archivo se normalizaron a blanco sobre transparencia en
+ * scripts/build-assets.mjs; el resto se rotula con la tipografía de marca.
+ */
+const logos = [
+  { name: "R&M Materials Handling", img: null, word: "R&M", url: "https://www.rmhoist.com/" },
+  { name: "World Hoists", img: "/images/brand-world-hoist.png", url: "https://worldhoists.com/" },
+  { name: "DIEPA Special Wire Ropes", img: "/images/brand-diepa.png", url: "https://www.diepa.com/" },
+  { name: "SRP Crane Controls", img: "/images/brand-srp.png", url: "https://www.srpcranes.com/" },
+  { name: "Black Bear", img: null, word: "Black Bear", url: "https://www.blackbear.com/" },
+  { name: "AUTEC", img: null, word: "Autec", url: "https://www.autecsafety.com/" },
+  { name: "Conductix-Wampfler", img: null, word: "Conductix", url: "https://www.conductix.com/" },
+  { name: "FELEMAMG", img: null, word: "Felemamg", url: "https://felemamg.com/" },
+  { name: "Nova Lift · Jovoo", img: null, word: "Nova Lift", url: "https://www.novalift.com/" },
+  { name: "DRIVECON", img: null, word: "Drivecon", url: "https://drivecon.com/" },
+];
+---
+
+<section class="brands" aria-label="Firmas representadas y suministradas">
+  <div class="wrap">
+      <h2 class="brands__label">Firmas representadas y suministradas</h2>
+    <ul class="brands__row">
+      {logos.map((brand) => (
+        <li class="brands__item">
+          <a class="brands__link" href={brand.url} target="_blank" rel="noopener noreferrer" aria-label={`Visitar ${brand.name}`} data-tooltip={brand.name}>
+          {brand.img ? (
+            <img src={brand.img} alt="" loading="lazy" decoding="async" />
+          ) : (
+            <span class="brands__wordmark">{brand.word}</span>
+          )}
+          <span class="brands__tooltip" aria-hidden="true">{brand.name}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,96 @@
+---
+const equipment = [
+  "Puentes grúa monoviga y biviga",
+  "Grúas pórtico y semipórtico",
+  "Grúas bandera",
+  "Polipastos de cable",
+  "Polipastos de cadena",
+  "Kits de puente grúa",
+  "Electrificación y accesorios",
+];
+
+const services = [
+  "Asesorías integrales de ingeniería",
+  "Fabricación de puentes grúa",
+  "Montaje y puesta en marcha",
+  "Mantenimiento preventivo",
+  "Contratos de mantenimiento y repuestos",
+  "Suministro de repuestos",
+  "Modernización de puente grúa",
+];
+
+const company = [
+  { href: "#capacidad", label: "Capacidad y planta" },
+  { href: "#proyectos", label: "Registro de proyectos" },
+  { href: "#cotizar", label: "Cotización técnica" },
+  { href: "https://colcranes.com/trabaje-con-nosotros/", label: "Trabaje con nosotros" },
+];
+
+const socials = [
+  { href: "https://co.linkedin.com/company/colcranes-s-a-s", label: "LinkedIn" },
+  { href: "https://www.instagram.com/colcranes_sas/", label: "Instagram" },
+  { href: "https://www.facebook.com/Colcranespuentegruasypolipastos", label: "Facebook" },
+  { href: "https://twitter.com/colcranes", label: "X" },
+];
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__grid">
+      <div>
+        <img
+          src="/images/colcranes-logo-oscura.png"
+          alt="COLCRANES · Heavy Lifting Engineering"
+          width="1200"
+          height="360"
+          style="height:2.4rem;width:auto"
+          loading="lazy"
+        />
+        <p style="margin:1.25rem 0 0;max-width:34ch;font-size:.9rem;line-height:1.65">
+          Fabricación, montaje, mantenimiento y modernización de puentes grúa, pórticos, grúas
+          bandera y polipastos para la industria colombiana. Más de 25 años y más de 800 proyectos.
+        </p>
+        <div class="site-footer__socials" style="margin-top:1.5rem">
+          {socials.map((social) => <a href={social.href} rel="noopener noreferrer">{social.label}</a>)}
+        </div>
+      </div>
+
+      <div>
+        <h2>Equipos</h2>
+        <ul>
+          {equipment.map((item) => <li><a href="#equipos">{item}</a></li>)}
+        </ul>
+      </div>
+
+      <div>
+        <h2>Servicios</h2>
+        <ul>
+          {services.map((item) => <li><a href="#ciclo">{item}</a></li>)}
+        </ul>
+      </div>
+
+      <div>
+        <h2>Empresa</h2>
+        <ul>
+          {company.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+        <p style="margin:1.5rem 0 0;font-size:.85rem;line-height:1.7">
+          Cra. 67 # Vía 40-62, piso 3<br />Barranquilla · Colombia
+          <br /><br />
+          Cra. 128 # 14B-31<br />Bogotá · Colombia
+        </p>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p class="mono" style="margin:0">
+        © {new Date().getFullYear()} COLCRANES S.A.S. · Barranquilla · Bogotá · Cobertura nacional
+      </p>
+      <p class="mono" style="margin:0">
+        <a href="tel:+573156293396">+57 315 629 3396</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:comercial@colcranes.com">comercial@colcranes.com</a>
+      </p>
+    </div>
+  </div>
+</footer>
