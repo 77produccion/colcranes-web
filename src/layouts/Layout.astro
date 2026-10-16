@@ -7,9 +7,9 @@ interface Props {
 }
 
 const {
-  title = "COLCRANES | Fabricación, montaje y mantenimiento de puentes grúa y polipastos",
+  title = "COLCRANES | Fabricación, montaje y mantenimiento de puentes grúa y polipastos en Colombia",
   description =
-    "Más de 25 años fabricando, montando, manteniendo y modernizando puentes grúa, pórticos, grúas bandera y polipastos para la industria colombiana.",
+    "Colcranes S.A.S. diseña, fabrica, monta y mantiene puentes grúa, pórticos, grúas bandera y polipastos en Colombia. Más de 25 años de experiencia y 800 proyectos desde Barranquilla y Bogotá.",
 } = Astro.props;
 
 const site = "https://colcranes.com";
@@ -43,14 +43,55 @@ const site = "https://colcranes.com";
       set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Organization",
+        "@id": `${site}/#organization`,
         name: "COLCRANES S.A.S.",
         url: site,
+        logo: `${site}/images/colcranes-logo-oscura.png`,
         description,
         email: "comercial@colcranes.com",
         telephone: "+57 315 629 3396",
         address: [
-          { "@type": "PostalAddress", addressLocality: "Barranquilla", addressCountry: "CO" },
-          { "@type": "PostalAddress", addressLocality: "Bogotá", addressCountry: "CO" },
+          {
+            "@type": "PostalAddress",
+            streetAddress: "Cra. 67 # Vía 40-62, piso 3",
+            addressLocality: "Barranquilla",
+            addressCountry: "CO",
+          },
+          {
+            "@type": "PostalAddress",
+            streetAddress: "Cra. 128 # 14B-31",
+            addressLocality: "Bogotá",
+            addressCountry: "CO",
+          },
+        ],
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            telephone: "+57-315-629-3396",
+            contactType: "sales",
+            areaServed: "CO",
+            availableLanguage: "es",
+          },
+          {
+            "@type": "ContactPoint",
+            telephone: "+57-310-704-3333",
+            contactType: "technical support",
+            areaServed: "CO",
+            availableLanguage: "es",
+          },
+          {
+            "@type": "ContactPoint",
+            telephone: "+57-322-249-2904",
+            contactType: "customer service",
+            areaServed: "CO",
+            availableLanguage: "es",
+          },
+        ],
+        sameAs: [
+          "https://co.linkedin.com/company/colcranes-s-a-s",
+          "https://www.instagram.com/colcranes_sas/",
+          "https://www.facebook.com/Colcranespuentegruasypolipastos",
+          "https://twitter.com/colcranes",
         ],
         areaServed: "Colombia",
       })}
