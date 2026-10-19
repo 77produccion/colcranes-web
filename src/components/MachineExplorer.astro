@@ -28,7 +28,7 @@ const families: Family[] = [
     short: "Monoviga y biviga",
     copy:
       "Para naves industriales con recorrido sobre rieles. Se fabrica en configuración monoviga o biviga y se dimensiona según la luz, la altura de izaje, la carga y el ciclo de trabajo.",
-    image: "/images/crane-160t.webp",
+    image: "/images/productos/puente-grua.jpg",
     alt: "Puente grúa biviga de gran capacidad con polipasto de cable y gancho de carga",
     notes: [
       { text: "Viga principal biviga", pos: "tl" },
@@ -49,7 +49,7 @@ const families: Family[] = [
     short: "Pórtico y semipórtico",
     copy:
       "Alternativa para patios y espacios sin una vía de rodadura elevada. La configuración de pórtico o semipórtico se define según la luz libre y las condiciones del lugar.",
-    image: "/images/grua-portico.webp",
+    image: "/images/productos/grua-portico.jpg",
     alt: "Grúa semipórtico amarilla con viga principal y polipasto sobre estructura de apoyo",
     notes: [
       { text: "Viga principal", pos: "tl" },
@@ -69,9 +69,9 @@ const families: Family[] = [
     short: "De columna y de pared",
     copy:
       "Atiende puestos de trabajo mediante un brazo giratorio instalado en columna o pared. El alcance y la capacidad se definen para las condiciones de cada estación.",
-    image: "",
-    alt: "Diagrama de elevación de una grúa bandera con columna, brazo giratorio y alcance radial",
-    diagram: true,
+    image: "/images/productos/grua-bandera.jpg",
+    alt: "Grúa bandera de columna y de pared",
+    diagram: false,
     notes: [
       { text: "Radio de giro", pos: "tr" },
       { text: "Brazo giratorio", pos: "tl" },
@@ -111,7 +111,7 @@ const families: Family[] = [
     short: "Testeros, motorización y control",
     copy:
       "Testeros, motorización y control para configurar un puente grúa sobre una viga calculada para la instalación.",
-    image: "/images/crane-kit.png",
+    image: "/images/productos/kit-puente-grua.jpg",
     alt: "Kit de puente grúa con testero motorizado, ruedas y bastidor de acero",
     notes: [
       { text: "Testero motorizado", pos: "tl" },
@@ -131,9 +131,9 @@ const families: Family[] = [
     short: "Recorrido, alimentación y bajo gancho",
     copy:
       "Alimentación eléctrica para el puente y el carro, además de accesorios bajo gancho y componentes de reposición.",
-    image: "/images/crane-runway.webp",
+    image: "/images/productos/sistema-electrificacion.jpg",
     alt: "Carro de traslación de un puente grúa sobre su vía de rodadura, junto a la línea de alimentación por barras",
-    photo: true,
+    photo: false,
     notes: [
       { text: "Carro de traslación", pos: "tl" },
       { text: "Línea de alimentación", pos: "br" },
@@ -148,10 +148,10 @@ const families: Family[] = [
 ];
 
 const hoistOptions = [
-  { image: "/images/hoist-double-girder.png", alt: "Polipasto de cable con carro para viga doble", name: "Spacemaster SX", detail: "Cable · montaje sobre viga doble" },
-  { image: "/images/hoist-normal-headroom.png", alt: "Polipasto de cable de altura normal", name: "Polipasto de cable", detail: "Cable · altura normal" },
-  { image: "/images/hoist-open-winch.webp", alt: "Polipasto de tambor abierto para servicio pesado", name: "Malacate abierto", detail: "Tambor abierto · servicio pesado" },
-  { image: "/images/hoist-100t.webp", alt: "Polipasto de gran capacidad", name: "Alta capacidad", detail: "Soluciones según aplicación" },
+  { image: "/images/productos/polipastos/polipasto-cable-sx-sxe.png", alt: "Polipasto de cable SX / SXE", name: "Polipasto de cable SX / SXE", detail: "Cable de acero · Servicio pesado y alta capacidad" },
+  { image: "/images/productos/polipastos/polipasto-cadenas-lk.jpg", alt: "Polipasto de cadena LK", name: "Polipasto de cadena LK", detail: "Cadena de eslabones · Maniobra ágil y compacta" },
+  { image: "/images/productos/polipastos/polipasto-cadena-black-bear-nhd-ntd.jpeg", alt: "Black Bear NHD / NTD", name: "Black Bear NHD / NTD", detail: "Cadena industrial · Trabajo continuo de alta exigencia" },
+  { image: "/images/productos/polipastos/polipasto-cadena-black-bear-yhs-yss.png", alt: "Black Bear YHS / YSS", name: "Black Bear YHS / YSS", detail: "Cadena · Versatilidad en estaciones y talleres" },
 ];
 
 const familyOrder = ["fam-cable", "fam-puentes", "fam-bandera", "fam-kit", "fam-electrico", "fam-portico"];

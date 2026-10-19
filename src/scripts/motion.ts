@@ -126,13 +126,18 @@ function setupExplorer() {
 
   const activate = (index: number, animate = true) => {
     inputs[index].checked = true;
-    figures.forEach((fig, i) => fig.classList.toggle("is-active", i === index));
-    families.forEach((fam, i) => fam.classList.toggle("is-active", i === index));
+    families.forEach((fam, i) => {
+      const isActive = i === index;
+      fam.classList.toggle("is-active", isActive);
+      const fig = fam.querySelector<HTMLElement>(".stage__fig");
+      if (fig) fig.classList.toggle("is-active", isActive);
+    });
     moveMarker(index, animate);
 
     if (!animate) return;
 
-    const active = figures[index];
+    const activeFam = families[index];
+    const active = activeFam ? activeFam.querySelector<HTMLElement>(".stage__fig") : null;
     if (!active) return;
     gsap.fromTo(
       active,

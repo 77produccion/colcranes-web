@@ -27,6 +27,37 @@ const capabilities = [
   },
 ];
 
+const showcase = [
+  {
+    num: "01",
+    title: "Proyectos",
+    text: "Puentes grúa, pórticos y grúas bandera para planta nueva o ampliación.",
+    img: "/images/galeria/montaje-equipo.webp",
+    alt: "Equipo de izaje y estructura amarilla dispuestos para montaje en patio",
+  },
+  {
+    num: "02",
+    title: "Servicios",
+    text: "Mantenimiento, montaje y puesta en marcha de equipos en operación.",
+    img: "/images/galeria/servicio-tecnico.webp",
+    alt: "Técnicos revisando el gancho de un polipasto de 55 toneladas",
+  },
+  {
+    num: "03",
+    title: "Repuestos y polipastos",
+    text: "Repuestos de cable, tambores, guías y polipastos de cadena y cable.",
+    img: "/images/galeria/ingenieria-calculo.webp",
+    alt: "Medición del diámetro de un cable de acero con un calibrador",
+  },
+  {
+    num: "04",
+    title: "Fabricación",
+    text: "Estructuras, testeros y componentes fabricados y controlados en taller.",
+    img: "/images/galeria/fabricacion-taller.webp",
+    alt: "Técnico ajustando un reductor sobre una viga en el taller de fabricación",
+  },
+];
+
 const companyData = [
   { label: "Trayectoria", value: "+25 años", src: "colcranes.com" },
   { label: "Proyectos entregados", value: "+800", src: "colcranes.com" },
@@ -83,15 +114,17 @@ const companyData = [
       <div class="capabilities" data-reveal-group>
         {capabilities.map((item) => (
           <article class="capability" data-reveal>
-            <span class="capability__num">{item.num}</span>
-            <div>
-              <h3 class="d3">{item.title}</h3>
-              <p class="body-copy">{item.text}</p>
+            <div class="capability__top">
+              <span class="capability__num">{item.num}</span>
+              <span class="capability__rule" aria-hidden="true"></span>
             </div>
+            <h3 class="d3">{item.title}</h3>
+            <p class="body-copy">{item.text}</p>
           </article>
         ))}
       </div>
 
+      {/* Oculto temporalmente: Datos de la compañía y nota técnica
       <div data-reveal>
         <table class="data-table">
           <caption>Datos de la compañía · fuente: sitio corporativo</caption>
@@ -111,33 +144,43 @@ const companyData = [
           técnico de Colcranes.
         </p>
       </div>
+      */}
     </div>
   </div>
 
   <div class="wrap" style="margin-top:clamp(2.5rem,5vw,4.5rem)">
-    <div class="detail-pair" data-reveal-group>
-      <figure data-reveal style="margin:0">
-        <img
-          src="/images/hoist-100t.webp"
-          alt="Polipasto de cable para servicio pesado sobre fondo blanco"
-          width="1700"
-          height="1300"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="figcap">Polipasto de cable para servicio pesado</figcaption>
-      </figure>
-      <figure data-reveal style="margin:0">
-        <img
-          src="/images/hoist-open-winch.webp"
-          alt="Conjunto de izado con tambor de cable y guías"
-          width="1700"
-          height="1230"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="figcap">Conjunto de izado: tambor, guías y freno</figcaption>
-      </figure>
+    <header class="sec-head sec-head--split" style="margin-bottom:clamp(1.5rem,3vw,2.5rem)">
+      <div>
+        <h2 class="d3" style="margin-top:1rem" data-reveal>Cotiza con nosotros</h2>
+      </div>
+      <div data-reveal>
+        <p class="lede">
+          Dinos qué necesitas cotizar: un equipo nuevo, un servicio, un repuesto o una fabricación a medida.
+        </p>
+      </div>
+    </header>
+
+    <div class="showcase" data-reveal-group>
+      {showcase.map((panel) => (
+        <article class="showcase__item" data-reveal tabindex="0">
+          <img
+            class="showcase__img"
+            src={panel.img}
+            alt={panel.alt}
+            width="1600"
+            height="2133"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="showcase__shade" aria-hidden="true"></span>
+          <span class="showcase__num">{panel.num}</span>
+          <div class="showcase__body">
+            <h3 class="d3">{panel.title}</h3>
+            <p class="body-copy">{panel.text}</p>
+            <button type="button" class="showcase__cta">Cotizar</button>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
