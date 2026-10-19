@@ -1106,9 +1106,6 @@ section[id] { scroll-margin-top: 5.5rem; }
   display: grid;
   gap: clamp(1.75rem, 3.5vw, 3.5rem);
 }
-@media (min-width: 1000px) {
-  .capacity__intro { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; }
-}
 
 /* Pareja fotográfica editorial: dos anchos distintos, alineados por la base.
    Evita el montaje superpuesto anterior, donde la segunda imagen se comía el
@@ -1139,44 +1136,226 @@ section[id] { scroll-margin-top: 5.5rem; }
   color: var(--steel-500);
 }
 
-/* Detalle de componentes: pareja fotográfica sobre acero */
-.detail-pair {
-  display: grid;
-  gap: clamp(1rem, 2.5vw, 2rem);
-  padding: clamp(1.25rem, 3vw, 2.5rem);
-  background: var(--steel-100);
-  border-top: 3px solid var(--ink);
+/* Galería de procesos: paneles que se expanden al pasar el cursor y revelan
+   el texto sobre la imagen. En pantallas estrechas se apilan y el texto queda
+   siempre visible. */
+.showcase {
+  display: flex;
+  height: clamp(26rem, 42vw, 37rem);
+  background: var(--ink);
+  border-top: 3px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
 }
-@media (min-width: 760px) {
-  .detail-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.showcase__item {
+  position: relative;
+  flex: 1 1 0%;
+  min-width: 0;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  transition: flex-grow 0.7s var(--ease-mech);
 }
-.detail-pair img {
-  display: block;
+.showcase__item + .showcase__item { border-left: 1px solid rgba(255, 255, 255, 0.25); }
+.showcase__item:hover,
+.showcase__item:focus-visible,
+.showcase__item.is-active { flex-grow: 3.4; }
+
+.showcase__item::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 3;
+  height: 3px;
+  background: var(--signal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.showcase__item:hover::after,
+.showcase__item:focus-visible::after { transform: scaleX(1); }
+
+.showcase__img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: contain;
-  mix-blend-mode: multiply;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.4) brightness(0.72);
+  transition: filter 0.6s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.showcase__item:hover .showcase__img,
+.showcase__item:focus-visible .showcase__img {
+  filter: grayscale(0) brightness(1);
+  transform: scale(1.03);
+}
+
+.showcase__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(29, 29, 27, 0.08) 0%,
+    rgba(29, 29, 27, 0.16) 42%,
+    rgba(29, 29, 27, 0.88) 100%
+  );
+}
+
+.showcase__num {
+  position: absolute;
+  top: clamp(1rem, 2vw, 1.5rem);
+  left: clamp(1rem, 2vw, 1.5rem);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.showcase__body {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  padding: clamp(1rem, 2vw, 1.75rem);
+  text-align: center;
+}
+
+.showcase__body h3 {
+  color: #fff;
+  font-size: clamp(1.05rem, 1.35vw, 1.35rem);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+/* La altura del párrafo se reserva para que los títulos de los cuatro paneles
+   queden sobre la misma línea base. */
+.showcase__body p {
+  max-width: 34ch;
+  min-height: 3.1em;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition: opacity 0.3s var(--ease-out), transform 0.45s var(--ease-out);
+}
+.showcase__item:hover .showcase__body p,
+.showcase__item:focus-visible .showcase__body p {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.12s;
+}
+
+/* Botón de cotización: mismo cian de marca, sin destino por ahora. */
+.showcase__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.35rem;
+  background: var(--signal);
+  color: #fff;
+  border: 0;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.24s var(--ease-out), transform 0.24s var(--ease-out);
+}
+.showcase__cta:hover { background: var(--cyan); transform: translateY(-2px); }
+.showcase__cta:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+@media (max-width: 900px) {
+  .showcase {
+    flex-direction: column;
+    height: auto;
+    border-bottom: 0;
+  }
+  .showcase__item {
+    flex: none;
+    min-height: 17rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  .showcase__item + .showcase__item { border-left: 0; }
+  .showcase__img { filter: brightness(0.72); }
+  .showcase__item:hover .showcase__img { transform: none; }
+  .showcase__body p { opacity: 1; transform: none; }
 }
 
 .capabilities {
   display: grid;
-  gap: 0;
-  border-top: 1px solid var(--line-dark);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 1.8vw, 1.75rem);
 }
+
 .capability {
-  display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
-  gap: 1rem;
-  padding: 1.4rem 0;
-  border-bottom: 1px solid var(--line-dark);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.25rem, 2vw, 1.85rem);
+  background: var(--paper);
+  border: 1px solid var(--line-dark);
+  border-top: 3px solid var(--line-dark);
+  overflow: hidden;
 }
-.capability h3 { margin: 0; }
-.capability p { margin: 0.5rem 0 0; }
+
+/* El filo cian de la marca aparece al pasar el cursor: refuerza la lectura
+   horizontal sin alterar la retícula de líneas azules. */
+.capability::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--signal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-out);
+}
+.capability:hover::before { transform: scaleX(1); }
+
+.capability__top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: clamp(1.25rem, 2vw, 1.75rem);
+}
 .capability__num {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  color: var(--steel-300);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--signal-deep);
+}
+.capability__rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line-dark);
+  opacity: 0.3;
+}
+
+.capability h3 {
+  margin: 0;
+  min-height: 2em;
+  font-size: clamp(1.4rem, 1.9vw, 1.85rem);
+}
+.capability p {
+  margin: 0.85rem 0 0;
+  font-size: clamp(0.875rem, 1vw, 0.95rem);
+  line-height: 1.55;
+}
+
+@media (max-width: 1100px) {
+  .capabilities { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .capability h3 { min-height: 0; }
+}
+@media (max-width: 560px) {
+  .capabilities { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* Tabla de datos con procedencia */
@@ -1217,82 +1396,6 @@ section[id] { scroll-margin-top: 5.5rem; }
   font-weight: 500;
 }
 .data-table__src { color: var(--steel-300); font-size: 0.72rem; }
-
-/* --------------------------------------------------------------------------
-   Registro de proyectos
-   -------------------------------------------------------------------------- */
-
-.projects { background: var(--steel-100); }
-
-.registry {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
-}
-.registry thead th {
-  text-align: left;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--steel-500);
-  font-weight: 500;
-  padding: 0 0.75rem 0.75rem 0;
-  border-bottom: 1px solid var(--ink);
-}
-.registry tbody tr {
-  border-bottom: 1px solid var(--line-dark);
-  transition: background-color 0.2s var(--ease-out);
-}
-.registry tbody tr:hover { background: rgba(41, 171, 226, 0.08); }
-.registry td { padding: 0.85rem 0.75rem 0.85rem 0; vertical-align: baseline; }
-.registry .ref {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--steel-500);
-  white-space: nowrap;
-  width: 7.5rem;
-}
-.registry .client { font-weight: 600; color: var(--ink); }
-.registry .equip { color: var(--steel-500); }
-.registry .cap {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  white-space: nowrap;
-  text-align: right;
-  color: var(--ink);
-}
-
-.registry__scroll { overflow-x: auto; }
-
-/* En pantallas estrechas la tabla se recorta: quedaban fuera la columna de
-   capacidad y el final de cada equipo, sin ninguna señal de que hubiera más
-   contenido. En lugar de desplazar en horizontal —la capacidad es el dato que
-   se busca— cada referencia pasa a ser una ficha con el cliente a la izquierda
-   y la capacidad a la derecha. */
-@media (max-width: 1023px) {
-  .registry__scroll { overflow-x: visible; }
-  .registry { font-size: 0.875rem; }
-  .registry thead {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-  }
-  .registry tbody tr {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.3rem 1rem;
-    padding-block: 0.95rem;
-    border-bottom: 1px solid var(--line-dark);
-  }
-  .registry td { display: block; padding: 0; border: 0; }
-  .registry .ref { grid-column: 1 / -1; width: auto; font-size: 0.66rem; }
-  .registry .client { grid-column: 1; }
-  .registry .equip { grid-column: 1; font-size: 0.8rem; }
-  .registry .cap { grid-column: 2; grid-row: 2 / 4; align-self: center; }
-}
 
 /* Nota metodológica */
 .note-src {
