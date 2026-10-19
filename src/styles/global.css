@@ -7,31 +7,31 @@
    ========================================================================== */
 
 @theme {
-  --color-ink: #0c1420;
-  --color-paper: #f4f5f7;
+  --color-ink: #1D1D1B;
+  --color-paper: #FFFFFF;
 }
 
 :root {
   /* --- Cromo --- */
-  --ink: #0c1420;          /* Negro técnico: superficies de máxima densidad */
-  --ink-2: #16233a;        /* Azul profundo: planos secundarios */
-  --navy: #2b3a8f;         /* Azul corporativo (isotipo COLCRANES) */
-  --cyan: #29abe2;         /* Cian de marca (descriptor de marca) */
-  --signal: #f2b705;       /* Amarillo de maquinaria y señalización */
-  --signal-deep: #d99f00;
+  --ink: #1D1D1B;
+  --ink-2: #2D2E83;
+  --navy: #2D2E83;
+  --cyan: #17B8E8;
+  --signal: #17B8E8;
+  --signal-deep: #2D2E83;
 
-  --paper: #f4f5f7;        /* Blanco industrial */
-  --steel-100: #e9ecf0;    /* Acero claro: lienzo de producto */
-  --steel-200: #d9dee5;    /* Acero medio: franjas y planos */
-  --steel-300: #bcc4cf;    /* Acero mineral */
-  --steel-500: #6f7b8b;    /* Texto secundario sobre claro */
-  --line-dark: rgba(12, 20, 32, 0.14);
-  --line-light: rgba(255, 255, 255, 0.16);
+  --paper: #FFFFFF;
+  --steel-100: #FFFFFF;
+  --steel-200: #FFFFFF;
+  --steel-300: #2D2E83;
+  --steel-500: #1D1D1B;
+  --line-dark: #2D2E83;
+  --line-light: #FFFFFF;
 
   /* --- Tipografía --- */
-  --font-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
-  --font-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
+  --font-display: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+  --font-body: Calibri, "Segoe UI", Arial, sans-serif;
+  --font-mono: Calibri, "Segoe UI", Arial, sans-serif;
 
   /* --- Métrica --- */
   --wrap: 1560px;
@@ -212,7 +212,7 @@ section[id] { scroll-margin-top: 5.5rem; }
   color: var(--ink);
   border-color: var(--signal);
 }
-.btn--signal:hover { background: #ffc81f; border-color: #ffc81f; transform: translateY(-2px); }
+.btn--signal:hover { background: var(--cyan); border-color: var(--cyan); transform: translateY(-2px); }
 
 .btn--ink {
   background: var(--ink);
@@ -629,7 +629,7 @@ section[id] { scroll-margin-top: 5.5rem; }
   bottom: calc(100% + 0.55rem);
   transform: translate(-50%, 0.25rem);
   padding: 0.38rem 0.58rem;
-  background: #f4f5f7;
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-mono);
   font-size: 0.62rem;
@@ -648,7 +648,7 @@ section[id] { scroll-margin-top: 5.5rem; }
 }
 
 .brands__row img {
-  max-height: 1.9rem;
+  max-height: 2.8rem;
   max-width: 100%;
   width: auto;
   height: auto;
@@ -664,7 +664,7 @@ section[id] { scroll-margin-top: 5.5rem; }
   font-stretch: 82%;
   font-weight: 700;
   text-transform: uppercase;
-  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+  font-size: clamp(1.2rem, 1.6vw, 1.55rem);
   letter-spacing: 0.01em;
   color: rgba(255, 255, 255, 0.66);
   transition: color 0.3s var(--ease-out), filter 0.3s var(--ease-out);
@@ -678,6 +678,9 @@ section[id] { scroll-margin-top: 5.5rem; }
 
 .explorer { background: var(--paper); }
 .explorer__title { margin-top: 0; }
+.explorer__head { display: block; }
+.explorer__head > div { max-width: 100%; }
+.explorer__head .lede { max-width: 76ch; margin-top: 1.25rem; }
 .explorer__experience,
 .explorer__description { display: block; }
 .explorer__experience { margin-bottom: 0.65rem; font-style: italic; text-transform: uppercase; }
@@ -836,6 +839,33 @@ section[id] { scroll-margin-top: 5.5rem; }
   mix-blend-mode: normal;
   border: 1px solid var(--steel-300);
 }
+.stage__head--quiet { display: none; }
+
+.hoist-range {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--steel-300);
+  background: var(--steel-100);
+}
+.hoist-option {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+  overflow: hidden;
+  padding: clamp(1rem, 2vw, 1.75rem);
+  border-right: 1px solid var(--steel-300);
+  border-bottom: 1px solid var(--steel-300);
+}
+.hoist-option__image { display: grid; place-items: center; min-width: 0; max-width: 100%; height: clamp(8rem, 13vw, 12rem); overflow: hidden; }
+.hoist-option__image img { display: block; width: 100%; max-width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.hoist-option__copy h3 { margin: 0; font-size: 0.95rem; line-height: 1.15; }
+.hoist-option__copy p { margin: 0.35rem 0 0; color: var(--steel-500); font-family: var(--font-mono); font-size: 0.59rem; line-height: 1.5; letter-spacing: 0.055em; text-transform: uppercase; }
+@media (max-width: 520px) {
+  .hoist-option { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
+  .hoist-option__image { height: 4.5rem; }
+}
 
 /* Anotaciones de plano */
 .note {
@@ -917,7 +947,7 @@ section[id] { scroll-margin-top: 5.5rem; }
    Ciclo de vida (servicios)
    -------------------------------------------------------------------------- */
 
-.lifecycle { background: var(--ink); color: #fff; overflow: hidden; }
+.lifecycle { background: var(--navy); color: #FFFFFF; overflow: hidden; }
 
 .lifecycle__head { max-width: 60ch; }
 
@@ -1545,7 +1575,7 @@ body.quote-open { overflow: hidden; }
 }
 .form-status[data-state] { display: grid; }
 .form-status[data-state="ok"] { border-left-color: var(--signal); }
-.form-status[data-state="error"] { border-left-color: #b3261e; }
+.form-status[data-state="error"] { border-left-color: var(--navy); }
 .form-status a { justify-self: start; margin-top: 0.35rem; }
 
 /* --------------------------------------------------------------------------
@@ -1596,6 +1626,27 @@ body.quote-open { overflow: hidden; }
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* Servicios: índice horizontal compacto, detalle al interactuar. */
+.services-head { display: block; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+.services-head h2 { margin: 0; color: #FFFFFF; }
+.services-head .services-head__description { max-width: 68ch; margin: 1rem 0 0; }
+.services-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 0; row-gap: 1rem; }
+.service-line { position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; min-height: 15rem; padding: 1.1rem; overflow: hidden; background: var(--navy); }
+.service-line::before { content: ""; position: absolute; z-index: 0; inset: 0; background-position: center; background-size: cover; opacity: 0.42; transition: opacity 1s var(--ease-out), transform 1.2s var(--ease-out); }
+.service-line::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, transparent 20%, #1D1D1B 100%); opacity: 0.82; }
+.service-line > * { position: relative; z-index: 2; }
+.service-line:nth-child(4n + 1)::before { background-image: url('/images/planta-puente-marca.webp'); }
+.service-line:nth-child(4n + 2)::before { background-image: url('/images/crane-runway.webp'); }
+.service-line:nth-child(4n + 3)::before { background-image: url('/images/planta-bodega.webp'); }
+.service-line:nth-child(4n)::before { background-image: url('/images/grua-portico.webp'); }
+.service-line:hover::before, .service-line:focus-visible::before { opacity: 0.78; transform: scale(1.035); }
+.service-line h3 { max-width: 20ch; margin: auto 0 0; color: #FFFFFF; font: 1.3rem/1.1 var(--font-display); text-transform: uppercase; }
+.service-line p { max-height: 0; opacity: 0; overflow: hidden; margin: 0; color: #FFFFFF; font-size: 0.92rem; line-height: 1.45; transform: translateY(0.8rem); transition: max-height 0.9s var(--ease-out), opacity 0.85s var(--ease-out), transform 0.9s var(--ease-out), margin 0.9s var(--ease-out); }
+.service-line:hover p, .service-line:focus-visible p { max-height: 8rem; opacity: 1; margin-top: 0.8rem; transform: translateY(0); }
+.service-line:focus-visible { outline: 2px solid var(--cyan); outline-offset: -3px; }
+@media (max-width: 900px) { .services-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .services-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .service-line { min-height: 9rem; } }
 
 .skip-link {
   position: absolute;

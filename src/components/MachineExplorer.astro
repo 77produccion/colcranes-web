@@ -27,7 +27,7 @@ const families: Family[] = [
     name: "Puente grúa",
     short: "Monoviga y biviga",
     copy:
-      "Equipo principal de elevación en naves industriales. Calculamos y fabricamos puentes grúa monoviga y biviga a partir de la luz entre rieles, la altura bajo gancho, el recorrido longitudinal, la carga nominal y el régimen FEM/ISO de la planta.",
+      "Para naves industriales con recorrido sobre rieles. Se fabrica en configuración monoviga o biviga y se dimensiona según la luz, la altura de izaje, la carga y el ciclo de trabajo.",
     image: "/images/crane-160t.webp",
     alt: "Puente grúa biviga de gran capacidad con polipasto de cable y gancho de carga",
     notes: [
@@ -37,10 +37,10 @@ const families: Family[] = [
     ],
     specs: [
       { label: "Configuración", value: "Monoviga · Biviga" },
-      { label: "Capacidad en archivo", value: "1 a 15 t" },
+      { label: "Capacidad documentada", value: "1 – 15 t" },
       { label: "Alcance", value: "Diseño, fabricación, montaje" },
     ],
-    tags: ["Siderurgia", "Bodegas de acero", "Manufactura pesada", "Plantas de producción"],
+    tags: ["Siderurgia", "Bodegas de acero", "Manufactura"],
   },
   {
     id: "fam-portico",
@@ -48,7 +48,7 @@ const families: Family[] = [
     name: "Grúa pórtico",
     short: "Pórtico y semipórtico",
     copy:
-      "Sistema de izaje para patios de acopio, áreas abiertas o naves cuyas columnas no admiten vigas carrilera elevadas. Dimensionamos las patas de apoyo, la viga principal y el sistema de traslación según las cargas sobre riel o losa.",
+      "Alternativa para patios y espacios sin una vía de rodadura elevada. La configuración de pórtico o semipórtico se define según la luz libre y las condiciones del lugar.",
     image: "/images/grua-portico.webp",
     alt: "Grúa semipórtico amarilla con viga principal y polipasto sobre estructura de apoyo",
     notes: [
@@ -57,10 +57,10 @@ const families: Family[] = [
     ],
     specs: [
       { label: "Configuración", value: "Pórtico · Semipórtico" },
-      { label: "Capacidad en archivo", value: "hasta 17 t" },
+      { label: "Capacidad documentada", value: "hasta 17 t" },
       { label: "Alcance", value: "Diseño, fabricación, modificación" },
     ],
-    tags: ["Patios de acopio", "Naves sin columnas", "Obra civil e infraestructura"],
+    tags: ["Patios de acopio", "Naves sin columnas", "Obra"],
   },
   {
     id: "fam-bandera",
@@ -68,7 +68,7 @@ const families: Family[] = [
     name: "Grúa bandera",
     short: "De columna y de pared",
     copy:
-      "Grúa giratoria para estaciones de trabajo individuales y celdas de manufactura. Cubre un radio fijo sobre columna propia con anclaje al piso o montada sobre la estructura existente, liberando al puente grúa principal de maniobras ligeras.",
+      "Atiende puestos de trabajo mediante un brazo giratorio instalado en columna o pared. El alcance y la capacidad se definen para las condiciones de cada estación.",
     image: "",
     alt: "Diagrama de elevación de una grúa bandera con columna, brazo giratorio y alcance radial",
     diagram: true,
@@ -82,7 +82,7 @@ const families: Family[] = [
       { label: "Capacidad", value: "Según estación de trabajo" },
       { label: "Alcance", value: "Diseño, fabricación, montaje" },
     ],
-    tags: ["Estaciones de ensamble", "Centros de mecanizado", "Talleres de mantenimiento"],
+    tags: ["Puestos de trabajo", "Carga puntual", "Mantenimiento"],
   },
   {
     id: "fam-cable",
@@ -90,7 +90,7 @@ const families: Family[] = [
     name: "Polipastos",
     short: "Cable y cadena · Servicio pesado",
     copy:
-      "Suministramos polipastos de cable Spacemaster SX (R&M Materials Handling) y World Hoists para ciclos continuos y grandes alturas de izaje, junto con polipastos eléctricos de cadena R&M LK y Black Bear para estaciones de menor tonelaje.",
+      "Suministro de polipastos de cable y de cadena para distintas configuraciones de puente grúa y necesidades de operación.",
     image: "/images/hoist-double-girder.png",
     alt: "Polipasto de cable para puente grúa biviga con carro motorizado",
     notes: [
@@ -98,11 +98,11 @@ const families: Family[] = [
       { text: "Tambor de cable", pos: "br" },
     ],
     specs: [
-      { label: "Líneas", value: "R&M Spacemaster SX · LK · Black Bear" },
-      { label: "Montaje", value: "Monoviga · Biviga · Monorriel" },
-      { label: "Alcance", value: "Suministro, repuestos, modernización" },
+      { label: "Línea", value: "Spacemaster SX" },
+      { label: "Montaje", value: "Viga simple · doble" },
+      { label: "Alcance", value: "Suministro, repuestos, retrofit" },
     ],
-    tags: ["Ciclos intensivos", "Servicio pesado", "Naves de gran altura", "Reposición directa"],
+    tags: ["Ciclos intensivos", "Servicio pesado", "Naves de gran altura"],
   },
   {
     id: "fam-kit",
@@ -110,7 +110,7 @@ const families: Family[] = [
     name: "Kit puente grúa",
     short: "Testeros, motorización y control",
     copy:
-      "Conjunto modular de testeros motorizados, polipasto, tableros eléctricos y mandos para integrar sobre vigas fabricadas en nuestros talleres. Combina mecanismos estandarizados de serie con el cálculo estructural a la medida de su bodega.",
+      "Testeros, motorización y control para configurar un puente grúa sobre una viga calculada para la instalación.",
     image: "/images/crane-kit.png",
     alt: "Kit de puente grúa con testero motorizado, ruedas y bastidor de acero",
     notes: [
@@ -119,10 +119,10 @@ const families: Family[] = [
     ],
     specs: [
       { label: "Contenido", value: "Testeros · Motorización · Control" },
-      { label: "Montaje", value: "Sobre viga fabricada en planta" },
+      { label: "Montaje", value: "Sobre viga de fabricación propia" },
       { label: "Alcance", value: "Suministro, montaje, puesta en marcha" },
     ],
-    tags: ["Mecanismos seriados", "Integración en planta", "Puesta en marcha"],
+    tags: ["Fabricación propia", "Estandarización", "Montaje rápido"],
   },
   {
     id: "fam-electrico",
@@ -130,7 +130,7 @@ const families: Family[] = [
     name: "Sistema de electrificación",
     short: "Recorrido, alimentación y bajo gancho",
     copy:
-      "Líneas de barra blindada y festón Conductix-Wampfler para la traslación del puente y del carro, radiocontroles industriales AUTEC, cables de acero especial DIEPA, electroimanes FELEMAMG y accesorios bajo gancho.",
+      "Alimentación eléctrica para el puente y el carro, además de accesorios bajo gancho y componentes de reposición.",
     image: "/images/crane-runway.webp",
     alt: "Carro de traslación de un puente grúa sobre su vía de rodadura, junto a la línea de alimentación por barras",
     photo: true,
@@ -139,12 +139,19 @@ const families: Family[] = [
       { text: "Línea de alimentación", pos: "br" },
     ],
     specs: [
-      { label: "Incluye", value: "Electrificación · Radiocontrol · Bajo gancho" },
-      { label: "Líneas", value: "Conductix · AUTEC · DIEPA · FELEMAMG" },
+      { label: "Incluye", value: "Alimentación · Bajo gancho" },
+      { label: "Líneas", value: "Conductix · Autec · DIEPA" },
       { label: "Alcance", value: "Suministro, instalación, repuestos" },
     ],
-    tags: ["Barras blindadas", "Festón portacables", "Radiocontrol", "Cables de izaje"],
+    tags: ["Recorrido del puente", "Toma de corriente", "Reposición"],
   },
+];
+
+const hoistOptions = [
+  { image: "/images/hoist-double-girder.png", alt: "Polipasto de cable con carro para viga doble", name: "Spacemaster SX", detail: "Cable · montaje sobre viga doble" },
+  { image: "/images/hoist-normal-headroom.png", alt: "Polipasto de cable de altura normal", name: "Polipasto de cable", detail: "Cable · altura normal" },
+  { image: "/images/hoist-open-winch.webp", alt: "Polipasto de tambor abierto para servicio pesado", name: "Malacate abierto", detail: "Tambor abierto · servicio pesado" },
+  { image: "/images/hoist-100t.webp", alt: "Polipasto de gran capacidad", name: "Alta capacidad", detail: "Soluciones según aplicación" },
 ];
 
 const familyOrder = ["fam-cable", "fam-puentes", "fam-bandera", "fam-kit", "fam-electrico", "fam-portico"];
@@ -165,17 +172,14 @@ const tabRules = families
 
 <section class="explorer band" id="equipos">
   <div class="wrap">
-    <header class="sec-head sec-head--split">
+    <header class="sec-head explorer__head">
       <div>
-        <p class="eyebrow" data-reveal>Equipos de izaje</p>
-        <h2 class="d2 explorer__title" style="margin-top:1.25rem" data-reveal>
-          Puentes grúa, pórticos<br />y polipastos
+        <h2 class="d2 explorer__title" data-reveal>
+          Nuestros productos
         </h2>
-      </div>
-      <div data-reveal>
         <p class="lede">
-          <span class="explorer__experience">Más de 25 años equipando plantas en Colombia</span>
-          <span class="explorer__description">Fabricamos la estructura del puente grúa a la medida de su nave e integramos polipastos, testeros y electrificación de fabricantes especializados como R&amp;M, World Hoists, Conductix-Wampfler, AUTEC y DIEPA.</span>
+          <span class="explorer__experience">Más de 25 años de experiencia</span>
+          <span class="explorer__description">Fabricamos equipos de izaje y suministramos componentes de fabricantes especializados. Definimos cada solución según la carga, la altura y las condiciones de la planta.</span>
         </p>
       </div>
     </header>
@@ -187,7 +191,7 @@ const tabRules = families
           name="familia-colcranes"
           id={family.id}
           checked={index === 0}
-          aria-label={`${family.num} ${family.name}: ${family.short}`}
+          aria-label={`${family.num} ${family.name} — ${family.short}`}
         />
       ))}
 
@@ -218,15 +222,7 @@ const tabRules = families
             aria-label={family.name}
           >
             <div class="stage">
-              <header class="stage__head">
-                <p class="mono" style="margin:0">
-                  {family.num} · {family.name}
-                </p>
-                <p class="mono" style="margin:0;color:var(--steel-500)">
-                  Referencia {family.num} / 06
-                </p>
-              </header>
-
+              {family.id !== "fam-cable" && (
               <div class="stage__media">
                 <figure class={`stage__fig ${index === 0 ? "is-active" : ""} ${family.photo ? "is-photo" : ""}`}>
                   {family.diagram ? (
@@ -275,6 +271,23 @@ const tabRules = families
                   ))}
                 </figure>
               </div>
+              )}
+
+              {family.id === "fam-cable" && (
+                <div class="hoist-range" aria-label="Opciones de polipastos">
+                  {hoistOptions.map((option) => (
+                    <article class="hoist-option">
+                      <div class="hoist-option__image">
+                        <img src={option.image} alt={option.alt} loading="lazy" decoding="async" />
+                      </div>
+                      <div class="hoist-option__copy">
+                        <h3>{option.name}</h3>
+                        <p>{option.detail}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )}
 
               <div class="stage__foot">
                 <div>
@@ -300,19 +313,6 @@ const tabRules = families
       </div>
     </div>
 
-    <div
-      style="display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--line-dark)"
-    >
-      <p class="mono" style="margin:0;color:var(--steel-500);max-width:62ch;line-height:1.8">
-        Definimos la configuración, la luz entre rieles y la capacidad de carga mediante levantamiento dimensional en su planta.
-      </p>
-      <a class="link-arrow" href="#cotizar">
-        Especificar un equipo
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-          <path d="M5 12h14M13 5l7 7-7 7" />
-        </svg>
-      </a>
-    </div>
   </div>
 
   <style is:global set:html={tabRules}></style>

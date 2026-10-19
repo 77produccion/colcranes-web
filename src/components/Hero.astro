@@ -9,7 +9,7 @@ const readouts = [
   { label: "Proyectos entregados", value: "+800", accent: false },
   { label: "Trayectoria", value: "+25 años", accent: true },
   { label: "Sedes", value: "Barranquilla · Bogotá", accent: false },
-  { label: "Atención", value: "Lun a Vie 07:30 a 17:30", accent: false },
+  { label: "Atención", value: "Lun–Vie 07:30–17:30", accent: false },
 ];
 ---
 
@@ -33,12 +33,15 @@ const readouts = [
 
   <div class="wrap hero__inner">
     <h1 class="d1 hero__title">
-      <span class="line" data-hero-line><span>Ingeniería para</span></span>
-      <span class="line" data-hero-line><span class="accent">mover grandes cargas.</span></span>
+      <span class="line" data-hero-line><span>Equipos para</span></span>
+      <span class="line" data-hero-line><span class="accent">izaje industrial.</span></span>
     </h1>
 
     <div class="hero__foot">
       <div>
+        <p class="lede lede--light hero__summary" data-hero-fade>
+          Diseño, fabricación, montaje y mantenimiento de puentes grúa y otros sistemas de izaje.
+        </p>
         <div class="hero__ctas" data-hero-fade>
           <button class="btn btn--signal" type="button" data-quote-open>
             Solicitar cotización técnica
@@ -48,11 +51,6 @@ const readouts = [
           </button>
           <a class="btn btn--ghost-light" href="#equipos">Explorar equipos</a>
         </div>
-        <p class="hero__locale" data-hero-fade>
-          <span>Puentes grúa, pórticos y polipastos</span>
-          <span>Fabricación en Colombia</span>
-          <span>Sedes en Barranquilla y Bogotá</span>
-        </p>
       </div>
 
       <!-- Métricas reservadas para reubicarlas en otra sección. -->

@@ -51,8 +51,7 @@ const equipmentOptions = [
             Cotice su<br />proyecto de izaje
           </h2>
           <p class="lede lede--light" style="margin-top:1.25rem">
-            Con la luz entre rieles, la altura de izaje y la carga a mover podemos dimensionar la
-            solución. Si aún no tiene esos datos, un ingeniero los levanta en planta.
+            Indique la carga, la altura de izaje y las condiciones de la planta. Si aún no cuenta con esos datos, puede señalarlo en el formulario.
           </p>
         </div>
 
@@ -182,7 +181,7 @@ const equipmentOptions = [
               </svg>
             </button>
             <p class="field__hint" style="margin:0">
-              Un ingeniero de proyectos revisa sus datos y entrega la propuesta técnica y comercial.
+              Usaremos estos datos para preparar una respuesta técnica.
             </p>
           </div>
         </form>
@@ -270,13 +269,13 @@ const equipmentOptions = [
           if (!response.ok) throw new Error(String(response.status));
           render(
             "ok",
-            "Solicitud enviada. Un ingeniero de proyectos se pondrá en contacto para confirmar los datos de la operación."
+            "Solicitud enviada. El equipo de proyectos se pondrá en contacto para revisar los datos de la operación."
           );
           form.reset();
         } catch {
           render(
             "error",
-            "No se pudo enviar la solicitud. Escríbanos por WhatsApp o llame a la línea de ventas.",
+            "No se pudo enviar la solicitud. Puede escribir por WhatsApp o llamar a la línea de ventas.",
             { href: `https://wa.me/${WHATSAPP}`, label: "Abrir WhatsApp" }
           );
         }
@@ -289,8 +288,8 @@ const equipmentOptions = [
       render(
         "ok",
         opened
-          ? "Se abrió WhatsApp con la solicitud redactada: envíela desde allí para que llegue al equipo de proyectos. También puede llamar al +57 315 629 3396."
-          : "Su navegador bloqueó la ventana de WhatsApp. Use el enlace para enviar la solicitud.",
+          ? "WhatsApp se abrió con la solicitud preparada. Envíela desde esa aplicación para contactar al equipo de proyectos."
+          : "No se pudo abrir WhatsApp automáticamente. Use el enlace para enviar la solicitud.",
         opened ? undefined : { href: url, label: "Abrir WhatsApp" }
       );
       form.reset();
