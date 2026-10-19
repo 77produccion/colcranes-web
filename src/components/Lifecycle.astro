@@ -4,99 +4,33 @@
  * Cada etapa reúne los servicios que Colcranes efectivamente ofrece
  * (tomados del sitio corporativo) en lugar de repetir tarjetas iguales.
  */
-const stages = [
-  {
-    num: "01",
-    name: "Asesoría e ingeniería",
-    body:
-      "Levantamiento dimensional en planta, definición de luz entre rieles, altura bajo gancho y ciclo de trabajo para calcular el sistema de elevación.",
-    refs: ["Asesorías integrales de ingeniería"],
-  },
-  {
-    num: "02",
-    name: "Diseño y fabricación",
-    body:
-      "Fabricación en nuestros talleres de la viga puente, los testeros y la estructura portante a la medida de la nave industrial.",
-    refs: ["Fabricación de puentes grúa"],
-  },
-  {
-    num: "03",
-    name: "Montaje y puesta en marcha",
-    body:
-      "Izaje y montaje en sitio, nivelación y alineación topográfica de la vía de rodadura, electrificación y pruebas de carga.",
-    refs: ["Montaje y puesta en marcha de grúas"],
-  },
-  {
-    num: "04",
-    name: "Servicio y garantía",
-    body:
-      "Soporte técnico directo posterior a la entrega, atención de garantías en planta y ajustes operativos sobre los equipos instalados.",
-    refs: ["Servicios técnicos", "Servicio de garantías"],
-  },
-  {
-    num: "05",
-    name: "Operación y mantenimiento",
-    body:
-      "Planes de mantenimiento preventivo, inspecciones estructurales y electromecánicas, y pólizas anuales con suministro de repuestos.",
-    refs: ["Mantenimiento preventivo", "Contratos de mantenimiento y repuestos"],
-  },
-  {
-    num: "06",
-    name: "Reposición y accesorios",
-    body:
-      "Despacho de repuestos originales de fábrica, cables de acero, controles remotos y accesorios de izaje bajo gancho.",
-    refs: [
-      "Suministro de repuestos",
-      "Accesorios de elevación bajo gancho",
-    ],
-  },
-  {
-    num: "07",
-    name: "Modernización",
-    body:
-      "Actualización eléctrica, cambio de polipastos, conversión a radiocontrol y repotenciación de grúas existentes en operación.",
-    refs: ["Modernización de puente grúa"],
-  },
+const services = [
+  { name: "Montaje y puesta en marcha de grúa", body: "Instalamos el equipo, alineamos la vía de rodadura y verificamos su funcionamiento antes de entrar en operación." },
+  { name: "Mantenimiento preventivo", body: "Inspecciones y tareas programadas para detectar desgaste y mantener los equipos disponibles." },
+  { name: "Contratos de mantenimiento y repuestos", body: "Planes de atención que reúnen mantenimiento y suministro de componentes para las necesidades de cada planta." },
+  { name: "Suministro de repuestos", body: "Componentes para reparación y reposición de equipos de izaje." },
+  { name: "Accesorios de elevación bajo gancho", body: "Accesorios seleccionados según la carga y la maniobra requerida." },
+  { name: "Fabricación de puentes grúa", body: "Diseño y fabricación de equipos según la luz, capacidad, altura de izaje y condiciones de la nave." },
+  { name: "Modernización de puente grúa", body: "Actualización de sistemas y componentes tras revisar el estado y los requerimientos del equipo." },
+  { name: "Servicios técnicos", body: "Soporte especializado para revisión, diagnóstico y atención de equipos de izaje." },
+  { name: "Servicio de garantías", body: "Atención y seguimiento de garantías para equipos suministrados por Colcranes." },
+  { name: "Asesorías integrales de ingeniería", body: "Acompañamiento técnico para definir soluciones de izaje desde los requerimientos de operación." },
 ];
 ---
 
 <section class="lifecycle band" id="ciclo">
   <div class="wrap">
-    <header class="sec-head sec-head--split lifecycle__head">
-      <div>
-        <p class="eyebrow eyebrow--light" data-reveal>Servicios</p>
-        <h2 class="d2" style="margin-top:1.25rem;color:#fff" data-reveal>
-          Ingeniería, montaje y<br />mantenimiento de grúas
-        </h2>
-      </div>
-      <div data-reveal>
-        <p class="lede lede--light">
-          Acompañamos toda la vida operativa de su sistema de elevación: desde el levantamiento
-          en planta y la fabricación estructural hasta el mantenimiento preventivo, el suministro
-          de repuestos originales y la modernización del equipo.
-        </p>
-      </div>
+    <header class="services-head">
+      <h2 class="d2" data-reveal>Nuestros servicios</h2>
+      <p class="lede lede--light services-head__description" data-reveal>Soporte técnico y soluciones para cada etapa de sus equipos de izaje.</p>
     </header>
-
-    <div class="rail" data-rail>
-      <span class="rail__line" aria-hidden="true"></span>
-      <span class="rail__node-line" data-rail-line aria-hidden="true"></span>
-
-      <ul class="rail__stops">
-        {stages.map((stage, index) => (
-          <li class={`stop ${index === 0 ? "is-active" : ""}`}>
-            <span class="stop__dot" aria-hidden="true"></span>
-            <button class="stop__toggle" type="button" aria-pressed={index === 0 ? "true" : "false"}>
-              <span class="stop__num">{stage.num}</span>
-              <span class="stop__name">{stage.name}</span>
-            </button>
-            <p class="stop__body">{stage.body}</p>
-            <ul class="stop__refs">
-              {stage.refs.map((ref) => <li>{ref}</li>)}
-            </ul>
-          </li>
-        ))}
-      </ul>
+    <div class="services-list">
+      {services.map((service, index) => (
+        <article class="service-line" tabindex="0">
+          <h3>{service.name}</h3>
+          <p>{service.body}</p>
+        </article>
+      ))}
     </div>
   </div>
 </section>

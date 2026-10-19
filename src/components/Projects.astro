@@ -5,57 +5,32 @@
  * (códigos FT). No se publican capacidades, clientes ni resultados que no
  * estén respaldados por ese archivo.
  */
-const featured = [
-  {
-    client: "Steckerl Aceros",
-    kind: "Puente grúa y modificaciones de pórtico",
-    scope:
-      "Varias intervenciones sobre la misma operación: fabricación de puente grúa, modificación de pórticos y modernización en plantas de Itagüí, Ricaurte, Bucaramanga, Cali, Pereira y Palmira.",
-    meta: "9 referencias base · 17 fichas con revisiones",
-    accent: true,
-  },
-  {
-    client: "AA Metals",
-    kind: "Puentes grúa por bodega",
-    scope:
-      "Suministro de puentes grúa dimensionados bodega por bodega, con capacidades definidas según el material almacenado en cada nave.",
-    meta: "6 bodegas · capacidades de 3 t a 15 t",
-  },
-  {
-    client: "Gran Colombia Gold",
-    kind: "Serie de equipos para operación minera",
-    scope:
-      "Suministro seriado de equipos de izaje para una misma instalación minera, con referencia técnica numerada por unidad.",
-    meta: "10 referencias numeradas",
-  },
-];
-
 /* Extracto del archivo de fichas técnicas (209 archivos). Cada fila se
    corresponde con un código real; la capacidad se transcribe del nombre de la
    ficha y sólo se publica cuando allí está declarada. FT-1079 aparece en el
    archivo para dos clientes distintos, así que la fila de Triple A usa FT-1081,
    que no es ambiguo. */
 const registry = [
-  { ref: "FT-110201", client: "AA Metals · Bodega 23A", equip: "Puente grúa", cap: "15 t" },
-  { ref: "FT-110202", client: "AA Metals · Bodega 23B", equip: "Puente grúa", cap: "12,8 t" },
-  { ref: "FT-110203", client: "AA Metals · Bodega 22A", equip: "Puente grúa", cap: "3 t y 5 t" },
-  { ref: "FT-110205", client: "AA Metals · Bodega 22C", equip: "Puente grúa", cap: "12,5 t" },
-  { ref: "FT-107102", client: "Agofer", equip: "Semipórtico", cap: "17 t" },
-  { ref: "FT-107101", client: "Agofer", equip: "Semipórtico", cap: "5 t" },
-  { ref: "FT-107103", client: "Agofer", equip: "Puente grúa", cap: "5 t" },
-  { ref: "FT-1110", client: "ES Metal", equip: "Puente grúa monoviga", cap: "3 t" },
-  { ref: "FT-107001", client: "Litoplas", equip: "Puente grúa", cap: "2,5 t" },
-  { ref: "FT-107002", client: "Litoplas", equip: "Monorriel curvo", cap: "2 t" },
-  { ref: "FT-108301", client: "Energía Solar · Nave 1", equip: "Puente grúa", cap: "3 t" },
-  { ref: "FT-108302", client: "Energía Solar · Nave 2", equip: "Puente grúa", cap: "5 t" },
-  { ref: "FT-108303", client: "Energía Solar", equip: "Pórtico", cap: "2 t" },
-  { ref: "FT-108304", client: "Energía Solar", equip: "Puente colgante", cap: "3 t" },
-  { ref: "FT-109201", client: "Carrocerías Panamericana", equip: "Puente grúa", cap: "1 t y 2 t" },
-  { ref: "FT-1112", client: "La Campana", equip: "Puente grúa · polipasto", cap: "5 t" },
-  { ref: "FT-1080", client: "Steckerl · Cali", equip: "Modificación de pórtico", cap: "Intervención" },
-  { ref: "FT-1081", client: "Triple A", equip: "Modernización de puente grúa", cap: "Intervención" },
-  { ref: "FT-1077", client: "OPP", equip: "Extensión de vía de rodadura", cap: "Obra civil y mecánica" },
-  { ref: "FT-1078", client: "Scotta Caracolí", equip: "Equipo de izaje a medida", cap: "Diseño especial" },
+  { ref: "FT-110201", client: "Reservado", equip: "Puente grúa", cap: "15 t" },
+  { ref: "FT-110202", client: "Reservado", equip: "Puente grúa", cap: "12,8 t" },
+  { ref: "FT-110203", client: "Reservado", equip: "Puente grúa", cap: "3 t y 5 t" },
+  { ref: "FT-110205", client: "Reservado", equip: "Puente grúa", cap: "12,5 t" },
+  { ref: "FT-107102", client: "Reservado", equip: "Semipórtico", cap: "17 t" },
+  { ref: "FT-107101", client: "Reservado", equip: "Semipórtico", cap: "5 t" },
+  { ref: "FT-107103", client: "Reservado", equip: "Puente grúa", cap: "5 t" },
+  { ref: "FT-1110", client: "Reservado", equip: "Puente grúa monoviga", cap: "3 t" },
+  { ref: "FT-107001", client: "Reservado", equip: "Puente grúa", cap: "2,5 t" },
+  { ref: "FT-107002", client: "Reservado", equip: "Monorriel curvo", cap: "2 t" },
+  { ref: "FT-108301", client: "Reservado", equip: "Puente grúa", cap: "3 t" },
+  { ref: "FT-108302", client: "Reservado", equip: "Puente grúa", cap: "5 t" },
+  { ref: "FT-108303", client: "Reservado", equip: "Pórtico", cap: "2 t" },
+  { ref: "FT-108304", client: "Reservado", equip: "Puente colgante", cap: "3 t" },
+  { ref: "FT-109201", client: "Reservado", equip: "Puente grúa", cap: "1 t y 2 t" },
+  { ref: "FT-1112", client: "Reservado", equip: "Puente grúa · polipasto", cap: "5 t" },
+  { ref: "FT-1080", client: "Reservado", equip: "Modificación de pórtico", cap: "Intervención" },
+  { ref: "FT-1081", client: "Reservado", equip: "Modernización de puente grúa", cap: "Intervención" },
+  { ref: "FT-1077", client: "Reservado", equip: "Extensión de vía de rodadura", cap: "Obra civil y mecánica" },
+  { ref: "FT-1078", client: "Reservado", equip: "Equipo de izaje a medida", cap: "Documentado" },
 ];
 ---
 
@@ -63,34 +38,20 @@ const registry = [
   <div class="wrap">
     <header class="sec-head sec-head--split">
       <div>
-        <p class="eyebrow" data-reveal>Proyectos</p>
         <h2 class="d2" style="margin-top:1.25rem" data-reveal>
-          Equipos fabricados e<br />instalados en Colombia
+          Proyectos documentados
         </h2>
       </div>
       <div data-reveal>
         <p class="lede">
-          Cada proyecto ejecutado cuenta con su expediente de ingeniería, código de ficha técnica,
-          planta de destino y capacidad nominal. A continuación presentamos una muestra de
-          suministros, montajes y modernizaciones realizados por nuestro equipo.
+          Extracto del registro técnico de proyectos. Los nombres de clientes se omiten mientras se confirma su autorización de publicación.
         </p>
       </div>
     </header>
 
-    <div class="cases-featured" data-reveal-group style="margin-bottom:clamp(2.5rem,5vw,4rem)">
-      {featured.map((item) => (
-        <article class={`case ${item.accent ? "case--signal" : ""}`} data-reveal>
-          <p class="mono" style="margin:0;color:var(--steel-500)">{item.meta}</p>
-          <h3 class="d3">{item.client}</h3>
-          <p class="mono" style="margin:.6rem 0 0;color:var(--navy)">{item.kind}</p>
-          <p class="body-copy" style="margin-top:.75rem">{item.scope}</p>
-        </article>
-      ))}
-    </div>
-
     <div class="registry__scroll" data-reveal>
       <table class="registry">
-        <caption class="vh">Registro de proyectos de izaje industrial en Colombia</caption>
+        <caption class="vh">Registro de proyectos documentados</caption>
         <thead>
           <tr>
             <th scope="col">Referencia</th>
@@ -113,8 +74,9 @@ const registry = [
     </div>
 
     <p class="note-src">
-      Referencias tomadas del archivo de ingeniería de Colcranes S.A.S. Las memorias de cálculo y
-      dossiers de fabricación están disponibles para revisión durante las visitas técnicas.
+      Extracto del archivo de fichas técnicas de ingeniería. Las capacidades se transcriben de la
+      ficha cuando están declaradas; los nombres de clientes no se muestran mientras se confirma
+      su autorización de publicación.
     </p>
   </div>
 </section>
