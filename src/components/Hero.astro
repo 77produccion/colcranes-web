@@ -1,37 +1,69 @@
 ---
 /**
- * Escena de apertura.
- * Fotografía industrial a sangre completa; la tipografía se apoya sobre la
- * imagen sin competir con ella. Los datos de la banda inferior provienen del
- * sitio corporativo (ver CONTENT_AUDIT_COLCRANES.md).
+ * Escena de apertura (Hero).
+ * - Se retiró la foto de R&M de 200 t (hero-crane.jpg).
+ * - Si existe `public/videos/hero-colcranes.mp4` (o `.webm`), reproduce el video corto en bucle.
+ * - Si existe `public/images/hero-colcranes.webp` (o `.jpg`), muestra la foto de obra propia.
+ * - Mientras se carga el archivo definitivo, muestra el espacio reservado con sus medidas exactas.
  */
-const readouts = [
-  { label: "Proyectos entregados", value: "+800", accent: false },
-  { label: "Trayectoria", value: "+25 años", accent: true },
-  { label: "Sedes", value: "Barranquilla · Bogotá", accent: false },
-  { label: "Atención", value: "Lun–Vie 07:30–17:30", accent: false },
-];
+import { existsSync } from "node:fs";
+
+const hasHeroVideo = existsSync("public/videos/hero-colcranes.mp4");
+const hasHeroWebm = existsSync("public/videos/hero-colcranes.webm");
+const hasHeroImageWebp = existsSync("public/images/hero-colcranes.webp");
+const hasHeroImageJpg = existsSync("public/images/hero-colcranes.jpg");
+const heroPoster = hasHeroImageWebp
+  ? "/images/hero-colcranes.webp"
+  : hasHeroImageJpg
+    ? "/images/hero-colcranes.jpg"
+    : undefined;
 ---
 
 <section class="hero" id="inicio" data-hero>
   <div class="hero__media" data-hero-media>
-    <img
-      data-hero-slide
-      src="/images/hero-crane.jpg"
-      alt="Puente grúa de gran capacidad operando en la nave de una acería"
-      width="2048"
-      height="1220"
-      fetchpriority="high"
-      decoding="async"
-    />
-    <img data-hero-slide src="/images/planta-puente-marca.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-    <img data-hero-slide src="/images/grua-portico.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-    <img data-hero-slide src="/images/crane-runway.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+    {hasHeroVideo || hasHeroWebm ? (
+      <video
+        class="hero__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster={heroPoster}
+      >
+        {hasHeroWebm && <source src="/videos/hero-colcranes.webm" type="video/webm" />}
+        {hasHeroVideo && <source src="/videos/hero-colcranes.mp4" type="video/mp4" />}
+      </video>
+    ) : heroPoster ? (
+      <img
+        data-hero-slide
+        src={heroPoster}
+        alt="Obra propia de Colcranes operando en planta industrial"
+        width="1920"
+        height="1080"
+        fetchpriority="high"
+        decoding="async"
+      />
+    ) : (
+      <div class="media-slot media-slot--hero" role="img" aria-label="Espacio reservado para video corto en bucle o fotografía de obra propia de Colcranes">
+        <div class="media-slot__box">
+          <span class="media-slot__tag">ESPACIO PARA VIDEO EN BUCLE O FOTO DE OBRA PROPIA</span>
+          <p class="media-slot__title">Hero principal · Grúa Colcranes operando</p>
+          <p class="media-slot__meta">
+            Video: <code>public/videos/hero-colcranes.mp4</code> (1920 × 1080 px · 16:9 · MP4/WebM · 8–15 s sin audio)<br />
+            Foto / Poster: <code>public/images/hero-colcranes.webp</code> (mín. 2400 × 1350 px · 16:9 · WebP/JPG)
+          </p>
+        </div>
+      </div>
+    )}
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="hero__axis" aria-hidden="true"></div>
 
   <div class="wrap hero__inner">
+    <p class="eyebrow eyebrow--light hero__tagline" data-hero-fade>
+      COLCRANES S.A.S. · Ingeniería, fabricación y servicio en Colombia
+    </p>
     <h1 class="d1 hero__title">
       <span class="line" data-hero-line><span>Equipos para</span></span>
       <span class="line" data-hero-line><span class="accent">izaje industrial.</span></span>
@@ -40,7 +72,7 @@ const readouts = [
     <div class="hero__foot">
       <div>
         <p class="lede lede--light hero__summary" data-hero-fade>
-          Diseño, fabricación, montaje y mantenimiento de puentes grúa y otros sistemas de izaje.
+          Diseño, fabricación, montaje y mantenimiento de puentes grúa, pórticos, grúas bandera y polipastos.
         </p>
         <div class="hero__ctas" data-hero-fade>
           <button class="btn btn--signal" type="button" data-quote-open>
@@ -52,8 +84,6 @@ const readouts = [
           <a class="btn btn--ghost-light" href="#equipos">Explorar equipos</a>
         </div>
       </div>
-
-      <!-- Métricas reservadas para reubicarlas en otra sección. -->
     </div>
   </div>
 </section>

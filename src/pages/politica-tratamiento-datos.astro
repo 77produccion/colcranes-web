@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Quote from "../components/Quote.astro";
+import Footer from "../components/Footer.astro";
+import { CONTACT } from "../data/site";
+---
+
+<Layout
+  title="Política de Tratamiento de Datos Personales (Ley 1581 de 2012) | COLCRANES"
+  description="Política de Tratamiento y Protección de Datos Personales de COLCRANES S.A.S. en cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013 en Colombia."
+>
+  <Header />
+  <main id="contenido">
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="breadcrumbs" aria-label="Ruta de navegación">
+          <a href="/">Inicio</a>
+          <span>/</span>
+          <span aria-current="page">Política de tratamiento de datos</span>
+        </nav>
+        <p class="eyebrow eyebrow--light">Marco legal · Ley 1581 de 2012</p>
+        <h1 class="d1" style="margin-top:0.75rem;max-width:20ch">
+          Política de tratamiento de datos personales
+        </h1>
+        <p class="lede lede--light" style="margin-top:1.25rem;max-width:64ch">
+          Lineamientos de COLCRANES S.A.S. para la recolección, almacenamiento, uso, circulación y protección de datos personales.
+        </p>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap">
+        <article class="legal-prose">
+          <h2>1. Identificación del Responsable del Tratamiento</h2>
+          <p>
+            <strong>Razón Social:</strong> {CONTACT.companyName}<br />
+            <strong>Domicilio Principal:</strong> Cra. 67 # Vía 40-62, piso 3, Barranquilla, Atlántico, Colombia.<br />
+            <strong>Sede Bogotá:</strong> Cra. 128 # 14B-31, Bogotá D.C., Colombia.<br />
+            <strong>Correo electrónico:</strong> <a href={`mailto:${CONTACT.commercialEmail}`}>{CONTACT.commercialEmail}</a><br />
+            <strong>Teléfono de contacto:</strong> <a href={CONTACT.salesPhoneHref}>{CONTACT.salesPhone}</a>
+          </p>
+
+          <h2>2. Marco Normativo</h2>
+          <p>
+            La presente Política de Tratamiento de Datos Personales se expide en cumplimiento del artículo 15 de la Constitución Política de Colombia, la <strong>Ley Estatutaria 1581 de 2012</strong>, el <strong>Decreto Reglamentario 1377 de 2013</strong> (compilado en el Decreto Único Reglamentario 1074 de 2015) y demás normas que los modifiquen o adicionen.
+          </p>
+
+          <h2>3. Finalidades del Tratamiento</h2>
+          <p>
+            Los datos personales suministrados voluntariamente por clientes, prospectos comerciales, proveedores, contratistas, candidatos laborales y usuarios del sitio web serán tratados por <strong>{CONTACT.companyName}</strong> para las siguientes finalidades:
+          </p>
+          <ul>
+            <li>Elaborar y enviar cotizaciones técnicas y comerciales de puentes grúa, pórticos, grúas bandera, polipastos, repuestos y servicios de ingeniería.</li>
+            <li>Coordinar visitas técnicas de levantamiento en planta, montajes, inspecciones, mantenimientos preventivos/correctivos y atención de garantías.</li>
+            <li>Dar cumplimiento a obligaciones contractuales, contables, tributarias y legales vigentes en Colombia.</li>
+            <li>Gestionar procesos de selección y vinculación de personal a través del canal "Trabaje con nosotros".</li>
+            <li>Atender peticiones, quejas, reclamos y consultas (PQRS) presentadas por los titulares de la información.</li>
+          </ul>
+
+          <h2>4. Derechos de los Titulares (Habeas Data)</h2>
+          <p>
+            De conformidad con el artículo 8 de la Ley 1581 de 2012, el Titular de los datos personales tiene los siguientes derechos:
+          </p>
+          <ul>
+            <li>Conocer, actualizar y rectificar sus datos personales frente a {CONTACT.companyName}.</li>
+            <li>Solicitar prueba de la autorización otorgada para el tratamiento de sus datos.</li>
+            <li>Ser informado, previa solicitud, respecto del uso que se le ha dado a sus datos personales.</li>
+            <li>Presentar ante la Superintendencia de Industria y Comercio quejas por infracciones a lo dispuesto en la Ley 1581 de 2012.</li>
+            <li>Revocar la autorización y/o solicitar la supresión del dato cuando en el Tratamiento no se respeten los principios, derechos y garantías constitucionales y legales.</li>
+            <li>Acceder en forma gratuita a sus datos personales que hayan sido objeto de Tratamiento.</li>
+          </ul>
+
+          <h2>5. Procedimiento para Consultas, Actualizaciones y Reclamos</h2>
+          <p>
+            Para ejercer sus derechos de conocer, actualizar, rectificar o suprimir sus datos personales, así como para revocar la autorización otorgada, el Titular puede enviar su solicitud al correo electrónico <a href={`mailto:${CONTACT.commercialEmail}`}>{CONTACT.commercialEmail}</a> o radicarla en nuestra sede principal en la Cra. 67 # Vía 40-62, piso 3, Barranquilla, indicando su nombre completo, número de identificación, descripción de la solicitud y datos de notificación.
+          </p>
+
+          <h2>6. Vigencia</h2>
+          <p>
+            La presente Política rige a partir de su publicación y las bases de datos se mantendrán vigentes durante el tiempo en que subsista la relación comercial, contractual o legal, o mientras no se solicite su supresión por el interesado y no exista un deber legal o contractual de conservar la información.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <Quote />
+  </main>
+  <Footer />
+</Layout>

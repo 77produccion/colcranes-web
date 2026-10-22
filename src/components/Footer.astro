@@ -1,35 +1,12 @@
 ---
-const equipment = [
-  "Puentes grúa monoviga y biviga",
-  "Grúas pórtico y semipórtico",
-  "Grúas bandera",
-  "Polipastos de cable",
-  "Polipastos de cadena",
-  "Kits de puente grúa",
-  "Electrificación y accesorios",
-];
-
-const services = [
-  "Asesorías integrales de ingeniería",
-  "Fabricación de puentes grúa",
-  "Montaje y puesta en marcha",
-  "Mantenimiento preventivo",
-  "Contratos de mantenimiento y repuestos",
-  "Suministro de repuestos",
-  "Modernización de puente grúa",
-];
+import { CONTACT, EQUIPMENT_FAMILIES, SERVICES } from "../data/site";
 
 const company = [
-  { href: "#capacidad", label: "Capacidad y planta" },
-  { href: "#cotizar", label: "Cotización técnica" },
-  { href: "https://colcranes.com/trabaje-con-nosotros/", label: "Trabaje con nosotros" },
-];
-
-const socials = [
-  { href: "https://co.linkedin.com/company/colcranes-s-a-s", label: "LinkedIn" },
-  { href: "https://www.instagram.com/colcranes_sas/", label: "Instagram" },
-  { href: "https://www.facebook.com/Colcranespuentegruasypolipastos", label: "Facebook" },
-  { href: "https://twitter.com/colcranes", label: "X" },
+  { href: "/nosotros", label: "Nosotros y planta" },
+  { href: "/proyectos", label: "Proyectos y casos de éxito" },
+  { href: "/contacto", label: "Contacto y sedes" },
+  { href: "/trabaje-con-nosotros", label: "Trabaje con nosotros" },
+  { href: "/politica-tratamiento-datos", label: "Política de tratamiento de datos (Ley 1581)" },
 ];
 ---
 
@@ -37,33 +14,41 @@ const socials = [
   <div class="wrap">
     <div class="site-footer__grid">
       <div>
-        <img
-          src="/images/colcranes-logo-oscura.png"
-          alt="COLCRANES · Heavy Lifting Engineering"
-          width="1200"
-          height="360"
-          style="height:2.4rem;width:auto"
-          loading="lazy"
-        />
+        <a href="/" aria-label="COLCRANES · Inicio">
+          <img
+            src="/images/colcranes-logo-oscura.png"
+            alt="COLCRANES · Heavy Lifting Engineering"
+            width="1200"
+            height="360"
+            style="height:2.4rem;width:auto"
+            loading="lazy"
+          />
+        </a>
         <p style="margin:1.25rem 0 0;max-width:34ch;font-size:.9rem;line-height:1.65">
-          Fabricación, montaje y servicio de sistemas de izaje para la industria colombiana.
+          Diseño, fabricación, montaje y mantenimiento de sistemas de izaje para la industria colombiana.
         </p>
         <div class="site-footer__socials" style="margin-top:1.5rem">
-          {socials.map((social) => <a href={social.href} rel="noopener noreferrer">{social.label}</a>)}
+          {CONTACT.socials.map((social) => (
+            <a href={social.href} target="_blank" rel="noopener noreferrer">{social.label}</a>
+          ))}
         </div>
       </div>
 
       <div>
-        <h2>Equipos</h2>
+        <h2><a href="/equipos">Equipos</a></h2>
         <ul>
-          {equipment.map((item) => <li><a href="#equipos">{item}</a></li>)}
+          {EQUIPMENT_FAMILIES.map((item) => (
+            <li><a href={`/equipos/${item.slug}`}>{item.pluralName}</a></li>
+          ))}
         </ul>
       </div>
 
       <div>
-        <h2>Servicios</h2>
+        <h2><a href="/servicios">Servicios</a></h2>
         <ul>
-          {services.map((item) => <li><a href="#ciclo">{item}</a></li>)}
+          {SERVICES.map((item) => (
+            <li><a href={`/servicios/${item.slug}`}>{item.name}</a></li>
+          ))}
         </ul>
       </div>
 
@@ -82,12 +67,12 @@ const socials = [
 
     <div class="site-footer__bottom">
       <p class="mono" style="margin:0">
-        © {new Date().getFullYear()} COLCRANES S.A.S. · Barranquilla · Bogotá · Cobertura nacional
+        © {new Date().getFullYear()} {CONTACT.companyName} · Barranquilla · Bogotá · Cobertura nacional
       </p>
       <p class="mono" style="margin:0">
-        <a href="tel:+573156293396">+57 315 629 3396</a>
+        <a href={CONTACT.salesPhoneHref}>{CONTACT.salesPhone}</a>
         &nbsp;·&nbsp;
-        <a href="mailto:comercial@colcranes.com">comercial@colcranes.com</a>
+        <a href={`mailto:${CONTACT.commercialEmail}`}>{CONTACT.commercialEmail}</a>
       </p>
     </div>
   </div>

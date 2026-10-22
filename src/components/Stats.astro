@@ -1,0 +1,21 @@
+---
+/**
+ * Sección de cifras de respaldo (Punto 4.2):
+ * Proyectos ejecutados, años de experiencia, técnicos propios y sedes.
+ */
+import { COMPANY_STATS } from "../data/site";
+---
+
+<section class="stats-band" aria-label="Cifras de respaldo de Colcranes">
+  <div class="wrap">
+    <div class="stats-grid" data-reveal-group>
+      {COMPANY_STATS.map((stat) => (
+        <article class="stat-card" data-reveal>
+          <p class="stat-card__value">{stat.value}</p>
+          <h2 class="stat-card__label">{stat.label}</h2>
+          <p class="stat-card__detail">{stat.detail}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

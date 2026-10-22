@@ -1,0 +1,167 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Quote from "../components/Quote.astro";
+import Footer from "../components/Footer.astro";
+import { CONTACT } from "../data/site";
+
+const areas = [
+  {
+    title: "Ingeniería y Diseño Estructural",
+    description: "Ingenieros mecánicos, electromecánicos y civiles con experiencia en cálculo bajo normas CMAA / FEM, modelado CAD y diseño de sistemas de izaje.",
+  },
+  {
+    title: "Fabricación, Soldadura y Planta",
+    description: "Soldadores calificados, armadores de estructuras metálicas, mecánicos de banco y supervisores de calidad en nuestra planta de Barranquilla.",
+  },
+  {
+    title: "Montaje y Servicio Técnico en Campo",
+    description: "Técnicos electromecánicos y electricistas industriales certificados en trabajo seguro en alturas para montaje, mantenimiento y pruebas en planta.",
+  },
+  {
+    title: "Comercial, Proyectos y Administración",
+    description: "Asesores técnicos comerciales, coordinadores de proyectos y personal administrativo en nuestras sedes de Barranquilla y Bogotá.",
+  },
+];
+---
+
+<Layout
+  title="Trabaje con Nosotros: Convocatorias de Ingeniería y Servicio Técnico | COLCRANES"
+  description="Únase al equipo de Colcranes S.A.S. en Barranquilla y Bogotá. Vacantes para ingenieros, soldadores, armadores y técnicos electromecánicos de puentes grúa."
+>
+  <Header />
+  <main id="contenido">
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="breadcrumbs" aria-label="Ruta de navegación">
+          <a href="/">Inicio</a>
+          <span>/</span>
+          <span aria-current="page">Trabaje con nosotros</span>
+        </nav>
+        <p class="eyebrow eyebrow--light">Talento humano · COLCRANES S.A.S.</p>
+        <h1 class="d1" style="margin-top:0.75rem;max-width:18ch">
+          Trabaje con nosotros
+        </h1>
+        <p class="lede lede--light" style="margin-top:1.25rem;max-width:62ch">
+          Buscamos ingenieros, técnicos electromecánicos, soldadores y profesionales comprometidos con la seguridad y la excelencia en ingeniería de izaje.
+        </p>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap">
+        <div class="detail-layout">
+          <div>
+            <p class="eyebrow">Nuestras áreas</p>
+            <h2 class="d2" style="margin:0.75rem 0 1.25rem">Desarrolle su carrera en ingeniería pesada</h2>
+            <p class="body-copy">
+              En <strong>COLCRANES S.A.S.</strong> formamos y respaldamos a nuestro talento humano bajo principios de seguridad industrial, rigor técnico, trabajo en equipo y mejora continua.
+            </p>
+
+            <div style="display:grid;gap:1rem;margin-top:1.75rem">
+              {areas.map((area) => (
+                <article style="background:var(--steel-100);border:1px solid var(--line-dark);border-left:4px solid var(--navy);padding:1.25rem 1.5rem">
+                  <h3 class="d4" style="margin:0">{area.title}</h3>
+                  <p class="body-copy" style="margin-top:0.4rem;font-size:0.92rem">{area.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div style="background:var(--paper);border:1px solid var(--line-dark);border-top:4px solid var(--navy);padding:clamp(1.5rem,3vw,2.5rem)">
+            <h2 class="d3" style="margin-bottom:0.5rem">Postule su hoja de vida</h2>
+            <p class="body-copy" style="margin-bottom:1.5rem;font-size:0.94rem">
+              Regístrese en nuestra base de talento para procesos de selección en Barranquilla, Bogotá y proyectos nacionales.
+            </p>
+            <form class="form-grid" data-careers-form novalidate>
+              <div class="field">
+                <label for="t-nombre">Nombre completo <span class="req">*</span></label>
+                <input id="t-nombre" name="nombre" type="text" required autocomplete="name" />
+              </div>
+              <div class="form-grid form-grid--2">
+                <div class="field">
+                  <label for="t-correo">Correo electrónico <span class="req">*</span></label>
+                  <input id="t-correo" name="correo" type="email" required autocomplete="email" />
+                </div>
+                <div class="field">
+                  <label for="t-telefono">Teléfono / Celular <span class="req">*</span></label>
+                  <input id="t-telefono" name="telefono" type="tel" required autocomplete="tel" />
+                </div>
+              </div>
+              <div class="form-grid form-grid--2">
+                <div class="field">
+                  <label for="t-area">Área de especialidad</label>
+                  <select id="t-area" name="area">
+                    {areas.map((a) => <option>{a.title}</option>)}
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="t-ciudad">Ciudad de residencia</label>
+                  <input id="t-ciudad" name="ciudad" type="text" placeholder="Barranquilla, Bogotá, etc." />
+                </div>
+              </div>
+              <div class="field">
+                <label for="t-perfil">Resumen de experiencia y certificaciones</label>
+                <textarea
+                  id="t-perfil"
+                  name="perfil"
+                  placeholder="Años de experiencia, formación, curso de alturas vigente, enlace a LinkedIn o portafolio."
+                ></textarea>
+              </div>
+              <div class="field">
+                <label style="display:flex;gap:.7rem;align-items:flex-start;letter-spacing:0;text-transform:none;font-size:.82rem;line-height:1.5">
+                  <input type="checkbox" name="politica" required style="width:1rem;height:1rem;margin-top:.2rem;flex:none" />
+                  <span>
+                    Autorizo el tratamiento de mis datos personales para procesos de selección conforme a la{" "}
+                    <a href="/politica-tratamiento-datos" style="color:var(--navy);text-decoration:underline;font-weight:600">
+                      Política de Tratamiento de Datos Personales (Ley 1581 de 2012)
+                    </a>{" "}
+                    de Colcranes S.A.S.
+                  </span>
+                </label>
+              </div>
+              <button class="btn btn--ink" type="submit">
+                Enviar postulación
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Quote />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  const careersForm = document.querySelector<HTMLFormElement>("[data-careers-form]");
+  if (careersForm) {
+    careersForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!careersForm.checkValidity()) {
+        careersForm.reportValidity();
+        return;
+      }
+      const data = new FormData(careersForm);
+      const subject = encodeURIComponent(`Postulación laboral - ${data.get("area")} - ${data.get("nombre")}`);
+      const body = encodeURIComponent(
+        [
+          `Nombre: ${data.get("nombre")}`,
+          `Correo: ${data.get("correo")}`,
+          `Teléfono: ${data.get("telefono")}`,
+          `Área: ${data.get("area")}`,
+          `Ciudad: ${data.get("ciudad") || "Sin indicar"}`,
+          "",
+          "Resumen de experiencia:",
+          String(data.get("perfil") || ""),
+        ].join("\n")
+      );
+      window.location.href = `mailto:comercial@colcranes.com?subject=${subject}&body=${body}`;
+      careersForm.reset();
+    });
+  }
+</script>

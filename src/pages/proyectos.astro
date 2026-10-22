@@ -1,0 +1,103 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Stats from "../components/Stats.astro";
+import Projects from "../components/Projects.astro";
+import Clients from "../components/Clients.astro";
+import Quote from "../components/Quote.astro";
+import Footer from "../components/Footer.astro";
+
+const registry = [
+  { ref: "FT-110201", client: "AA Metals · Bodega 23A", equip: "Puente grúa", cap: "15 t" },
+  { ref: "FT-110202", client: "AA Metals · Bodega 23B", equip: "Puente grúa", cap: "12,8 t" },
+  { ref: "FT-110203", client: "AA Metals · Bodega 22A", equip: "Puente grúa", cap: "3 t y 5 t" },
+  { ref: "FT-110205", client: "AA Metals · Bodega 22C", equip: "Puente grúa", cap: "12,5 t" },
+  { ref: "FT-107102", client: "Agofer", equip: "Semipórtico", cap: "17 t" },
+  { ref: "FT-107101", client: "Agofer", equip: "Semipórtico", cap: "5 t" },
+  { ref: "FT-107103", client: "Agofer", equip: "Puente grúa", cap: "5 t" },
+  { ref: "FT-1110", client: "ES Metal", equip: "Puente grúa monoviga", cap: "3 t" },
+  { ref: "FT-107001", client: "Litoplas", equip: "Puente grúa", cap: "2,5 t" },
+  { ref: "FT-107002", client: "Litoplas", equip: "Monorriel curvo", cap: "2 t" },
+  { ref: "FT-108301", client: "Energía Solar · Nave 1", equip: "Puente grúa", cap: "3 t" },
+  { ref: "FT-108302", client: "Energía Solar · Nave 2", equip: "Puente grúa", cap: "5 t" },
+  { ref: "FT-108303", client: "Energía Solar", equip: "Pórtico", cap: "2 t" },
+  { ref: "FT-108304", client: "Energía Solar", equip: "Puente colgante", cap: "3 t" },
+  { ref: "FT-109201", client: "Carrocerías Panamericana", equip: "Puente grúa", cap: "1 t y 2 t" },
+  { ref: "FT-1112", client: "La Campana", equip: "Puente grúa · polipasto", cap: "5 t" },
+  { ref: "FT-1080", client: "Steckerl · Cali", equip: "Modificación de pórtico", cap: "Intervención" },
+  { ref: "FT-1081", client: "Triple A", equip: "Modernización de puente grúa", cap: "Intervención" },
+  { ref: "FT-1077", client: "OPP", equip: "Extensión de vía de rodadura", cap: "Obra civil y mecánica" },
+  { ref: "FT-1078", client: "Scotta Caracolí", equip: "Equipo de izaje a medida", cap: "Diseño especial" },
+];
+---
+
+<Layout
+  title="Proyectos y Casos de Éxito de Puentes Grúa en Colombia | COLCRANES"
+  description="Conozca los proyectos y casos de éxito de Colcranes S.A.S. en Colombia: más de 800 equipos de izaje fabricados, montados y modernizados para siderurgia, industria y minería."
+>
+  <Header />
+  <main id="contenido">
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="breadcrumbs" aria-label="Ruta de navegación">
+          <a href="/">Inicio</a>
+          <span>/</span>
+          <span aria-current="page">Proyectos</span>
+        </nav>
+        <p class="eyebrow eyebrow--light">Portafolio e ingeniería ejecutada</p>
+        <h1 class="d1" style="margin-top:0.75rem;max-width:18ch">
+          Proyectos y casos de éxito
+        </h1>
+        <p class="lede lede--light" style="margin-top:1.25rem;max-width:62ch">
+          Más de 800 proyectos ejecutados en los sectores siderúrgico, metalmecánico, energético, minero y manufacturero de Colombia.
+        </p>
+      </div>
+    </section>
+
+    <Stats />
+    <Projects />
+    <Clients />
+
+    <section class="band">
+      <div class="wrap">
+        <header class="sec-head sec-head--split">
+          <div>
+            <p class="eyebrow">Trazabilidad técnica</p>
+            <h2 class="d2" style="margin-top:0.75rem">Extracto del registro de ingeniería (Fichas FT)</h2>
+          </div>
+          <div>
+            <p class="lede">
+              Muestra verificable de referencias del archivo de fichas técnicas de Colcranes S.A.S., con código de expediente, instalación y alcance.
+            </p>
+          </div>
+        </header>
+
+        <div style="overflow-x:auto;border:1px solid var(--line-dark);background:var(--paper)">
+          <table class="data-table" style="min-width:100%">
+            <thead>
+              <tr style="background:var(--steel-100)">
+                <th scope="col" style="padding:0.9rem 1rem">Referencia</th>
+                <th scope="col" style="padding:0.9rem 1rem">Cliente · instalación</th>
+                <th scope="col" style="padding:0.9rem 1rem">Equipo o intervención</th>
+                <th scope="col" style="padding:0.9rem 1rem;text-align:right">Capacidad / Alcance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {registry.map((row) => (
+                <tr>
+                  <td class="data-table__value" style="padding:0.8rem 1rem;color:var(--navy);font-weight:700">{row.ref}</td>
+                  <td style="padding:0.8rem 1rem;font-weight:600">{row.client}</td>
+                  <td style="padding:0.8rem 1rem">{row.equip}</td>
+                  <td class="data-table__value" style="padding:0.8rem 1rem;text-align:right">{row.cap}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <Quote />
+  </main>
+  <Footer />
+</Layout>

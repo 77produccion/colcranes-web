@@ -1,29 +1,28 @@
 ---
 /**
  * Capacidad, planta y compañía.
- * Los valores de la tabla de datos están tomados del sitio corporativo
- * (ver CONTENT_AUDIT_COLCRANES.md). No se publican cifras sin respaldo.
+ * Usa exclusivamente fotografía real de Colcranes (cero banco de imágenes / cero IA).
  */
 const capabilities = [
   {
     num: "01",
     title: "Fabricación propia",
-    text: "Fabricamos estructuras de puentes grúa y otros componentes; también suministramos equipos y piezas de fabricantes especializados.",
+    text: "Fabricamos estructuras de puentes grúa, testeros y componentes en nuestra planta de 3.000 m²; también integramos equipos de fabricantes especializados.",
   },
   {
     num: "02",
     title: "Ingeniería de cálculo",
-    text: "El cálculo considera la luz entre rieles, la altura disponible, la carga y el régimen de trabajo.",
+    text: "El cálculo estructural bajo normas CMAA y FEM considera la luz entre rieles, la altura disponible, la carga nominal y el régimen de trabajo.",
   },
   {
     num: "03",
     title: "Montaje en planta",
-    text: "Realizamos la instalación, alineación de la vía de rodadura y pruebas de funcionamiento en planta.",
+    text: "Realizamos la instalación con personal técnico propio, alineación de la vía de rodadura y pruebas de funcionamiento con carga en sitio.",
   },
   {
     num: "04",
     title: "Cobertura nacional",
-    text: "Tenemos sedes en Barranquilla y Bogotá y atendemos proyectos en distintas regiones de Colombia.",
+    text: "Operamos desde nuestras sedes en Barranquilla y Bogotá, desplazando cuadrillas técnicas a plantas industriales de toda Colombia.",
   },
 ];
 
@@ -57,38 +56,39 @@ const showcase = [
     alt: "Técnico ajustando un reductor sobre una viga en el taller de fabricación",
   },
 ];
-
-const companyData = [
-  { label: "Trayectoria", value: "+25 años", src: "colcranes.com" },
-  { label: "Proyectos entregados", value: "+800", src: "colcranes.com" },
-  { label: "Sedes", value: "Barranquilla · Bogotá", src: "colcranes.com" },
-  { label: "Atención", value: "Lun–Vie 07:30–17:30", src: "colcranes.com" },
-  { label: "Actividad", value: "Fabricación, montaje, mantenimiento", src: "colcranes.com" },
-];
 ---
 
 <section class="capacity band" id="capacidad">
   <div class="wrap">
     <header class="sec-head sec-head--split">
       <div>
+        <p class="eyebrow" data-reveal>Nosotros y capacidad operativa</p>
         <h2 class="d2" style="margin-top:1.25rem" data-reveal>
           Ingeniería y fabricación<br />en Colombia
         </h2>
       </div>
       <div data-reveal>
         <p class="lede">
-          Diseñamos, fabricamos e instalamos sistemas de izaje. También ofrecemos mantenimiento y repuestos para equipos en operación.
+          Diseñamos, fabricamos e instalamos sistemas de izaje. También ofrecemos mantenimiento, modernización y repuestos para equipos en operación.
         </p>
+        <div style="margin-top:1.25rem">
+          <a class="link-arrow" href="/nosotros">
+            Conocer más sobre Colcranes y nuestra planta
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
       </div>
     </header>
 
     <div class="plate" data-reveal-group>
       <figure class="plate__main" data-reveal>
         <img
-          src="/images/planta-bodega.webp"
+          src="/images/hero-colcranes-obra.webp"
           alt="Puente grúa amarillo instalado sobre su vía de rodadura en una bodega de acero en operación"
-          width="1800"
-          height="1108"
+          width="1920"
+          height="1282"
           loading="lazy"
           decoding="async"
         />
@@ -123,28 +123,6 @@ const companyData = [
           </article>
         ))}
       </div>
-
-      {/* Oculto temporalmente: Datos de la compañía y nota técnica
-      <div data-reveal>
-        <table class="data-table">
-          <caption>Datos de la compañía · fuente: sitio corporativo</caption>
-          <tbody>
-            {companyData.map((row) => (
-              <tr>
-                <th scope="row">{row.label}</th>
-                <td class="data-table__value">{row.value}</td>
-                <td class="data-table__src">{row.src}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <p class="note-src">
-          La capacidad máxima por familia se confirma con el levantamiento en planta. Los rangos
-          publicados en la sección de equipos corresponden a proyectos documentados en el archivo
-          técnico de Colcranes.
-        </p>
-      </div>
-      */}
     </div>
   </div>
 
@@ -177,7 +155,7 @@ const companyData = [
           <div class="showcase__body">
             <h3 class="d3">{panel.title}</h3>
             <p class="body-copy">{panel.text}</p>
-            <button type="button" class="showcase__cta">Cotizar</button>
+            <button type="button" class="showcase__cta" data-quote-open>Cotizar</button>
           </div>
         </article>
       ))}

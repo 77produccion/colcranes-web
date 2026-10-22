@@ -1,0 +1,93 @@
+---
+/**
+ * Sección de Proyectos y Casos de Éxito (Punto 4.3).
+ * Presenta 4 casos con espacio para fotografía propia (sin fotos de banco ni IA),
+ * cliente, capacidad, luz y alcance técnico.
+ */
+import { existsSync } from "node:fs";
+import { CASE_STUDIES } from "../data/site";
+
+const casesWithStatus = CASE_STUDIES.map((item) => ({
+  ...item,
+  hasImage: existsSync(`public${item.image}`),
+}));
+---
+
+<section class="projects band" id="proyectos">
+  <div class="wrap">
+    <header class="sec-head sec-head--split">
+      <div>
+        <p class="eyebrow" data-reveal>Proyectos y casos de éxito</p>
+        <h2 class="d2" style="margin-top:1.25rem" data-reveal>
+          Equipos fabricados e<br />instalados en Colombia
+        </h2>
+      </div>
+      <div data-reveal>
+        <p class="lede">
+          Cada proyecto ejecutado cuenta con expediente de ingeniería, código de ficha técnica,
+          planta de destino y pruebas de carga. Conozca cuatro intervenciones representativas.
+        </p>
+        <div style="margin-top:1.25rem">
+          <a class="link-arrow" href="/proyectos">
+            Ver portafolio completo y registro técnico
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="cases-grid" data-reveal-group>
+      {casesWithStatus.map((item) => (
+        <article class="case-card" data-reveal>
+          <div class="case-card__media">
+            {item.hasImage ? (
+              <img
+                src={item.image}
+                alt={item.alt}
+                width="1600"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div class="media-slot media-slot--case" role="img" aria-label={`Espacio para fotografía real del proyecto ${item.client}`}>
+                <span class="media-slot__tag">ESPACIO PARA FOTO DE PROYECTO PROPIO</span>
+                <span class="media-slot__title">{item.client}</span>
+                <span class="media-slot__meta">{item.slotSpec}</span>
+                <code class="media-slot__path">{item.image}</code>
+              </div>
+            )}
+            <span class="case-card__badge">{item.code}</span>
+          </div>
+          <div class="case-card__body">
+            <p class="mono case-card__location">{item.location}</p>
+            <h3 class="d3 case-card__client">{item.client}</h3>
+            <p class="case-card__title">{item.title}</p>
+            <p class="body-copy case-card__summary">{item.summary}</p>
+
+            <dl class="case-card__specs">
+              <div>
+                <dt>Cliente</dt>
+                <dd>{item.client}</dd>
+              </div>
+              <div>
+                <dt>Capacidad</dt>
+                <dd>{item.capacity}</dd>
+              </div>
+              <div>
+                <dt>Luz / Configuración</dt>
+                <dd>{item.span}</dd>
+              </div>
+              <div>
+                <dt>Alcance</dt>
+                <dd>{item.scope}</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

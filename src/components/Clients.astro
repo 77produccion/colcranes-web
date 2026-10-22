@@ -1,0 +1,38 @@
+---
+/**
+ * Franja de logos de clientes (Punto 4.1).
+ * Deja el espacio estructurado para cada logo autorizado en PNG/SVG transparente
+ * y muestra automáticamente la imagen en cuanto se coloque el archivo en `public/images/clientes/`.
+ */
+import { existsSync } from "node:fs";
+import { CLIENTS } from "../data/site";
+
+const clientsWithStatus = CLIENTS.map((client) => ({
+  ...client,
+  hasFile: existsSync(`public${client.logo}`),
+}));
+---
+
+<section class="clients-band" aria-label="Clientes industriales de Colcranes">
+  <div class="wrap">
+    <header class="clients-band__head">
+      <p class="eyebrow">Confianza industrial</p>
+      <h2 class="d3 clients-band__title">Empresas que operan con equipos y soporte de Colcranes</h2>
+    </header>
+    <ul class="clients-band__grid" data-reveal-group>
+      {clientsWithStatus.map((client) => (
+        <li class="clients-band__item" data-reveal title={`${client.name} · ${client.sector}`}>
+          {client.hasFile ? (
+            <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
+          ) : (
+            <div class="client-slot">
+              <span class="client-slot__tag">ESPACIO LOGO CLIENTE</span>
+              <span class="client-slot__name">{client.name}</span>
+              <span class="client-slot__spec">400 × 160 px · PNG/SVG</span>
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

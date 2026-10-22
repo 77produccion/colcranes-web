@@ -1,0 +1,156 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Brands from "../../components/Brands.astro";
+import Quote from "../../components/Quote.astro";
+import Footer from "../../components/Footer.astro";
+import { EQUIPMENT_FAMILIES, HOIST_OPTIONS, type EquipmentFamily } from "../../data/site";
+
+export function getStaticPaths() {
+  return EQUIPMENT_FAMILIES.map((family) => ({
+    params: { slug: family.slug },
+    props: { family },
+  }));
+}
+
+interface Props {
+  family: EquipmentFamily;
+}
+
+const { family } = Astro.props;
+const otherFamilies = EQUIPMENT_FAMILIES.filter((item) => item.slug !== family.slug);
+---
+
+<Layout title={family.seoTitle} description={family.seoDescription}>
+  <Header />
+  <main id="contenido">
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="breadcrumbs" aria-label="Ruta de navegación">
+          <a href="/">Inicio</a>
+          <span>/</span>
+          <a href="/equipos">Equipos</a>
+          <span>/</span>
+          <span aria-current="page">{family.name}</span>
+        </nav>
+        <p class="eyebrow eyebrow--light">Familia {family.num} · {family.short}</p>
+        <h1 class="d1" style="margin-top:0.75rem;max-width:18ch">
+          {family.pluralName}
+        </h1>
+        <p class="lede lede--light" style="margin-top:1.25rem;max-width:62ch">
+          {family.copy}
+        </p>
+        <div class="hero__ctas" style="margin-top:1.75rem">
+          <button class="btn btn--signal" type="button" data-quote-open>
+            Cotizar {family.name.toLowerCase()}
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </button>
+          <a class="btn btn--ghost-light" href="/equipos">Ver todo el catálogo</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap">
+        <div class="detail-layout">
+          <div>
+            <div class="detail-media">
+              <img src={family.image} alt={family.alt} loading="eager" decoding="async" />
+            </div>
+
+            {family.slug === "polipastos" && (
+              <div style="margin-top:2rem">
+                <h2 class="d3" style="margin-bottom:1rem">Líneas de polipastos disponibles</h2>
+                <div class="hoist-range" aria-label="Opciones de polipastos">
+                  {HOIST_OPTIONS.map((option) => (
+                    <article class="hoist-option">
+                      <div class="hoist-option__image">
+                        <img src={option.image} alt={option.alt} loading="lazy" decoding="async" />
+                      </div>
+                      <div class="hoist-option__copy">
+                        <h3>{option.name}</h3>
+                        <p>{option.detail}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div class="body-copy" style="margin-top:2rem">
+              <h2 class="d3" style="margin-bottom:1rem">Ingeniería y configuración</h2>
+              {family.longDescription.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <dl class="spec-grid" style="margin-bottom:2rem">
+              {family.specs.map((spec) => (
+                <div>
+                  <dt>{spec.label}</dt>
+                  <dd>{spec.value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div style="background:var(--steel-100);border:1px solid var(--line-dark);border-top:3px solid var(--navy);padding:1.5rem;margin-bottom:1.75rem">
+              <h2 class="d3">Características técnicas</h2>
+              <ul class="check-list">
+                {family.features.map((feat) => <li>{feat}</li>)}
+              </ul>
+            </div>
+
+            <div style="background:var(--paper);border:1px solid var(--line-dark);padding:1.5rem">
+              <h2 class="d3">Aplicaciones habituales</h2>
+              <ul class="check-list">
+                {family.applications.map((app) => <li>{app}</li>)}
+              </ul>
+              <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line-dark)">
+                <button class="btn btn--ink" type="button" data-quote-open style="width:100%;justify-content:center">
+                  Solicitar dimensionamiento y cotización
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Brands />
+
+    <section class="band" style="background:var(--steel-100);border-top:1px solid var(--line-dark)">
+      <div class="wrap">
+        <header class="sec-head">
+          <div>
+            <p class="eyebrow">Otras familias del catálogo</p>
+            <h2 class="d2" style="margin-top:0.75rem">Más equipos de izaje</h2>
+          </div>
+        </header>
+        <div class="catalog-cards">
+          {otherFamilies.map((item) => (
+            <article class="catalog-card">
+              <p class="mono" style="margin:0;color:var(--navy);font-weight:700">{item.num} · {item.short}</p>
+              <h3 class="d3" style="margin:0.4rem 0 0">{item.pluralName}</h3>
+              <p class="body-copy" style="margin-top:0.65rem;flex:1">{item.copy}</p>
+              <div style="margin-top:1.25rem">
+                <a class="link-arrow" href={`/equipos/${item.slug}`}>
+                  Ver {item.name.toLowerCase()}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Quote />
+  </main>
+  <Footer />
+</Layout>

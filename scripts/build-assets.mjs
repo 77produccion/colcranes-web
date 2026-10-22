@@ -138,3 +138,51 @@ for (const job of logoJobs) {
     console.log("FAIL", job.name, error.message);
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   Hero propio (sin recorte residual superior izquierdo) y Open Graph 1200x630
+   -------------------------------------------------------------------------- */
+try {
+  const meta = await sharp(`${OUT}/planta-bodega.webp`).metadata();
+  await sharp(`${OUT}/planta-bodega.webp`)
+    .extract({ left: 150, top: 0, width: meta.width - 150, height: meta.height })
+    .resize({ width: 1920, withoutEnlargement: false })
+    .webp({ quality: 86 })
+    .toFile(`${OUT}/hero-colcranes-obra.webp`);
+  console.log("ok  ", "hero-colcranes-obra.webp");
+
+  const bg = await sharp(`${OUT}/hero-colcranes-obra.webp`)
+    .resize(1200, 630, { fit: "cover", position: "center" })
+    .toBuffer();
+
+  const overlaySvg = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1D1D1B" stop-opacity="0.88"/>
+        <stop offset="55%" stop-color="#2D2E83" stop-opacity="0.72"/>
+        <stop offset="100%" stop-color="#1D1D1B" stop-opacity="0.92"/>
+      </linearGradient>
+    </defs>
+    <rect width="1200" height="630" fill="url(#g)"/>
+    <rect x="0" y="618" width="1200" height="12" fill="#00AEEF"/>
+    <text x="80" y="360" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="800" font-size="52" letter-spacing="1">EQUIPOS PARA IZAJE INDUSTRIAL</text>
+    <text x="80" y="420" fill="#00AEEF" font-family="Arial, sans-serif" font-weight="700" font-size="28" letter-spacing="1.5">PUENTES GRÚA · PÓRTICOS · POLIPASTOS · SERVICIO TÉCNICO</text>
+    <text x="80" y="545" fill="#FFFFFF" fill-opacity="0.8" font-family="Arial, sans-serif" font-weight="600" font-size="22" letter-spacing="2">COLCRANES S.A.S. · BARRANQUILLA &amp; BOGOTÁ · COLOMBIA</text>
+  </svg>`);
+
+  const logo = await sharp(`${OUT}/colcranes-logo-oscura.png`)
+    .resize({ width: 380 })
+    .toBuffer();
+
+  await sharp(bg)
+    .composite([
+      { input: overlaySvg, top: 0, left: 0 },
+      { input: logo, top: 90, left: 80 },
+    ])
+    .jpeg({ quality: 90 })
+    .toFile(`${OUT}/og-colcranes.jpg`);
+  console.log("ok  ", "og-colcranes.jpg");
+} catch (error) {
+  console.log("FAIL og/hero", error.message);
+}

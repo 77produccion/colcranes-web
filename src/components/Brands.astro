@@ -1,37 +1,64 @@
 ---
 /**
- * Firmas y fabricantes presentes en el catálogo y el archivo técnico.
- * Los logos con archivo se normalizaron a blanco sobre transparencia en
- * scripts/build-assets.mjs; el resto se rotula con la tipografía de marca.
+ * Firmas representadas y línea propia (Punto 1).
+ * - Se mantienen: R&M, Worldhoists, Diepa, SRP, Black Bear, Autec.
+ * - Se agrega: CMAK.
+ * - NOVALIFT es línea propia y va sin enlace externo.
+ * - Se retiraron Felemamg, Conductix y Drivecon hasta confirmación.
+ * - Si el archivo de logo existe en `public/`, renderiza el `<img>`; si está pendiente de entrega,
+ *   deja el espacio reservado para el logo oficial monocromo (sin inventar SVGs).
  */
-const logos = [
-  { name: "R&M Materials Handling", img: null, word: "R&M", url: "https://www.rmhoist.com/" },
-  { name: "World Hoists", img: "/images/brand-world-hoist.png", url: "https://worldhoists.com/" },
-  { name: "DIEPA Special Wire Ropes", img: "/images/brand-diepa.png", url: "https://www.diepa.com/" },
-  { name: "SRP Crane Controls", img: "/images/brand-srp.png", url: "https://www.srpcranes.com/" },
-  { name: "Black Bear", img: null, word: "Black Bear", url: "https://www.blackbear.com/" },
-  { name: "AUTEC", img: null, word: "Autec", url: "https://www.autecsafety.com/" },
-  { name: "Conductix-Wampfler", img: null, word: "Conductix", url: "https://www.conductix.com/" },
-  { name: "FELEMAMG", img: null, word: "Felemamg", url: "https://felemamg.com/" },
-  { name: "Nova Lift · Jovoo", img: null, word: "Nova Lift", url: "https://www.novalift.com/" },
-  { name: "DRIVECON", img: null, word: "Drivecon", url: "https://drivecon.com/" },
-];
+import { existsSync } from "node:fs";
+import { BRANDS } from "../data/site";
+
+const brandsWithStatus = BRANDS.map((brand) => ({
+  ...brand,
+  hasFile: existsSync(`public${brand.img}`),
+}));
 ---
 
-<section class="brands" aria-label="Firmas representadas y suministradas">
+<section class="brands" aria-label="Marcas representadas y línea propia">
   <div class="wrap">
-      <h2 class="brands__label">Firmas representadas y suministradas</h2>
+    <h2 class="brands__label">Marcas aliadas y línea propia</h2>
     <ul class="brands__row">
-      {logos.map((brand) => (
+      {brandsWithStatus.map((brand) => (
         <li class="brands__item">
-          <a class="brands__link" href={brand.url} target="_blank" rel="noopener noreferrer" aria-label={`Visitar ${brand.name}`} data-tooltip={brand.name}>
-          {brand.img ? (
-            <img src={brand.img} alt="" loading="lazy" decoding="async" />
+          {brand.url ? (
+            <a
+              class="brands__link"
+              href={brand.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visitar sitio oficial de ${brand.name}`}
+              data-tooltip={brand.name}
+            >
+              {brand.hasFile ? (
+                <img src={brand.img} alt={brand.name} loading="lazy" decoding="async" />
+              ) : (
+                <span class="logo-slot" aria-label={`Espacio para logo oficial de ${brand.shortName}`}>
+                  <span class="logo-slot__name">{brand.shortName}</span>
+                  <span class="logo-slot__hint">Logo PNG/SVG</span>
+                </span>
+              )}
+              <span class="brands__tooltip" aria-hidden="true">{brand.name}</span>
+            </a>
           ) : (
-            <span class="brands__wordmark">{brand.word}</span>
+            <div
+              class="brands__link brands__link--static"
+              aria-label={brand.name}
+              data-tooltip={brand.name}
+            >
+              {brand.hasFile ? (
+                <img src={brand.img} alt={brand.name} loading="lazy" decoding="async" />
+              ) : (
+                <span class="logo-slot logo-slot--own" aria-label={`Espacio para logo de ${brand.shortName}`}>
+                  <span class="logo-slot__name">{brand.shortName}</span>
+                  <span class="logo-slot__hint">Sin enlace · Logo PNG/SVG</span>
+                </span>
+              )}
+              <span class="brands__tooltip" aria-hidden="true">{brand.name}</span>
+            </div>
           )}
-          <span class="brands__tooltip" aria-hidden="true">{brand.name}</span>
-          </a>
         </li>
       ))}
     </ul>

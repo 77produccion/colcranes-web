@@ -1,0 +1,95 @@
+# Plan de Redirecciones 301 desde colcranes.com (WordPress antiguo -> Astro nuevo)
+
+# Cotizadores antiguos
+/cotizador_proyectos    /contacto#cotizar                 301
+/cotizador_proyectos/   /contacto#cotizar                 301
+/cotizador_servicios    /contacto#cotizar                 301
+/cotizador_servicios/   /contacto#cotizar                 301
+/cotizador_repuestos    /contacto#cotizar                 301
+/cotizador_repuestos/   /contacto#cotizar                 301
+/cotizar                /contacto                         301
+/cotizar/               /contacto                         301
+
+# Páginas corporativas y legales antiguas
+/quienes-somos          /nosotros                         301
+/quienes-somos/         /nosotros                         301
+/sobre-nosotros         /nosotros                         301
+/sobre-nosotros/        /nosotros                         301
+/empresa                /nosotros                         301
+/empresa/               /nosotros                         301
+/trabaja-con-nosotros   /trabaje-con-nosotros             301
+/trabaja-con-nosotros/  /trabaje-con-nosotros             301
+/politica-de-privacidad          /politica-tratamiento-datos 301
+/politica-de-privacidad/         /politica-tratamiento-datos 301
+/politica-tratamiento-de-datos   /politica-tratamiento-datos 301
+/politica-tratamiento-de-datos/  /politica-tratamiento-datos 301
+/politicas                       /politica-tratamiento-datos 301
+/politicas/                      /politica-tratamiento-datos 301
+
+# Catálogo general de productos
+/productos              /equipos                          301
+/productos/             /equipos                          301
+
+# Productos / Equipos individuales antiguos
+/puentes-grua                    /equipos/puentes-grua             301
+/puentes-grua/                   /equipos/puentes-grua             301
+/puente-grua                     /equipos/puentes-grua             301
+/puente-grua/                    /equipos/puentes-grua             301
+/productos/puente-grua           /equipos/puentes-grua             301
+/productos/puente-grua/          /equipos/puentes-grua             301
+/gruas-portico                   /equipos/gruas-portico            301
+/gruas-portico/                  /equipos/gruas-portico            301
+/grua-portico                    /equipos/gruas-portico            301
+/grua-portico/                   /equipos/gruas-portico            301
+/productos/grua-portico          /equipos/gruas-portico            301
+/productos/grua-portico/         /equipos/gruas-portico            301
+/gruas-bandera                   /equipos/gruas-bandera            301
+/gruas-bandera/                  /equipos/gruas-bandera            301
+/grua-bandera                    /equipos/gruas-bandera            301
+/grua-bandera/                   /equipos/gruas-bandera            301
+/productos/grua-bandera          /equipos/gruas-bandera            301
+/productos/grua-bandera/         /equipos/gruas-bandera            301
+/polipastos                      /equipos/polipastos               301
+/polipastos/                     /equipos/polipastos               301
+/productos/polipastos            /equipos/polipastos               301
+/productos/polipastos/           /equipos/polipastos               301
+/kit-puente-grua                 /equipos/kits-puente-grua         301
+/kit-puente-grua/                /equipos/kits-puente-grua         301
+/kits-puente-grua                /equipos/kits-puente-grua         301
+/kits-puente-grua/               /equipos/kits-puente-grua         301
+/productos/kit-puente-grua       /equipos/kits-puente-grua         301
+/productos/kit-puente-grua/      /equipos/kits-puente-grua         301
+/sistema-electrificacion         /equipos/sistemas-electrificacion 301
+/sistema-electrificacion/        /equipos/sistemas-electrificacion 301
+/sistemas-electrificacion        /equipos/sistemas-electrificacion 301
+/sistemas-electrificacion/       /equipos/sistemas-electrificacion 301
+/productos/sistema-electrificacion  /equipos/sistemas-electrificacion 301
+/productos/sistema-electrificacion/ /equipos/sistemas-electrificacion 301
+
+# Servicios individuales antiguos
+/montaje-y-puesta-en-marcha               /servicios/montaje-puesta-en-marcha          301
+/montaje-y-puesta-en-marcha/              /servicios/montaje-puesta-en-marcha          301
+/mantenimiento-preventivo                 /servicios/mantenimiento-preventivo          301
+/mantenimiento-preventivo/                /servicios/mantenimiento-preventivo          301
+/contratos-de-mantenimiento-y-repuestos   /servicios/contratos-mantenimiento-repuestos 301
+/contratos-de-mantenimiento-y-repuestos/  /servicios/contratos-mantenimiento-repuestos 301
+/suministro-de-repuestos                  /servicios/suministro-repuestos              301
+/suministro-de-repuestos/                 /servicios/suministro-repuestos              301
+/repuestos                                /servicios/suministro-repuestos              301
+/repuestos/                               /servicios/suministro-repuestos              301
+/accesorios-de-elevacion-bajo-gancho      /servicios/accesorios-bajo-gancho            301
+/accesorios-de-elevacion-bajo-gancho/     /servicios/accesorios-bajo-gancho            301
+/fabricacion-de-puentes-grua              /servicios/fabricacion-puentes-grua          301
+/fabricacion-de-puentes-grua/             /servicios/fabricacion-puentes-grua          301
+/modernizacion-de-puente-grua             /servicios/modernizacion-puente-grua         301
+/modernizacion-de-puente-grua/            /servicios/modernizacion-puente-grua         301
+/servicios-tecnicos                       /servicios/servicios-tecnicos                301
+/servicios-tecnicos/                      /servicios/servicios-tecnicos                301
+/servicio-de-garantias                    /servicios/servicio-garantias                301
+/servicio-de-garantias/                   /servicios/servicio-garantias                301
+/asesorias-integrales-de-ingenieria       /servicios/asesorias-ingenieria              301
+/asesorias-integrales-de-ingenieria/      /servicios/asesorias-ingenieria              301
+
+# Sitemap legado de WordPress
+/sitemap_index.xml      /sitemap.xml                      301
+/wp-sitemap.xml         /sitemap.xml                      301

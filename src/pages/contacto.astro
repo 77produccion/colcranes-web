@@ -1,0 +1,187 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Quote from "../components/Quote.astro";
+import Footer from "../components/Footer.astro";
+import { CONTACT } from "../data/site";
+
+const equipmentOptions = [
+  "Puente grúa monoviga o biviga",
+  "Grúa pórtico o semipórtico",
+  "Grúa bandera",
+  "Polipasto de cable",
+  "Polipasto de cadena",
+  "Kit de puente grúa",
+  "Electrificación o accesorios",
+  "Mantenimiento, repuestos o modernización",
+  "Aún no lo tengo definido",
+];
+---
+
+<Layout
+  title="Contacto y Cotización Técnica en Barranquilla y Bogotá | COLCRANES"
+  description="Comuníquese con Colcranes S.A.S. en Barranquilla y Bogotá para cotizar puentes grúa, pórticos, polipastos, repuestos y servicio técnico en toda Colombia."
+>
+  <Header />
+  <main id="contenido">
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="breadcrumbs" aria-label="Ruta de navegación">
+          <a href="/">Inicio</a>
+          <span>/</span>
+          <span aria-current="page">Contacto</span>
+        </nav>
+        <p class="eyebrow eyebrow--light">Atención comercial y soporte técnico</p>
+        <h1 class="d1" style="margin-top:0.75rem;max-width:18ch">
+          Contacto y sedes en Colombia
+        </h1>
+        <p class="lede lede--light" style="margin-top:1.25rem;max-width:62ch">
+          Atendemos requerimientos de proyectos nuevos, mantenimiento, modernizaciones y repuestos desde nuestras sedes de Barranquilla y Bogotá.
+        </p>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap">
+        <div class="detail-layout">
+          <div>
+            <p class="eyebrow">Canales directos</p>
+            <h2 class="d2" style="margin:0.75rem 0 1.5rem">Directorio por área y sedes</h2>
+
+            <div style="display:grid;gap:1rem">
+              <article style="background:var(--steel-100);border:1px solid var(--line-dark);border-left:4px solid var(--navy);padding:1.25rem 1.5rem">
+                <p class="mono" style="margin:0;color:var(--navy);font-weight:700">Línea nacional · Ventas y Proyectos</p>
+                <p class="d3" style="margin:0.35rem 0 0"><a href={CONTACT.salesPhoneHref}>{CONTACT.salesPhone}</a></p>
+                <p class="body-copy" style="margin-top:0.25rem;font-size:0.9rem">Cotización de puentes grúa, pórticos, grúas bandera y polipastos nuevos.</p>
+              </article>
+
+              <article style="background:var(--steel-100);border:1px solid var(--line-dark);border-left:4px solid var(--cyan);padding:1.25rem 1.5rem">
+                <p class="mono" style="margin:0;color:var(--navy);font-weight:700">Soporte Técnico e Inspecciones</p>
+                <p class="d3" style="margin:0.35rem 0 0"><a href={CONTACT.supportPhoneHref}>{CONTACT.supportPhone}</a></p>
+                <p class="body-copy" style="margin-top:0.25rem;font-size:0.9rem">Atención de equipos en operación, mantenimiento preventivo, correctivo y modernizaciones.</p>
+              </article>
+
+              <article style="background:var(--steel-100);border:1px solid var(--line-dark);border-left:4px solid var(--navy);padding:1.25rem 1.5rem">
+                <p class="mono" style="margin:0;color:var(--navy);font-weight:700">Servicio al Cliente y Repuestos</p>
+                <p class="d3" style="margin:0.35rem 0 0">
+                  <a href={CONTACT.customerServicePhone1Href}>{CONTACT.customerServicePhone1}</a> · <a href={CONTACT.customerServicePhone2Href}>{CONTACT.customerServicePhone2}</a>
+                </p>
+                <p class="body-copy" style="margin-top:0.25rem;font-size:0.9rem">Suministro de repuestos, accesorios bajo gancho y seguimiento de contratos.</p>
+              </article>
+
+              <article style="background:var(--steel-100);border:1px solid var(--line-dark);padding:1.25rem 1.5rem">
+                <p class="mono" style="margin:0;color:var(--navy);font-weight:700">Correo electrónico comercial</p>
+                <p class="d4" style="margin:0.35rem 0 0;text-transform:none">
+                  <a href={`mailto:${CONTACT.commercialEmail}`}>{CONTACT.commercialEmail}</a>
+                </p>
+                <p class="body-copy" style="margin-top:0.25rem;font-size:0.9rem">Horario de atención: {CONTACT.schedule}</p>
+              </article>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;margin-top:1.5rem">
+              {CONTACT.offices.map((office) => (
+                <div style="border:1px solid var(--line-dark);padding:1.25rem;background:var(--paper)">
+                  <p class="mono" style="margin:0;color:var(--navy);font-weight:700">Sede {office.city}</p>
+                  <p style="margin:0.4rem 0 0;font-weight:700">{office.address}</p>
+                  <p class="body-copy" style="margin-top:0.25rem;font-size:0.88rem">{office.role}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style="background:var(--paper);border:1px solid var(--line-dark);border-top:4px solid var(--navy);padding:clamp(1.5rem,3vw,2.5rem)">
+            <h2 class="d3" style="margin-bottom:0.5rem">Envíenos su requerimiento</h2>
+            <p class="body-copy" style="margin-bottom:1.5rem;font-size:0.94rem">
+              Complete los datos de su proyecto o solicitud técnica para comunicarnos con su equipo.
+            </p>
+            <form class="form-grid" data-contact-page-form novalidate>
+              <div class="form-grid form-grid--2">
+                <div class="field">
+                  <label for="cp-nombre">Nombre y apellido <span class="req">*</span></label>
+                  <input id="cp-nombre" name="nombre" type="text" required autocomplete="name" />
+                </div>
+                <div class="field">
+                  <label for="cp-empresa">Empresa o planta <span class="req">*</span></label>
+                  <input id="cp-empresa" name="empresa" type="text" required autocomplete="organization" />
+                </div>
+              </div>
+              <div class="form-grid form-grid--2">
+                <div class="field">
+                  <label for="cp-correo">Correo corporativo <span class="req">*</span></label>
+                  <input id="cp-correo" name="correo" type="email" required autocomplete="email" />
+                </div>
+                <div class="field">
+                  <label for="cp-telefono">Teléfono <span class="req">*</span></label>
+                  <input id="cp-telefono" name="telefono" type="tel" required autocomplete="tel" />
+                </div>
+              </div>
+              <div class="form-grid form-grid--2">
+                <div class="field">
+                  <label for="cp-equipo">Equipo o servicio</label>
+                  <select id="cp-equipo" name="equipo">
+                    {equipmentOptions.map((option) => <option>{option}</option>)}
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="cp-ciudad">Ciudad</label>
+                  <input id="cp-ciudad" name="ciudad" type="text" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="cp-detalle">Mensaje o especificaciones técnicas</label>
+                <textarea id="cp-detalle" name="detalle" placeholder="Capacidad, luz, altura de izaje o descripción de la necesidad en planta."></textarea>
+              </div>
+              <div class="field">
+                <label style="display:flex;gap:.7rem;align-items:flex-start;letter-spacing:0;text-transform:none;font-size:.82rem;line-height:1.5">
+                  <input type="checkbox" name="politica" required style="width:1rem;height:1rem;margin-top:.2rem;flex:none" />
+                  <span>
+                    Autorizo el tratamiento de mis datos personales conforme a la{" "}
+                    <a href="/politica-tratamiento-datos" style="color:var(--navy);text-decoration:underline;font-weight:600">
+                      Política de Tratamiento de Datos Personales (Ley 1581 de 2012)
+                    </a>{" "}
+                    de Colcranes S.A.S.
+                  </span>
+                </label>
+              </div>
+              <button class="btn btn--ink" type="submit">
+                Enviar requerimiento
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Quote />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  const contactForm = document.querySelector<HTMLFormElement>("[data-contact-page-form]");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+      const data = new FormData(contactForm);
+      const msg = [
+        "Contacto desde colcranes.com/contacto",
+        `Nombre: ${data.get("nombre")}`,
+        `Empresa: ${data.get("empresa")}`,
+        `Correo: ${data.get("correo")}`,
+        `Teléfono: ${data.get("telefono")}`,
+        `Interés: ${data.get("equipo")}`,
+        `Ciudad: ${data.get("ciudad") || "sin indicar"}`,
+        `Detalle: ${data.get("detalle") || "sin indicar"}`,
+      ].join("\n");
+      window.open(`https://wa.me/573156293396?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+      contactForm.reset();
+    });
+  }
+</script>

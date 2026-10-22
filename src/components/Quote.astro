@@ -1,27 +1,29 @@
 ---
 /**
- * Cotización.
- * Tres rutas de solicitud —proyecto, servicio y repuestos— replican los tres
- * formularios del sitio corporativo, sin convertirlo en un asistente por pasos.
- * Los datos de contacto provienen de colcranes.com.
+ * Cotización (Drawer + Formulario).
+ * - Enlaza la política de tratamiento de datos personales (Ley 1581 de 2012)
+ *   a `/politica-tratamiento-datos` (Punto 4.4).
+ * - Usa datos centralizados de contacto (Punto 6).
  */
+import { CONTACT } from "../data/site";
+
 const channels = [
   {
     label: "Línea nacional · Ventas",
-    value: "+57 315 629 3396",
-    href: "tel:+573156293396",
+    value: CONTACT.salesPhone,
+    href: CONTACT.salesPhoneHref,
     note: "Cotización de proyectos y equipos nuevos",
   },
   {
     label: "Soporte técnico",
-    value: "+57 310 704 3333",
-    href: "tel:+573107043333",
+    value: CONTACT.supportPhone,
+    href: CONTACT.supportPhoneHref,
     note: "Fallas, mantenimiento y equipos en operación",
   },
   {
     label: "Servicio al cliente",
-    value: "+57 322 249 2904 · +57 315 306 5795",
-    href: "tel:+573222492904",
+    value: `${CONTACT.customerServicePhone1} · ${CONTACT.customerServicePhone2}`,
+    href: CONTACT.customerServicePhone1Href,
     note: "Contratos, repuestos y accesorios",
   },
 ];
@@ -58,24 +60,40 @@ const equipmentOptions = [
         <div class="quote-contacts" data-reveal>
           <details class="quote-contacts__accordion">
             <summary aria-label="Mostrar otros teléfonos" title="Mostrar otros teléfonos">
-              <span class="quote-contacts__primary"><span>Línea principal · Ventas</span><a href="tel:+573156293396">+57 315 629 3396</a></span>
+              <span class="quote-contacts__primary">
+                <span>Línea principal · Ventas</span>
+                <a href={CONTACT.salesPhoneHref}>{CONTACT.salesPhone}</a>
+              </span>
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
             </summary>
             <div class="quote-contacts__details">
               {channels.slice(1).map((channel) => (
-                <p><span>{channel.label}</span><a href={channel.href}>{channel.value}</a><small>{channel.note}</small></p>
+                <p>
+                  <span>{channel.label}</span>
+                  <a href={channel.href}>{channel.value}</a>
+                  <small>{channel.note}</small>
+                </p>
               ))}
             </div>
           </details>
           <div class="quote-contacts__extras">
-            <p><span>Correo comercial</span><a href="mailto:comercial@colcranes.com">comercial@colcranes.com</a></p>
-            <p><span>Sedes</span><span>Cra. 67 # Vía 40-62, piso 3 · Barranquilla<br />Cra. 128 # 14B-31 · Bogotá</span></p>
+            <p>
+              <span>Correo comercial</span>
+              <a href={`mailto:${CONTACT.commercialEmail}`}>{CONTACT.commercialEmail}</a>
+            </p>
+            <p>
+              <span>Sedes</span>
+              <span>
+                Cra. 67 # Vía 40-62, piso 3 · Barranquilla<br />
+                Cra. 128 # 14B-31 · Bogotá
+              </span>
+            </p>
           </div>
         </div>
 
         <a
           class="btn btn--signal"
-          href="https://wa.me/573156293396"
+          href={CONTACT.whatsappUrl}
           style="align-self:start"
           data-reveal
         >
@@ -162,11 +180,17 @@ const equipmentOptions = [
           </div>
 
           <div class="field">
-            <label style="display:flex;gap:.7rem;align-items:flex-start;letter-spacing:0;text-transform:none;font-size:.8rem;line-height:1.5">
+            <label style="display:flex;gap:.7rem;align-items:flex-start;letter-spacing:0;text-transform:none;font-size:.82rem;line-height:1.5">
               <input type="checkbox" name="politica" required style="width:1rem;height:1rem;margin-top:.2rem;flex:none" />
               <span>
-                Autorizo el tratamiento de mis datos personales conforme a la política de
-                privacidad de Colcranes S.A.S.
+                Autorizo el tratamiento de mis datos personales conforme a la{" "}
+                <a
+                  href="/politica-tratamiento-datos"
+                  style="color:var(--navy);text-decoration:underline;font-weight:600"
+                >
+                  Política de Tratamiento de Datos Personales (Ley 1581 de 2012)
+                </a>{" "}
+                de Colcranes S.A.S.
               </span>
             </label>
           </div>
@@ -191,18 +215,7 @@ const equipmentOptions = [
 </section>
 
 <script>
-  /**
-   * Recepción de solicitudes.
-   *
-   * El sitio es estático y todavía no tiene endpoint propio. Un formulario
-   * que responde "registrado" sin enviar nada es peor que uno que falla, así
-   * que mientras no exista backend la solicitud se compone y se entrega al
-   * canal verificado (WhatsApp de la línea de ventas), que sí produce efecto.
-   *
-   * Para conectar el endpoint real basta con asignar ENDPOINT: el envío pasa
-   * a hacerse por POST y se deja de usar el canal alternativo.
-   */
-  const ENDPOINT: string | null = null; // p. ej. "https://formspree.io/f/xxxxxxxx"
+  const ENDPOINT: string | null = null;
   const WHATSAPP = "573156293396";
 
   const TIPO = { proyecto: "Proyecto nuevo", servicio: "Servicio", repuestos: "Repuestos" } as const;
@@ -219,8 +232,6 @@ const equipmentOptions = [
       text.textContent = message;
       status.append(text);
 
-      /* El enlace se crea como nodo: el contenido del formulario es entrada
-         del usuario y nunca debe interpretarse como HTML. */
       if (link) {
         const anchor = document.createElement("a");
         anchor.className = "link-arrow";

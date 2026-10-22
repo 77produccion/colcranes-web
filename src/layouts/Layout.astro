@@ -1,18 +1,21 @@
 ---
 import '../styles/global.css';
+import { SITE_URL, CONTACT } from '../data/site';
 
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
 }
 
 const {
   title = "COLCRANES | Fabricación, montaje y mantenimiento de puentes grúa y polipastos en Colombia",
   description =
     "Colcranes S.A.S. diseña, fabrica, monta y mantiene puentes grúa, pórticos, grúas bandera y polipastos en Colombia. Más de 25 años de experiencia y 800 proyectos desde Barranquilla y Bogotá.",
+  ogImage = `${SITE_URL}/images/og-colcranes.jpg`,
 } = Astro.props;
 
-const site = "https://colcranes.com";
+const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
 ---
 
 <!doctype html>
@@ -23,18 +26,28 @@ const site = "https://colcranes.com";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={site} />
+    <link rel="canonical" href={canonicalUrl} />
 
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="COLCRANES" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${site}/images/hero-crane.jpg`} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="COLCRANES · Equipos para izaje industrial en Colombia" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,600..800&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Saira:ital,wdth,wght@0,75..125,600..900;1,75..125,600..800&display=swap"
       rel="stylesheet"
     />
 
@@ -43,13 +56,14 @@ const site = "https://colcranes.com";
       set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Organization",
-        "@id": `${site}/#organization`,
-        name: "COLCRANES S.A.S.",
-        url: site,
-        logo: `${site}/images/colcranes-logo-oscura.png`,
+        "@id": `${SITE_URL}/#organization`,
+        name: CONTACT.companyName,
+        url: SITE_URL,
+        logo: `${SITE_URL}/images/colcranes-logo-oscura.png`,
+        image: ogImage,
         description,
-        email: "comercial@colcranes.com",
-        telephone: "+57 315 629 3396",
+        email: CONTACT.commercialEmail,
+        telephone: CONTACT.salesPhone,
         address: [
           {
             "@type": "PostalAddress",
@@ -87,12 +101,7 @@ const site = "https://colcranes.com";
             availableLanguage: "es",
           },
         ],
-        sameAs: [
-          "https://co.linkedin.com/company/colcranes-s-a-s",
-          "https://www.instagram.com/colcranes_sas/",
-          "https://www.facebook.com/Colcranespuentegruasypolipastos",
-          "https://twitter.com/colcranes",
-        ],
+        sameAs: CONTACT.socials.map((s) => s.href),
         areaServed: "Colombia",
       })}
     />

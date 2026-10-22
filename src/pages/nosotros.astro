@@ -1,0 +1,77 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Stats from "../components/Stats.astro";
+import Capacity from "../components/Capacity.astro";
+import Brands from "../components/Brands.astro";
+import Clients from "../components/Clients.astro";
+import Quote from "../components/Quote.astro";
+import Footer from "../components/Footer.astro";
+import { CONTACT } from "../data/site";
+---
+
+<Layout
+  title="Nosotros: Más de 25 Años Fabricando Puentes Grúa en Colombia | COLCRANES"
+  description="Conozca a Colcranes S.A.S.: más de 25 años de experiencia, planta de fabricación de 3.000 m² en Barranquilla, sede en Bogotá, técnicos propios y diseño bajo normas CMAA y FEM."
+>
+  <Header />
+  <main id="contenido">
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="breadcrumbs" aria-label="Ruta de navegación">
+          <a href="/">Inicio</a>
+          <span>/</span>
+          <span aria-current="page">Nosotros</span>
+        </nav>
+        <p class="eyebrow eyebrow--light">COLCRANES S.A.S.</p>
+        <h1 class="d1" style="margin-top:0.75rem;max-width:18ch">
+          Ingeniería, planta propia y respaldo nacional
+        </h1>
+        <p class="lede lede--light" style="margin-top:1.25rem;max-width:64ch">
+          Más de 25 años diseñando, fabricando, montando y manteniendo sistemas de izaje pesado para la industria colombiana.
+        </p>
+      </div>
+    </section>
+
+    <Stats />
+
+    <section class="band" style="background:var(--steel-100);border-bottom:1px solid var(--line-dark)">
+      <div class="wrap">
+        <div class="detail-layout">
+          <div class="body-copy">
+            <p class="eyebrow">Quiénes somos</p>
+            <h2 class="d2" style="margin:0.75rem 0 1.25rem">Especialistas en movimiento e izaje de cargas pesadas</h2>
+            <p>
+              <strong>COLCRANES S.A.S.</strong> acompaña al sector industrial colombiano en sus desafíos operacionales de manejo de carga e izaje de materiales pesados. Contamos con una planta de fabricación de aproximadamente <strong>3.000 m²</strong> en Barranquilla, una división especializada en estructuras metálicas y sede comercial y técnica en Bogotá.
+            </p>
+            <p>
+              Nuestros diseños y procesos de fabricación se rigen por estándares internacionales como las normas americanas <strong>CMAA (Crane Manufacturers Association of America)</strong> y europeas <strong>FEM (Fédération Européenne de la Manutention)</strong>, integrando componentes electromecánicos de marcas reconocidas a nivel mundial junto con nuestra línea propia <strong>NOVALIFT</strong>.
+            </p>
+            <p>
+              Desde el levantamiento dimensional en planta y el cálculo estructural hasta el montaje, las pruebas de carga y los contratos de mantenimiento preventivo, operamos con ingenieros y técnicos propios certificados para respaldar la continuidad de su operación.
+            </p>
+          </div>
+
+          <div style="display:grid;gap:1.25rem">
+            {CONTACT.offices.map((office) => (
+              <article style="background:var(--paper);border:1px solid var(--line-dark);border-top:3px solid var(--navy);padding:1.5rem">
+                <p class="mono" style="margin:0;color:var(--navy);font-weight:700">{office.role}</p>
+                <h3 class="d3" style="margin:0.4rem 0 0">Sede {office.city}</h3>
+                <p class="body-copy" style="margin-top:0.5rem">{office.address}</p>
+                <p class="mono" style="margin:0.75rem 0 0">
+                  <a href={office.phoneHref} style="color:var(--navy);font-weight:700">{office.phone}</a>
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Capacity />
+    <Brands />
+    <Clients />
+    <Quote />
+  </main>
+  <Footer />
+</Layout>

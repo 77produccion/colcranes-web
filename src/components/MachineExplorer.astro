@@ -1,164 +1,13 @@
 ---
 /**
- * Explorador de maquinaria.
- * Pestañas implementadas con radios nativos: funcionan sin JavaScript y el
- * contenido completo queda en el HTML (indexable). GSAP sólo añade el
- * desplazamiento del carro y el revelado de anotaciones.
+ * Explorador de maquinaria (Equipos).
+ * Pestañas con radios nativos + enlace directo a cada página individual SEO (/equipos/[slug]).
  */
-type Family = {
-  id: string;
-  num: string;
-  name: string;
-  short: string;
-  copy: string;
-  image: string;
-  alt: string;
-  diagram?: boolean;
-  photo?: boolean;
-  notes: { text: string; pos: "tl" | "tr" | "bl" | "br" }[];
-  specs: { label: string; value: string }[];
-  tags: string[];
-};
+import { EQUIPMENT_FAMILIES, HOIST_OPTIONS } from "../data/site";
 
-const families: Family[] = [
-  {
-    id: "fam-puentes",
-    num: "01",
-    name: "Puente grúa",
-    short: "Monoviga y biviga",
-    copy:
-      "Para naves industriales con recorrido sobre rieles. Se fabrica en configuración monoviga o biviga y se dimensiona según la luz, la altura de izaje, la carga y el ciclo de trabajo.",
-    image: "/images/productos/puente-grua.jpg",
-    alt: "Puente grúa biviga de gran capacidad con polipasto de cable y gancho de carga",
-    notes: [
-      { text: "Viga principal biviga", pos: "tl" },
-      { text: "Polipasto de cable", pos: "tr" },
-      { text: "Gancho de carga", pos: "br" },
-    ],
-    specs: [
-      { label: "Configuración", value: "Monoviga · Biviga" },
-      { label: "Capacidad documentada", value: "1 – 15 t" },
-      { label: "Alcance", value: "Diseño, fabricación, montaje" },
-    ],
-    tags: ["Siderurgia", "Bodegas de acero", "Manufactura"],
-  },
-  {
-    id: "fam-portico",
-    num: "02",
-    name: "Grúa pórtico",
-    short: "Pórtico y semipórtico",
-    copy:
-      "Alternativa para patios y espacios sin una vía de rodadura elevada. La configuración de pórtico o semipórtico se define según la luz libre y las condiciones del lugar.",
-    image: "/images/productos/grua-portico.jpg",
-    alt: "Grúa semipórtico amarilla con viga principal y polipasto sobre estructura de apoyo",
-    notes: [
-      { text: "Viga principal", pos: "tl" },
-      { text: "Apoyo de pórtico", pos: "br" },
-    ],
-    specs: [
-      { label: "Configuración", value: "Pórtico · Semipórtico" },
-      { label: "Capacidad documentada", value: "hasta 17 t" },
-      { label: "Alcance", value: "Diseño, fabricación, modificación" },
-    ],
-    tags: ["Patios de acopio", "Naves sin columnas", "Obra"],
-  },
-  {
-    id: "fam-bandera",
-    num: "03",
-    name: "Grúa bandera",
-    short: "De columna y de pared",
-    copy:
-      "Atiende puestos de trabajo mediante un brazo giratorio instalado en columna o pared. El alcance y la capacidad se definen para las condiciones de cada estación.",
-    image: "/images/productos/grua-bandera.jpg",
-    alt: "Grúa bandera de columna y de pared",
-    diagram: false,
-    notes: [
-      { text: "Radio de giro", pos: "tr" },
-      { text: "Brazo giratorio", pos: "tl" },
-      { text: "Columna", pos: "bl" },
-    ],
-    specs: [
-      { label: "Configuración", value: "Columna · Pared" },
-      { label: "Capacidad", value: "Según estación de trabajo" },
-      { label: "Alcance", value: "Diseño, fabricación, montaje" },
-    ],
-    tags: ["Puestos de trabajo", "Carga puntual", "Mantenimiento"],
-  },
-  {
-    id: "fam-cable",
-    num: "04",
-    name: "Polipastos",
-    short: "Cable y cadena · Servicio pesado",
-    copy:
-      "Suministro de polipastos de cable y de cadena para distintas configuraciones de puente grúa y necesidades de operación.",
-    image: "/images/hoist-double-girder.png",
-    alt: "Polipasto de cable para puente grúa biviga con carro motorizado",
-    notes: [
-      { text: "Carro motorizado", pos: "tl" },
-      { text: "Tambor de cable", pos: "br" },
-    ],
-    specs: [
-      { label: "Línea", value: "Spacemaster SX" },
-      { label: "Montaje", value: "Viga simple · doble" },
-      { label: "Alcance", value: "Suministro, repuestos, retrofit" },
-    ],
-    tags: ["Ciclos intensivos", "Servicio pesado", "Naves de gran altura"],
-  },
-  {
-    id: "fam-kit",
-    num: "05",
-    name: "Kit puente grúa",
-    short: "Testeros, motorización y control",
-    copy:
-      "Testeros, motorización y control para configurar un puente grúa sobre una viga calculada para la instalación.",
-    image: "/images/productos/kit-puente-grua.jpg",
-    alt: "Kit de puente grúa con testero motorizado, ruedas y bastidor de acero",
-    notes: [
-      { text: "Testero motorizado", pos: "tl" },
-      { text: "Rueda de rodadura", pos: "br" },
-    ],
-    specs: [
-      { label: "Contenido", value: "Testeros · Motorización · Control" },
-      { label: "Montaje", value: "Sobre viga de fabricación propia" },
-      { label: "Alcance", value: "Suministro, montaje, puesta en marcha" },
-    ],
-    tags: ["Fabricación propia", "Estandarización", "Montaje rápido"],
-  },
-  {
-    id: "fam-electrico",
-    num: "06",
-    name: "Sistema de electrificación",
-    short: "Recorrido, alimentación y bajo gancho",
-    copy:
-      "Alimentación eléctrica para el puente y el carro, además de accesorios bajo gancho y componentes de reposición.",
-    image: "/images/productos/sistema-electrificacion.jpg",
-    alt: "Carro de traslación de un puente grúa sobre su vía de rodadura, junto a la línea de alimentación por barras",
-    photo: false,
-    notes: [
-      { text: "Carro de traslación", pos: "tl" },
-      { text: "Línea de alimentación", pos: "br" },
-    ],
-    specs: [
-      { label: "Incluye", value: "Alimentación · Bajo gancho" },
-      { label: "Líneas", value: "Conductix · Autec · DIEPA" },
-      { label: "Alcance", value: "Suministro, instalación, repuestos" },
-    ],
-    tags: ["Recorrido del puente", "Toma de corriente", "Reposición"],
-  },
-];
+const families = EQUIPMENT_FAMILIES;
+const hoistOptions = HOIST_OPTIONS;
 
-const hoistOptions = [
-  { image: "/images/productos/polipastos/polipasto-cable-sx-sxe.png", alt: "Polipasto de cable SX / SXE", name: "Polipasto de cable SX / SXE", detail: "Cable de acero · Servicio pesado y alta capacidad" },
-  { image: "/images/productos/polipastos/polipasto-cadenas-lk.jpg", alt: "Polipasto de cadena LK", name: "Polipasto de cadena LK", detail: "Cadena de eslabones · Maniobra ágil y compacta" },
-  { image: "/images/productos/polipastos/polipasto-cadena-black-bear-nhd-ntd.jpeg", alt: "Black Bear NHD / NTD", name: "Black Bear NHD / NTD", detail: "Cadena industrial · Trabajo continuo de alta exigencia" },
-  { image: "/images/productos/polipastos/polipasto-cadena-black-bear-yhs-yss.png", alt: "Black Bear YHS / YSS", name: "Black Bear YHS / YSS", detail: "Cadena · Versatilidad en estaciones y talleres" },
-];
-
-const familyOrder = ["fam-cable", "fam-puentes", "fam-bandera", "fam-kit", "fam-electrico", "fam-portico"];
-families.sort((a, b) => familyOrder.indexOf(a.id) - familyOrder.indexOf(b.id));
-families.forEach((family, index) => { family.num = String(index + 1).padStart(2, "0"); });
-
-/* Pestañas sin JavaScript: las reglas enlazan cada radio con su panel y su fila. */
 const tabRules = families
   .map(
     (family) => `
@@ -174,12 +23,16 @@ const tabRules = families
   <div class="wrap">
     <header class="sec-head explorer__head">
       <div>
-        <h2 class="d2 explorer__title" data-reveal>
+        <p class="eyebrow" data-reveal>Catálogo de equipos</p>
+        <h2 class="d2 explorer__title" style="margin-top:1rem" data-reveal>
           Nuestros productos
         </h2>
         <p class="lede">
           <span class="explorer__experience">Más de 25 años de experiencia</span>
-          <span class="explorer__description">Fabricamos equipos de izaje y suministramos componentes de fabricantes especializados. Definimos cada solución según la carga, la altura y las condiciones de la planta.</span>
+          <span class="explorer__description">
+            Fabricamos equipos de izaje y suministramos componentes de fabricantes especializados.
+            Definimos cada solución según la carga, la luz entre rieles, la altura y las condiciones de la planta.
+          </span>
         </p>
       </div>
     </header>
@@ -204,7 +57,7 @@ const tabRules = families
             <span class="index-row__name">
               {family.name}
               <span
-                style="display:block;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:400;color:var(--steel-500);margin-top:.4rem"
+                style="display:block;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--steel-500);margin-top:.35rem"
               >
                 {family.short}
               </span>
@@ -223,54 +76,14 @@ const tabRules = families
           >
             <div class="stage">
               {family.id !== "fam-cable" && (
-              <div class="stage__media">
-                <figure class={`stage__fig ${index === 0 ? "is-active" : ""} ${family.photo ? "is-photo" : ""}`}>
-                  {family.diagram ? (
-                    <svg
-                      viewBox="0 0 720 420"
-                      width="100%"
-                      role="img"
-                      aria-label={family.alt}
-                      style="display:block;color:var(--ink)"
-                    >
-                      <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square">
-                        <path d="M120 380 h48" stroke-width="6" />
-                        <path d="M96 372 h96" stroke-width="6" />
-                        <path d="M144 372 V96" />
-                        <path d="M144 96 h330" stroke-width="5" />
-                        <path d="M144 78 h330" stroke-width="2" opacity=".45" />
-                        <path d="M144 114 h330" stroke-width="2" opacity=".45" />
-                        <path d="M474 96 v22" stroke-width="5" />
-                        <path d="M144 96 L120 372" stroke-width="2" opacity=".35" />
-                      </g>
-                      <g stroke="var(--signal)" fill="none" stroke-width="3">
-                        <rect x="330" y="78" width="58" height="36" fill="#fff" />
-                        <path d="M359 114 v70" stroke-dasharray="6 5" />
-                        <path d="M359 184 q11 12 0 24 q-11 12 0 24" stroke-width="4" />
-                        <path
-                          d="M150 130 A300 300 0 0 1 470 130"
-                          fill="none"
-                          stroke-width="1.5"
-                          stroke-dasharray="4 6"
-                        />
-                      </g>
-                      <g fill="var(--ink)">
-                        <circle cx="144" cy="96" r="5" />
-                        <circle cx="474" cy="96" r="5" />
-                      </g>
-                      <text x="150" y="404" font-family="var(--font-mono)" font-size="12" fill="var(--steel-500)">
-                        Ø RADIO DE GIRO
-                      </text>
-                    </svg>
-                  ) : (
+                <div class="stage__media">
+                  <figure class={`stage__fig ${index === 0 ? "is-active" : ""} ${family.photo ? "is-photo" : ""}`}>
                     <img src={family.image} alt={family.alt} loading="lazy" decoding="async" />
-                  )}
-
-                  {family.notes.map((note) => (
-                    <span class={`note note--${note.pos}`}>{note.text}</span>
-                  ))}
-                </figure>
-              </div>
+                    {family.notes.map((note) => (
+                      <span class={`note note--${note.pos}`}>{note.text}</span>
+                    ))}
+                  </figure>
+                </div>
               )}
 
               {family.id === "fam-cable" && (
@@ -297,6 +110,14 @@ const tabRules = families
                       <span class="mono" style="color:var(--steel-500)">{tag}</span>
                     ))}
                   </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-top:1.25rem">
+                    <a class="link-arrow" href={`/equipos/${family.slug}`}>
+                      Ver página de {family.name}
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M5 12h14M13 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
                 <dl class="spec-grid">
                   {family.specs.map((spec) => (
@@ -312,7 +133,6 @@ const tabRules = families
         ))}
       </div>
     </div>
-
   </div>
 
   <style is:global set:html={tabRules}></style>
