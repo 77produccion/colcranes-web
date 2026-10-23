@@ -58,75 +58,58 @@ const showcase = [
 ];
 ---
 
-<section class="capacity band" id="capacidad">
-  <div class="wrap">
-    <header class="sec-head sec-head--split">
-      <div>
-        <p class="eyebrow" data-reveal>Nosotros y capacidad operativa</p>
-        <h2 class="d2" style="margin-top:1.25rem" data-reveal>
-          Ingeniería y fabricación<br />en Colombia
-        </h2>
-      </div>
-      <div data-reveal>
-        <p class="lede">
-          Diseñamos, fabricamos e instalamos sistemas de izaje. También ofrecemos mantenimiento, modernización y repuestos para equipos en operación.
-        </p>
-        <div style="margin-top:1.25rem">
-          <a class="link-arrow" href="/nosotros">
-            Conocer más sobre Colcranes y nuestra planta
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
-          </a>
+<section class="capacity" id="capacidad">
+  <div class="capacity__stage">
+    <img
+      class="capacity__bg"
+      src="/images/planta-bodega.webp"
+      alt="Dos puentes grúa Colcranes de 2,5 toneladas en operación dentro de una planta industrial"
+      width="1672"
+      height="941"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="wrap capacity__stage-inner">
+      <header class="sec-head sec-head--split capacity__head">
+        <div>
+          <p class="eyebrow eyebrow--light" data-reveal>Nosotros y capacidad operativa</p>
+          <h2 class="d2" style="margin-top:1.25rem" data-reveal>
+            Ingeniería y fabricación<br />en Colombia
+          </h2>
         </div>
-      </div>
-    </header>
-
-    <div class="plate" data-reveal-group>
-      <figure class="plate__main" data-reveal>
-        <img
-          src="/images/hero-colcranes-obra.webp"
-          alt="Puente grúa amarillo instalado sobre su vía de rodadura en una bodega de acero en operación"
-          width="1920"
-          height="1282"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="figcap">
-          Puente grúa en operación sobre vía de rodadura · bodega de lámina de acero
-        </figcaption>
-      </figure>
-
-      <figure class="plate__secondary" data-reveal>
-        <img
-          src="/images/planta-puente-marca.webp"
-          alt="Puente grúa Colcranes rotulado en su vía de rodadura dentro de una bodega industrial"
-          width="1200"
-          height="892"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="figcap">Puente grúa rotulado · izaje de servicio en planta</figcaption>
-      </figure>
-    </div>
-
-    <div class="capacity__intro">
-      <div class="capabilities" data-reveal-group>
-        {capabilities.map((item) => (
-          <article class="capability" data-reveal>
-            <div class="capability__top">
-              <span class="capability__num">{item.num}</span>
-              <span class="capability__rule" aria-hidden="true"></span>
-            </div>
-            <h3 class="d3">{item.title}</h3>
-            <p class="body-copy">{item.text}</p>
-          </article>
-        ))}
-      </div>
+        <div data-reveal>
+          <p class="lede lede--light">
+            Diseñamos, fabricamos e instalamos sistemas de izaje. También ofrecemos mantenimiento, modernización y repuestos para equipos en operación.
+          </p>
+          <div style="margin-top:1.25rem">
+            <a class="link-arrow link-arrow--light" href="/nosotros">
+              Conocer más sobre Colcranes y nuestra planta
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </header>
     </div>
   </div>
 
-  <div class="wrap" style="margin-top:clamp(2.5rem,5vw,4.5rem)">
+  <div class="wrap capacity__cards">
+    <div class="capabilities" data-reveal-group>
+      {capabilities.map((item) => (
+        <article class="capability" data-reveal>
+          <div class="capability__top">
+            <span class="capability__num">{item.num}</span>
+            <span class="capability__rule" aria-hidden="true"></span>
+          </div>
+          <h3 class="d3">{item.title}</h3>
+          <p class="body-copy">{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <div class="wrap capacity__quote">
     <header class="sec-head sec-head--split" style="margin-bottom:clamp(1.5rem,3vw,2.5rem)">
       <div>
         <h2 class="d3" style="margin-top:1rem" data-reveal>Cotiza con nosotros</h2>

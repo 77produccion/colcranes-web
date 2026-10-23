@@ -19,7 +19,7 @@ const brandsWithStatus = BRANDS.map((brand) => ({
 
 <section class="brands" aria-label="Marcas representadas y línea propia">
   <div class="wrap">
-    <h2 class="brands__label">Marcas aliadas y línea propia</h2>
+    <h2 class="brands__label">Marcas aliadas</h2>
     <ul class="brands__row">
       {brandsWithStatus.map((brand) => (
         <li class="brands__item">
@@ -33,7 +33,13 @@ const brandsWithStatus = BRANDS.map((brand) => ({
               data-tooltip={brand.name}
             >
               {brand.hasFile ? (
-                <img src={brand.img} alt={brand.name} loading="lazy" decoding="async" />
+                <img
+                  class={brand.ownLine ? "brands__img--solid" : undefined}
+                  src={brand.img}
+                  alt={brand.name}
+                  loading="lazy"
+                  decoding="async"
+                />
               ) : (
                 <span class="logo-slot" aria-label={`Espacio para logo oficial de ${brand.shortName}`}>
                   <span class="logo-slot__name">{brand.shortName}</span>
@@ -49,7 +55,13 @@ const brandsWithStatus = BRANDS.map((brand) => ({
               data-tooltip={brand.name}
             >
               {brand.hasFile ? (
-                <img src={brand.img} alt={brand.name} loading="lazy" decoding="async" />
+                <img
+                  class={brand.ownLine ? "brands__img--solid" : undefined}
+                  src={brand.img}
+                  alt={brand.name}
+                  loading="lazy"
+                  decoding="async"
+                />
               ) : (
                 <span class="logo-slot logo-slot--own" aria-label={`Espacio para logo de ${brand.shortName}`}>
                   <span class="logo-slot__name">{brand.shortName}</span>

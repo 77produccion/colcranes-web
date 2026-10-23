@@ -79,6 +79,8 @@ export const COMPANY_STATS = [
  * - Se retiran: Felemamg, Conductix y Drivecon hasta confirmación.
  * - Si el archivo de logo existe en `public/`, se muestra la imagen; si aún está pendiente
  *   de entrega, se muestra el espacio reservado para el logo oficial monocromo.
+ * - Los logos nuevos viven en `public/images/marks-logo/`; R&M, Worldhoists, Diepa y SRP
+ *   se mantienen en `public/images/` porque los genera `scripts/build-assets.mjs`.
  */
 export interface BrandItem {
   name: string;
@@ -92,7 +94,7 @@ export const BRANDS: BrandItem[] = [
   {
     name: "R&M Materials Handling",
     shortName: "R&M",
-    img: "/images/brands/brand-rm.png",
+    img: "/images/marks-logo/trim/RM-Logo.png",
     url: "https://www.rmhoist.com/",
   },
   {
@@ -116,25 +118,25 @@ export const BRANDS: BrandItem[] = [
   {
     name: "Black Bear Hoists",
     shortName: "Black Bear",
-    img: "/images/brands/brand-black-bear.png",
+    img: "/images/marks-logo/black-bear-logo.png",
     url: "https://www.blackbearhoists.com/",
   },
   {
     name: "AUTEC Radio Remote Control",
     shortName: "AUTEC",
-    img: "/images/brands/brand-autec.png",
+    img: "/images/marks-logo/autec-logo.svg",
     url: "https://www.autecsafety.com/",
   },
   {
     name: "CMAK Crane Systems",
     shortName: "CMAK",
-    img: "/images/brands/brand-cmak.png",
+    img: "/images/marks-logo/cmak-logo.png",
     url: "https://cmak.com/",
   },
   {
     name: "NOVALIFT · Línea propia COLCRANES",
     shortName: "NOVALIFT (Línea propia)",
-    img: "/images/brands/brand-novalift.png",
+    img: "/images/marks-logo/novalift-logo.png",
     url: null,
     ownLine: true,
   },
@@ -142,15 +144,15 @@ export const BRANDS: BrandItem[] = [
 
 /**
  * Franja de logos de clientes (Punto 4.1).
- * Espacio listo para colocar los archivos PNG/SVG autorizados en `public/images/clientes/`.
+ * Los archivos PNG/SVG autorizados viven en `public/images/logos/`.
  */
 export const CLIENTS = [
-  { name: "Cliente 01 · Steckerl Aceros", logo: "/images/clientes/cliente-01.png", sector: "Siderurgia y aceros" },
-  { name: "Cliente 02 · AA Metals", logo: "/images/clientes/cliente-02.png", sector: "Metalmecánica y distribución" },
-  { name: "Cliente 03 · Agofer", logo: "/images/clientes/cliente-03.png", sector: "Acero y construcción" },
-  { name: "Cliente 04 · Energía Solar", logo: "/images/clientes/cliente-04.png", sector: "Manufactura arquitectónica" },
-  { name: "Cliente 05 · Litoplas", logo: "/images/clientes/cliente-05.png", sector: "Industria de empaques" },
-  { name: "Cliente 06 · Triple A", logo: "/images/clientes/cliente-06.png", sector: "Servicios públicos e infraestructura" },
+  { name: "Steckerl Aceros", logo: "/images/logos/trim/steckerlaceros.png", sector: "Siderurgia y aceros" },
+  { name: "AA Metals", logo: "/images/logos/trim/aa-metals.png", sector: "Metalmecánica y distribución" },
+  { name: "Agofer", logo: "/images/logos/trim/agofer.png", sector: "Acero y construcción" },
+  { name: "Energía Solar", logo: "/images/logos/trim/energia-solar.png", sector: "Manufactura arquitectónica" },
+  { name: "Litoplas", logo: "/images/logos/trim/litoplas.png", sector: "Industria de empaques" },
+  { name: "Triple A", logo: "/images/logos/trim/triple-a.png", sector: "Servicios públicos e infraestructura" },
 ];
 
 /**
@@ -754,7 +756,7 @@ export const SERVICES: ServiceItem[] = [
       "Respaldo directo de fábrica con nuestros proveedores internacionales",
       "Verificación en planta y acompañamiento postventa",
     ],
-    image: "/images/servicios/09-servicio-garantias.webp",
+    image: "/images/servicios/09-servicio-garantia.webp",
     slotSpec: "1200 × 1500 px · Proporción 4:5 · Sin filtro de color",
     alt: "Respaldo técnico y atención de garantía en equipos suministrados por Colcranes",
   },

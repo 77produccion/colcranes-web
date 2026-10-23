@@ -279,6 +279,35 @@ function setupGenericReveals() {
   });
 }
 
+/* Conteo animado de las cifras: conserva prefijo/sufijo (+ y %) y la
+   tipografía original; sólo cambia el número mientras entra en pantalla. */
+function setupStatCounters() {
+  const values = Array.from(document.querySelectorAll<HTMLElement>(".stat-card__value"));
+  values.forEach((el) => {
+    const original = el.textContent?.trim() ?? "";
+    const match = original.match(/^([^\d]*)(\d+)([^\d]*)$/);
+    if (!match) return;
+    const [, prefix, digits, suffix] = match;
+    const target = Number(digits);
+    if (!Number.isFinite(target)) return;
+    const counter = { value: 0 };
+    const render = () => {
+      el.textContent = `${prefix}${Math.round(counter.value)}${suffix}`;
+    };
+    render();
+    gsap.to(counter, {
+      value: target,
+      duration: 1.6,
+      ease: "power2.out",
+      onUpdate: render,
+      onComplete: () => {
+        el.textContent = original;
+      },
+      scrollTrigger: { trigger: el, start: "top 90%", once: true },
+    });
+  });
+}
+
 function setupHeader() {
   const header = document.querySelector<HTMLElement>("[data-header]");
   const sentinel = document.querySelector<HTMLElement>("[data-header-sentinel]");
@@ -318,6 +347,7 @@ function run() {
   setupQuoteDrawer();
   setupQuoteContacts();
   setupHeroSlides();
+  setupStatCounters();
 
   const mm = gsap.matchMedia();
 

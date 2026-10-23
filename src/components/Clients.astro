@@ -1,16 +1,20 @@
 ---
 /**
  * Franja de logos de clientes (Punto 4.1).
- * Deja el espacio estructurado para cada logo autorizado en PNG/SVG transparente
- * y muestra automáticamente la imagen en cuanto se coloque el archivo en `public/images/clientes/`.
+ * Cinta continua: los logos se desplazan en bucle, sin tarjetas ni bordes.
+ * Los logos autorizados viven en `public/images/logos/` y se referencian desde
+ * `CLIENTS`. Si falta un archivo, se muestra el nombre del cliente.
  */
 import { existsSync } from "node:fs";
 import { CLIENTS } from "../data/site";
 
-const clientsWithStatus = CLIENTS.map((client) => ({
+const clients = CLIENTS.map((client) => ({
   ...client,
   hasFile: existsSync(`public${client.logo}`),
 }));
+
+// Dos copias para que el desplazamiento sea continuo y sin saltos.
+const marquee = [...clients, ...clients];
 ---
 
 <section class="clients-band" aria-label="Clientes industriales de Colcranes">
@@ -19,20 +23,33 @@ const clientsWithStatus = CLIENTS.map((client) => ({
       <p class="eyebrow">Confianza industrial</p>
       <h2 class="d3 clients-band__title">Empresas que operan con equipos y soporte de Colcranes</h2>
     </header>
-    <ul class="clients-band__grid" data-reveal-group>
-      {clientsWithStatus.map((client) => (
-        <li class="clients-band__item" data-reveal title={`${client.name} · ${client.sector}`}>
-          {client.hasFile ? (
-            <img src={client.logo} alt={client.name} loading="lazy" decoding="async" />
-          ) : (
-            <div class="client-slot">
-              <span class="client-slot__tag">ESPACIO LOGO CLIENTE</span>
-              <span class="client-slot__name">{client.name}</span>
-              <span class="client-slot__spec">400 × 160 px · PNG/SVG</span>
-            </div>
-          )}
-        </li>
-      ))}
+  </div>
+
+  <div class="clients-band__marquee">
+    <ul class="clients-band__track">
+      {marquee.map((client, index) => {
+        const isDuplicate = index >= clients.length;
+        return (
+          <li
+            class="clients-band__item"
+            aria-hidden={isDuplicate ? "true" : undefined}
+          >
+            {client.hasFile ? (
+              <img
+                src={client.logo}
+                alt={isDuplicate ? "" : `Logo de ${client.name}`}
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <span class="clients-band__fallback">{client.name}</span>
+            )}
+            <span class="clients-band__tooltip" aria-hidden="true">
+              {client.name} · {client.sector}
+            </span>
+          </li>
+        );
+      })}
     </ul>
   </div>
 </section>
