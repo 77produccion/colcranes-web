@@ -94,31 +94,31 @@ export const BRANDS: BrandItem[] = [
   {
     name: "R&M Materials Handling",
     shortName: "R&M",
-    img: "/images/marks-logo/trim/RM-Logo.png",
+    img: "/images/marks-logo/trim/RM-Logo.webp",
     url: "https://www.rmhoist.com/",
   },
   {
     name: "World Hoists",
     shortName: "Worldhoists",
-    img: "/images/brand-world-hoist.png",
+    img: "/images/brand-world-hoist.webp",
     url: "https://worldhoists.com/",
   },
   {
     name: "DIEPA Special Wire Ropes",
     shortName: "DIEPA",
-    img: "/images/brand-diepa.png",
+    img: "/images/brand-diepa.webp",
     url: "https://www.diepa.com/",
   },
   {
     name: "SRP Crane Controls",
     shortName: "SRP",
-    img: "/images/brand-srp.png",
+    img: "/images/brand-srp.webp",
     url: "https://www.srpcranes.com/",
   },
   {
     name: "Black Bear Hoists",
     shortName: "Black Bear",
-    img: "/images/marks-logo/black-bear-logo.png",
+    img: "/images/marks-logo/black-bear-logo.webp",
     url: "https://www.blackbearhoists.com/",
   },
   {
@@ -130,13 +130,13 @@ export const BRANDS: BrandItem[] = [
   {
     name: "CMAK Crane Systems",
     shortName: "CMAK",
-    img: "/images/marks-logo/cmak-logo.png",
+    img: "/images/marks-logo/cmak-logo.webp",
     url: "https://cmak.com/",
   },
   {
     name: "NOVALIFT · Línea propia COLCRANES",
     shortName: "NOVALIFT (Línea propia)",
-    img: "/images/marks-logo/novalift-logo-white.png",
+    img: "/images/marks-logo/novalift-logo-white.webp",
     url: null,
     ownLine: true,
   },
@@ -147,12 +147,12 @@ export const BRANDS: BrandItem[] = [
  * Los archivos PNG/SVG autorizados viven en `public/images/logos/`.
  */
 export const CLIENTS = [
-  { name: "Steckerl Aceros", logo: "/images/logos/trim/steckerlaceros.png", sector: "Siderurgia y aceros" },
-  { name: "AA Metals", logo: "/images/logos/trim/aa-metals.png", sector: "Metalmecánica y distribución" },
-  { name: "Agofer", logo: "/images/logos/trim/agofer.png", sector: "Acero y construcción" },
-  { name: "Energía Solar", logo: "/images/logos/trim/energia-solar.png", sector: "Manufactura arquitectónica" },
-  { name: "Litoplas", logo: "/images/logos/trim/litoplas.png", sector: "Industria de empaques" },
-  { name: "Triple A", logo: "/images/logos/trim/triple-a.png", sector: "Servicios públicos e infraestructura" },
+  { name: "Steckerl Aceros", logo: "/images/logos/trim/steckerlaceros.webp", sector: "Siderurgia y aceros" },
+  { name: "AA Metals", logo: "/images/logos/trim/aa-metals.webp", sector: "Metalmecánica y distribución" },
+  { name: "Agofer", logo: "/images/logos/trim/agofer.webp", sector: "Acero y construcción" },
+  { name: "Energía Solar", logo: "/images/logos/trim/energia-solar.webp", sector: "Manufactura arquitectónica" },
+  { name: "Litoplas", logo: "/images/logos/trim/litoplas.webp", sector: "Industria de empaques" },
+  { name: "Triple A", logo: "/images/logos/trim/triple-a.webp", sector: "Servicios públicos e infraestructura" },
 ];
 
 /**
@@ -277,7 +277,7 @@ export const EQUIPMENT_FAMILIES: EquipmentFamily[] = [
       "En COLCRANES S.A.S. seleccionamos y suministramos polipastos eléctricos de cable de acero y de cadena de eslabones de fabricantes internacionales como R&M Materials Handling, Worldhoists, Black Bear y CMAK, además de nuestra línea propia NOVALIFT.",
       "Cada unidad se configura según la capacidad nominal de carga, la altura de izaje efectiva, la velocidad de elevación (una o dos velocidades, o variador de frecuencia), el espacio libre superior disponible (altura normal o bajo perfil) y el grupo de servicio FEM / ISO requerido por su operación.",
     ],
-    image: "/images/hoist-double-girder.png",
+    image: "/images/hoist-double-girder.webp",
     alt: "Polipasto de cable para puente grúa biviga con carro motorizado",
     notes: [
       { text: "Carro motorizado", pos: "tl" },
@@ -317,7 +317,7 @@ export const EQUIPMENT_FAMILIES: EquipmentFamily[] = [
       "Diseñamos y fabricamos puentes grúa monoviga, biviga y suspendidos (colgantes) en nuestra planta de 3.000 m² en Barranquilla, cumpliendo con las normas internacionales CMAA (Crane Manufacturers Association of America) y FEM (Fédération Européenne de la Manutention).",
       "Cada puente grúa parte del levantamiento dimensional en su planta: calculamos la viga principal (perfil laminado o viga cajón soldada), definimos los testeros motorizados, el polipasto y la electrificación transversal y longitudinal para garantizar una operación segura, suave y precisa.",
     ],
-    image: "/images/productos/puente-grua.jpg",
+    image: "/images/productos/puente-grua.webp",
     alt: "Puente grúa industrial con polipasto de cable y gancho de carga",
     notes: [
       { text: "Viga principal calculada", pos: "tl" },
@@ -358,7 +358,7 @@ export const EQUIPMENT_FAMILIES: EquipmentFamily[] = [
       "Las grúas bandera (también conocidas como grúas pescante o jib cranes) agilizan el izaje localizado en celdas de manufactura, centros de mecanizado, áreas de soldadura y muelles de carga sin ocupar el puente grúa principal de la nave.",
       "Fabricamos grúas bandera de columna autosoportada (con placa base y pernos de anclaje calculados) y grúas bandera murales fijadas a columnas estructurales existentes, con rotación manual o motorizada de 180°, 270° o 360°.",
     ],
-    image: "/images/productos/grua-bandera.jpg",
+    image: "/images/productos/grua-bandera.webp",
     alt: "Grúa bandera amarilla de columna con polipasto eléctrico",
     notes: [
       { text: "Radio de giro", pos: "tr" },
@@ -399,7 +399,7 @@ export const EQUIPMENT_FAMILIES: EquipmentFamily[] = [
       "El kit de puente grúa reúne todos los conjuntos electromecánicos de precisión —polipasto con carro, par de testeros con motorreductores de traslación, tableros de control, festón transversal y mando— listos para ensamblarse sobre la viga principal.",
       "Es una solución eficiente tanto para proyectos donde fabricamos la viga en nuestra planta como para montajes en regiones apartadas donde se optimiza el transporte y la integración en sitio.",
     ],
-    image: "/images/productos/kit-puente-grua.jpg",
+    image: "/images/productos/kit-puente-grua.webp",
     alt: "Kit de puente grúa con testeros motorizados, polipasto y sistema de control",
     notes: [
       { text: "Testero motorizado", pos: "tl" },
@@ -438,7 +438,7 @@ export const EQUIPMENT_FAMILIES: EquipmentFamily[] = [
       "Un suministro eléctrico confiable y un sistema de mando preciso evitan paradas no programadas en la vía de rodadura. Suministramos e instalamos sistemas de electrificación longitudinal (blindo barra / rieles conductores encapsulados) y transversal (sistemas tipo festón con cable plano).",
       "Complementamos la electrificación con radiocontroles industriales de seguridad AUTEC, controles y componentes SRP Crane Controls, y cables de acero de alto rendimiento DIEPA.",
     ],
-    image: "/images/productos/sistema-electrificacion.jpg",
+    image: "/images/productos/sistema-electrificacion.webp",
     alt: "Sistema de electrificación tipo festón con carros portacables y riel para puente grúa",
     photo: false,
     notes: [
@@ -479,7 +479,7 @@ export const EQUIPMENT_FAMILIES: EquipmentFamily[] = [
       "Las grúas pórtico y semipórtico resuelven el izaje de cargas pesadas en patios abiertos de almacenamiento, plantas de prefabricados, astilleros o naves industriales cuyas columnas no fueron diseñadas para soportar una vía de rodadura elevada.",
       "En la configuración de pórtico completo, las dos patas estructurales se desplazan sobre rieles a nivel de piso (o ruedas para taller); en la configuración semipórtico, un extremo corre sobre riel elevado en columna y el otro sobre riel en piso, aprovechando al máximo el pasillo de trabajo.",
     ],
-    image: "/images/productos/grua-portico.jpg",
+    image: "/images/productos/grua-portico.webp",
     alt: "Grúa pórtico industrial amarilla con viga principal y estructura de apoyo",
     notes: [
       { text: "Viga principal", pos: "tl" },
@@ -508,25 +508,25 @@ export const EQUIPMENT_FAMILIES: EquipmentFamily[] = [
 
 export const HOIST_OPTIONS = [
   {
-    image: "/images/productos/polipastos/polipasto-cable-sx-sxe.png",
+    image: "/images/productos/polipastos/polipasto-cable-sx-sxe.webp",
     alt: "Polipasto de cable SX / SXE",
     name: "Polipasto de cable SX / SXE",
     detail: "Cable de acero · Servicio pesado y alta capacidad",
   },
   {
-    image: "/images/productos/polipastos/polipasto-cadenas-lk.jpg",
+    image: "/images/productos/polipastos/polipasto-cadenas-lk.webp",
     alt: "Polipasto de cadena LK",
     name: "Polipasto de cadena LK",
     detail: "Cadena de eslabones · Maniobra ágil y compacta",
   },
   {
-    image: "/images/productos/polipastos/polipasto-cadena-black-bear-nhd-ntd.jpeg",
+    image: "/images/productos/polipastos/polipasto-cadena-black-bear-nhd-ntd.webp",
     alt: "Black Bear NHD / NTD",
     name: "Black Bear NHD / NTD",
     detail: "Cadena industrial · Trabajo continuo de alta exigencia",
   },
   {
-    image: "/images/productos/polipastos/polipasto-cadena-black-bear-yhs-yss.png",
+    image: "/images/productos/polipastos/polipasto-cadena-black-bear-yhs-yss.webp",
     alt: "Black Bear YHS / YSS",
     name: "Black Bear YHS / YSS",
     detail: "Cadena · Versatilidad en estaciones y talleres",

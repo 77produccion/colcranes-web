@@ -1,4 +1,6 @@
 ---
+import { responsiveImage } from "../utils/media";
+
 interface Props {
   image: string;
   tone?: "black" | "blue" | "white";
@@ -8,7 +10,7 @@ const { image, tone = "black" } = Astro.props;
 ---
 
 <section class={`page-hero interior-hero interior-hero--${tone}`}>
-  <img class="interior-hero__image" src={image} alt="" loading="eager" fetchpriority="high" decoding="async" />
+  <img class="interior-hero__image" src={image} {...await responsiveImage(image)} alt="" loading="eager" fetchpriority="high" decoding="async" />
   <div class="interior-hero__overlay" aria-hidden="true"></div>
   <slot />
 </section>

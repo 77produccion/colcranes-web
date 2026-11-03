@@ -4,6 +4,7 @@
  * Usa exclusivamente fotografía real de Colcranes (cero banco de imágenes / cero IA).
  */
 import { PROMO_IMAGES } from "../data/promos";
+import { responsiveImage } from "../utils/media";
 
 /* Si la carpeta aún no tiene imágenes, se conserva la foto de planta. */
 const slides = PROMO_IMAGES.length ? PROMO_IMAGES : ["/images/planta-bodega.webp"];
@@ -36,14 +37,14 @@ const showcase = [
     num: "01",
     title: "Proyectos",
     text: "Puentes grúa, pórticos y grúas bandera para planta nueva o ampliación.",
-    img: encodeURI("/images/imagenes-promocionales/WhatsApp Image 2026-10-23 at 9.51.44 AM.jpeg"),
+    img: encodeURI("/images/imagenes-promocionales/WhatsApp Image 2026-10-23 at 9.51.44 AM.webp"),
     alt: "Puente grúa Colcranes de 80 toneladas instalado en una nave industrial",
   },
   {
     num: "02",
     title: "Servicios",
     text: "Mantenimiento, montaje y puesta en marcha de equipos en operación.",
-    img: encodeURI("/images/imagenes-promocionales/WhatsApp Image 2026-10-23 at 9.51.47 AM (4).jpeg"),
+    img: encodeURI("/images/imagenes-promocionales/WhatsApp Image 2026-10-23 at 9.51.47 AM (4).webp"),
     alt: "Técnico sobre una plataforma elevadora interviniendo un puente grúa Colcranes",
   },
   {
@@ -72,7 +73,7 @@ const showcase = [
         alt=""
         width="1600"
         height="1200"
-        fetchpriority="high"
+        loading="lazy"
         decoding="async"
       />
       <img class="capacity__bg" alt="" aria-hidden="true" decoding="async" />
@@ -130,11 +131,12 @@ const showcase = [
     </header>
 
     <div class="showcase" data-reveal-group>
-      {showcase.map((panel) => (
+      {showcase.map(async (panel) => (
         <article class="showcase__item" data-reveal tabindex="0">
           <img
             class="showcase__img"
             src={panel.img}
+            {...await responsiveImage(panel.img, "(min-width: 980px) 25vw, (min-width: 600px) 50vw, 92vw")}
             alt={panel.alt}
             width="1600"
             height="2133"

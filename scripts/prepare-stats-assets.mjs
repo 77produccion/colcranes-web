@@ -2,7 +2,7 @@ import sharp from "sharp";
 
 // Derivados del PNG original; el remuestreo mejora la presentación, no añade
 // detalle fotográfico. Mantener el original para sustituirlo por uno de más calidad.
-const source = "public/images/assets/brazo.png";
+const source = "source-media/images/assets/brazo.png";
 
 await sharp(source)
   .extract({ left: 300, top: 394, width: 360, height: 110 })

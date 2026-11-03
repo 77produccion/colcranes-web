@@ -30,7 +30,7 @@ const jobs = [
   },
   {
     name: "crane-runway.webp",
-    from: "public/images/hero-crane.jpg",
+    from: "source-media/images/hero-crane.jpg",
     // Detalle de la misma nave: carro de traslación sobre la vía de rodadura y
     // línea de alimentación por barras. Es el encuadre que documenta recorrido
     // y electrificación, sin repetir la composición de la portada.

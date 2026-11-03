@@ -6,6 +6,7 @@ import Header from "../../components/Header.astro";
 import Quote from "../../components/Quote.astro";
 import Footer from "../../components/Footer.astro";
 import { EQUIPMENT_FAMILIES } from "../../data/site";
+import { responsiveImage } from "../../utils/media";
 ---
 
 <Layout
@@ -34,10 +35,10 @@ import { EQUIPMENT_FAMILIES } from "../../data/site";
     <section class="band">
       <div class="wrap">
         <div class="catalog-cards">
-          {EQUIPMENT_FAMILIES.map((family) => (
+          {EQUIPMENT_FAMILIES.map(async (family) => (
             <article class="catalog-card">
               <div class="catalog-card__media catalog-card__media--contain">
-                <img src={family.image} alt={family.alt} loading="lazy" decoding="async" />
+                <img src={family.image} {...await responsiveImage(family.image, "(min-width: 960px) 30vw, 92vw")} alt={family.alt} loading="lazy" decoding="async" />
               </div>
               <p class="mono" style="margin:0;color:var(--navy);font-weight:700">{family.num} · {family.short}</p>
               <h2 class="d3" style="margin:0.4rem 0 0">{family.pluralName}</h2>

@@ -7,6 +7,7 @@
  * - Si no hay clips, cae a la fotografía de obra propia o al espacio reservado.
  */
 import { existsSync } from "node:fs";
+import { responsiveImage } from "../utils/media";
 
 const HERO_VIDEOS = [
   { src: "/videos/hero/01-hero.mp4", position: "50% 42%" },
@@ -23,12 +24,9 @@ const HERO_VIDEOS = [
 const hasHeroVideos = HERO_VIDEOS.length > 0;
 
 const heroPosterWebp = existsSync("public/images/hero-video-poster.webp");
-const heroPosterJpg = existsSync("public/images/hero-video-poster.jpg");
 const heroPoster = heroPosterWebp
   ? "/images/hero-video-poster.webp"
-  : heroPosterJpg
-    ? "/images/hero-video-poster.jpg"
-    : undefined;
+  : undefined;
 
 const heroFallbackWebp = existsSync("public/images/hero-colcranes-obra.webp");
 const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : undefined;
@@ -42,6 +40,7 @@ const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : und
           <img
             class="hero__poster"
             src={heroPoster}
+            {...await responsiveImage(heroPoster)}
             alt="Puente grúa amarillo Colcranes en operación dentro de una planta industrial"
             width="1920"
             height="1080"
@@ -50,12 +49,12 @@ const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : und
           />
         )}
         <div class="hero__videos" data-hero-videos aria-hidden="true">
-          <video class="hero__video is-active" muted playsinline preload="auto"></video>
+          <video class="hero__video is-active" muted playsinline preload="none"></video>
           <video class="hero__video" muted playsinline preload="none"></video>
         </div>
         <ul data-hero-playlist hidden>
           {HERO_VIDEOS.map((video) => (
-            <li data-src={video.src} data-position={video.position}></li>
+            <li data-src={video.src} data-mobile-src={video.src.replace(/\.mp4$/, "-mobile.mp4")} data-position={video.position}></li>
           ))}
         </ul>
       </>
@@ -63,6 +62,7 @@ const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : und
       <img
         data-hero-slide
         src={heroFallback}
+        {...await responsiveImage(heroFallback)}
         alt="Obra propia de Colcranes operando en planta industrial"
         width="1920"
         height="1282"
@@ -88,7 +88,7 @@ const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : und
     <span class="hero__logo-wrap">
       <img
         class="hero__logo"
-        src="/images/logo-colcranes-dark-480.png"
+        src="/images/logo-colcranes-dark-480.webp"
         alt="COLCRANES"
         width="480"
         height="144"

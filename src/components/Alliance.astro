@@ -5,6 +5,7 @@
  * tres filas interactivas en lugar de tarjetas repetidas.
  */
 import { PROMO_IMAGES } from "../data/promos";
+import { responsiveImage } from "../utils/media";
 
 const promo = (fragment: string) =>
   PROMO_IMAGES.find((src) => decodeURIComponent(src).includes(fragment)) ??
@@ -31,10 +32,14 @@ const promises = [
 
 <section class="alliance" id="aliado" data-alliance>
   <div class="alliance__media" aria-hidden="true">
-    {promises.map((promise, index) => (
+    {promises.map(async (promise, index) => (
       <img
         class:list={["alliance__img", { "is-active": index === 0 }]}
-        src={promise.img}
+        src={index === 0 ? promise.img : undefined}
+        srcset={index === 0 ? (await responsiveImage(promise.img)).srcset : undefined}
+        sizes="100vw"
+        data-src={promise.img}
+        data-srcset={(await responsiveImage(promise.img)).srcset}
         alt=""
         loading="lazy"
         decoding="async"

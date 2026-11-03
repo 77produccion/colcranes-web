@@ -3,6 +3,7 @@
  * Catálogo vigente: vista previa ancha del PDF y acciones de descarga.
  */
 import { PROMO_IMAGES } from "../data/promos";
+import { responsiveImage } from "../utils/media";
 
 const catalogUrl = "/catalogos/colcranes-catalogo-2023.pdf";
 const backdrop = PROMO_IMAGES[7] ?? "/images/planta-bodega.webp";
@@ -11,10 +12,10 @@ const viewerUrl = `${catalogUrl}#page=1&zoom=78,0,0&toolbar=0&navpanes=0`;
 
 <section class="catalogs" id="catalogos">
   <div class="catalogs__media" aria-hidden="true">
-    <img src={backdrop} alt="" loading="lazy" decoding="async" />
+    <img src={backdrop} {...await responsiveImage(backdrop)} alt="" loading="lazy" decoding="async" />
   </div>
   <div class="catalogs__hook" aria-hidden="true">
-    <img src="/images/assets/gancho.png" alt="" width="1365" height="768" loading="lazy" decoding="async" />
+    <img src="/images/assets/gancho.webp" alt="" width="1365" height="768" loading="lazy" decoding="async" />
   </div>
 
   <div class="wrap catalogs__grid">

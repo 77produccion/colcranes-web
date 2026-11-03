@@ -6,6 +6,7 @@
  */
 import { existsSync } from "node:fs";
 import { CASE_STUDIES } from "../data/site";
+import { responsiveImage } from "../utils/media";
 
 const casesWithStatus = CASE_STUDIES.map((item) => ({
   ...item,
@@ -39,12 +40,13 @@ const casesWithStatus = CASE_STUDIES.map((item) => ({
     </header>
 
     <div class="cases-grid" data-reveal-group>
-      {casesWithStatus.map((item) => (
+      {casesWithStatus.map(async (item) => (
         <article class="case-card" data-reveal>
           <div class="case-card__media">
             {item.hasImage ? (
               <img
                 src={item.image}
+                {...await responsiveImage(item.image, "(min-width: 860px) 46vw, 92vw")}
                 alt={`Fotografía del proyecto: ${item.title}`}
                 width="1600"
                 height="1000"

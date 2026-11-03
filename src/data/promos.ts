@@ -9,7 +9,7 @@ const promoDir = "public/images/imagenes-promocionales";
 
 export const PROMO_IMAGES = existsSync(promoDir)
   ? readdirSync(promoDir)
-      .filter((file) => /\.(jpe?g|png|webp|avif)$/i.test(file))
+      .filter((file) => /\.(webp|avif)$/i.test(file) && !/\.w\d+\.webp$/.test(file))
       .sort()
       .map((file) => encodeURI(`/images/imagenes-promocionales/${file}`))
   : [];

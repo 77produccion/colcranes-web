@@ -333,10 +333,14 @@ function setupHeroPlaylist() {
   const playlist = document.querySelector<HTMLElement>("[data-hero-playlist]");
   if (!container || !playlist) return;
 
+  const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+  if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType ?? "")) return;
+  const mobile = window.matchMedia("(max-width: 767px)").matches || connection?.effectiveType === "3g";
+
   const videos = Array.from(container.querySelectorAll<HTMLVideoElement>("video"));
   const items = Array.from(playlist.querySelectorAll<HTMLLIElement>("li"))
     .map((li) => ({
-      src: li.dataset.src ?? "",
+      src: (mobile ? li.dataset.mobileSrc : li.dataset.src) ?? li.dataset.src ?? "",
       position: li.dataset.position ?? "50% 50%",
     }))
     .filter((item) => item.src);
@@ -345,24 +349,47 @@ function setupHeroPlaylist() {
 
   let activeSlot = 0;
   let currentIndex = 0;
+  let inView = false;
+  let started = false;
+  let readyToStart = false;
+  let advancing = false;
 
   const load = (video: HTMLVideoElement, index: number) => {
     const item = items[index];
     video.preload = "auto";
     video.style.objectPosition = item.position;
     video.src = item.src;
+    video.dataset.playlistIndex = String(index);
     video.load();
   };
 
   const start = (video: HTMLVideoElement) => {
-    video.play()?.catch(() => {});
+    if (inView && !document.hidden) video.play()?.catch(() => {});
   };
 
-  load(videos[0], 0);
-  videos[0].addEventListener("canplay", () => start(videos[0]), { once: true });
-  load(videos[1], 1);
+  const syncPlayback = () => {
+    if (!inView || document.hidden) {
+      videos.forEach((video) => video.pause());
+      return;
+    }
+    if (!readyToStart) return;
+    if (!started) {
+      started = true;
+      videos[0].addEventListener("canplay", () => start(videos[0]), { once: true });
+      load(videos[0], 0);
+    } else start(videos[activeSlot]);
+  };
+
+  const prepareNext = () => {
+    if (!inView || document.hidden) return;
+    const nextIndex = (currentIndex + 1) % items.length;
+    const next = videos[1 - activeSlot];
+    if (next.dataset.playlistIndex !== String(nextIndex)) load(next, nextIndex);
+  };
 
   const advance = () => {
+    if (advancing) return;
+    advancing = true;
     const from = videos[activeSlot];
     const to = videos[1 - activeSlot];
     const nextIndex = (currentIndex + 1) % items.length;
@@ -374,30 +401,47 @@ function setupHeroPlaylist() {
 
       activeSlot = 1 - activeSlot;
       currentIndex = nextIndex;
+      advancing = false;
 
-      /* Espera al fundido antes de liberar el slot anterior y usarlo para
-         dejar cargando el clip que seguirá al que acaba de entrar. */
+      /* Liberar el slot anterior tras el fundido. El siguiente clip se carga
+         sólo cuando falten pocos segundos para terminar el actual. */
       window.setTimeout(() => {
         from.pause();
         from.removeAttribute("src");
         from.load();
-        load(videos[1 - activeSlot], (currentIndex + 1) % items.length);
+        delete from.dataset.playlistIndex;
       }, 1100);
     };
 
-    if (to.readyState >= 3) swap();
-    else to.addEventListener("canplay", swap, { once: true });
+    if (to.dataset.playlistIndex === String(nextIndex) && to.readyState >= 3) swap();
+    else {
+      to.addEventListener("canplay", swap, { once: true });
+      if (to.dataset.playlistIndex !== String(nextIndex)) load(to, nextIndex);
+    }
   };
 
   videos.forEach((video) => {
+    // Cargar el siguiente clip sólo al acercarse al final del actual.
+    video.addEventListener("timeupdate", () => {
+      if (video === videos[activeSlot] && video.duration - video.currentTime < 3) prepareNext();
+    });
     video.addEventListener("ended", () => {
       if (video === videos[activeSlot]) advance();
     });
   });
+
+  new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+    syncPlayback();
+  }, { threshold: 0 }).observe(container);
+  document.addEventListener("visibilitychange", syncPlayback);
+  const begin = () => window.setTimeout(() => { readyToStart = true; syncPlayback(); }, 350);
+  if (document.readyState === "complete") begin();
+  else window.addEventListener("load", begin, { once: true });
 }
 
-/* Fondo rotativo de la sección "Ingeniería y fabricación": crossfade con
-   zoom lento cada 3 s, siempre activo (sin condicionarlo a reduced motion). */
+/* Fondo rotativo de "Ingeniería y fabricación": sólo avanza cuando la sección
+   está visible, sin descargar toda la galería mientras el usuario ve el hero. */
 function setupCapacitySlides() {
   const root = document.querySelector<HTMLElement>("[data-capacity-slides]");
   if (!root) return;
@@ -418,8 +462,6 @@ function setupCapacitySlides() {
     const image = new Image();
     image.src = src;
   };
-
-  preload(sources[1]);
 
   const advance = () => {
     const nextIndex = (index + 1) % sources.length;
@@ -461,7 +503,20 @@ function setupCapacitySlides() {
     }
   };
 
-  window.setInterval(advance, 3000);
+  let timer: number | undefined;
+  let inView = false;
+  const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+  const sync = () => {
+    window.clearInterval(timer);
+    if (!inView || document.hidden || saveData) return;
+    preload(sources[(index + 1) % sources.length]);
+    timer = window.setInterval(advance, 5000);
+  };
+  new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+    sync();
+  }).observe(root);
+  document.addEventListener("visibilitychange", sync);
 }
 
 /* Aliado operativo: la imagen de fondo y la fila activa cambian juntas. */
@@ -476,6 +531,8 @@ function setupAlliance() {
 
   let active = 0;
   let timer: number | undefined;
+  let inView = false;
+  const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
 
   const moveRail = (index: number) => {
     const item = items[index];
@@ -500,7 +557,16 @@ function setupAlliance() {
       item.classList.toggle("is-active", on);
       item.setAttribute("aria-pressed", String(on));
     });
-    images.forEach((image, i) => image.classList.toggle("is-active", i === index));
+    const image = images[index];
+    if (!image.getAttribute("src")) {
+      if (image.dataset.srcset) image.srcset = image.dataset.srcset;
+      image.src = image.dataset.src ?? "";
+    }
+    const show = () => {
+      if (active === index) images.forEach((img, i) => img.classList.toggle("is-active", i === index));
+    };
+    if (image.complete && image.naturalWidth) show();
+    else image.addEventListener("load", show, { once: true });
     moveRail(index);
   };
 
@@ -511,6 +577,7 @@ function setupAlliance() {
 
   const start = () => {
     stop();
+    if (!inView || document.hidden || saveData) return;
     timer = window.setInterval(() => activate((active + 1) % items.length), 5200);
   };
 
@@ -529,7 +596,12 @@ function setupAlliance() {
 
   window.addEventListener("resize", () => moveRail(active));
   activate(0);
-  start();
+  new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+    if (inView) start();
+    else stop();
+  }).observe(section);
+  document.addEventListener("visibilitychange", () => document.hidden ? stop() : start());
 }
 
 /* Botón flotante de WhatsApp: abre un selector de línea de atención y deja

@@ -1,5 +1,6 @@
 ---
 import { CASE_STUDIES } from "../data/site";
+import { responsiveImage } from "../utils/media";
 
 // Presentación pública: sin clientes, ubicaciones ni referencias de expedientes.
 const projects = CASE_STUDIES.map(({ title, image, scope, summary }, index) => ({
@@ -13,7 +14,7 @@ const projects = CASE_STUDIES.map(({ title, image, scope, summary }, index) => (
 ---
 
 <div class="project-showcase" id="proyectos">
-  {projects.map((project, index) => (
+  {projects.map(async (project, index) => (
     <section class:list={["project-feature", { "project-feature--blue": index % 2 === 1, "project-feature--reverse": index % 2 === 1 }]} aria-labelledby={`project-title-${index}`}>
       <div class="wrap project-feature__layout">
         <div class="project-feature__content">
@@ -29,6 +30,7 @@ const projects = CASE_STUDIES.map(({ title, image, scope, summary }, index) => (
         <figure class="project-feature__photo">
           <img
             src={project.image}
+            {...await responsiveImage(project.image, "(min-width: 896px) 46vw, 92vw")}
             alt={`Fotografía de obra: ${project.title}`}
             width="1448"
             height="1086"

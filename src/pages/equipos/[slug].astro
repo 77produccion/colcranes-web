@@ -7,6 +7,7 @@ import Brands from "../../components/Brands.astro";
 import Quote from "../../components/Quote.astro";
 import Footer from "../../components/Footer.astro";
 import { EQUIPMENT_FAMILIES, HOIST_OPTIONS, type EquipmentFamily } from "../../data/site";
+import { responsiveImage } from "../../utils/media";
 
 export function getStaticPaths() {
   return EQUIPMENT_FAMILIES.map((family) => ({
@@ -61,7 +62,7 @@ const heroImage = PROMO_IMAGES[heroImages[familyIndex]] ?? "/images/planta-bodeg
         <div class="detail-layout">
           <div>
             <div class="detail-media">
-              <img src={family.image} alt={family.alt} loading="eager" decoding="async" />
+              <img src={family.image} {...await responsiveImage(family.image, "(min-width: 960px) 50vw, 92vw")} alt={family.alt} loading="lazy" decoding="async" />
             </div>
 
             {family.slug === "polipastos" && (
@@ -135,10 +136,10 @@ const heroImage = PROMO_IMAGES[heroImages[familyIndex]] ?? "/images/planta-bodeg
           </div>
         </header>
         <div class="catalog-cards">
-          {otherFamilies.map((item) => (
+          {otherFamilies.map(async (item) => (
             <article>
               <a class="related-equipment" href={`/equipos/${item.slug}`}>
-                <img class="related-equipment__image" src={item.image} alt="" loading="lazy" decoding="async" />
+                <img class="related-equipment__image" src={item.image} {...await responsiveImage(item.image, "(min-width: 960px) 30vw, 92vw")} alt="" loading="lazy" decoding="async" />
                 <div class="related-equipment__content">
                   <h3 class="d3">{item.pluralName}</h3>
                   <svg class="related-equipment__arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">

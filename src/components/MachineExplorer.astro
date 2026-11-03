@@ -80,7 +80,7 @@ const tabRules = families
                     <img
                       src={family.id === "fam-cable" ? featuredHoist.image : family.image}
                       alt={family.id === "fam-cable" ? featuredHoist.alt : family.alt}
-                      loading="eager"
+                      loading="lazy"
                       decoding="async"
                     />
                     {family.id !== "fam-cable" && family.notes.map((note) => (

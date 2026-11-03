@@ -7,6 +7,7 @@ import { PROMO_IMAGES } from "../../data/promos";
 import Quote from "../../components/Quote.astro";
 import Footer from "../../components/Footer.astro";
 import { SERVICES } from "../../data/site";
+import { responsiveImage } from "../../utils/media";
 
 const servicesWithStatus = SERVICES.map((service) => ({
   ...service,
@@ -39,11 +40,11 @@ const servicesWithStatus = SERVICES.map((service) => ({
     <section class="band">
       <div class="wrap">
         <div class="catalog-cards">
-          {servicesWithStatus.map((service) => (
+          {servicesWithStatus.map(async (service) => (
             <article class="catalog-card">
               <div class="catalog-card__media">
                 {service.hasImage ? (
-                  <img src={service.image} alt={service.alt} loading="lazy" decoding="async" />
+                  <img src={service.image} {...await responsiveImage(service.image, "(min-width: 960px) 30vw, 92vw")} alt={service.alt} loading="lazy" decoding="async" />
                 ) : (
                   <div class="media-slot media-slot--card" role="img" aria-label={`Espacio para fotografía del servicio ${service.name}`}>
                     <span class="media-slot__tag">ESPACIO PARA FOTO · SERVICIO {service.num}</span>

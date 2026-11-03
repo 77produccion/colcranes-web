@@ -7,6 +7,7 @@ import Quote from "../../components/Quote.astro";
 import Footer from "../../components/Footer.astro";
 import { SERVICES, CONTACT, type ServiceItem } from "../../data/site";
 import { PROMO_IMAGES } from "../../data/promos";
+import { responsiveImage } from "../../utils/media";
 
 export function getStaticPaths() {
   return SERVICES.map((service) => ({
@@ -64,9 +65,10 @@ const heroImage = PROMO_IMAGES[serviceIndex % PROMO_IMAGES.length] ?? service.im
               {hasImage ? (
                 <img
                   src={service.image}
+                  {...await responsiveImage(service.image, "(min-width: 960px) 50vw, 92vw")}
                   alt={service.alt}
                   style="max-height:28rem;object-fit:cover;width:100%"
-                  loading="eager"
+                  loading="lazy"
                   decoding="async"
                 />
               ) : (
@@ -123,10 +125,10 @@ const heroImage = PROMO_IMAGES[serviceIndex % PROMO_IMAGES.length] ?? service.im
           </div>
         </header>
         <div class="catalog-cards">
-          {otherServices.slice(0, 6).map((item) => (
+          {otherServices.slice(0, 6).map(async (item) => (
             <article>
               <a class="related-service" href={`/servicios/${item.slug}`}>
-                <img class="related-service__image" src={item.image} alt="" loading="lazy" decoding="async" />
+                <img class="related-service__image" src={item.image} {...await responsiveImage(item.image, "(min-width: 960px) 30vw, 92vw")} alt="" loading="lazy" decoding="async" />
                 <div class="related-service__content">
                   <h3 class="d3">{item.name}</h3>
                   <svg class="related-service__arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
