@@ -1,0 +1,173 @@
+---
+// Cross-document transition: keep the existing page scripts and native navigation.
+---
+
+<div class="page-transition" data-page-transition aria-hidden="true">
+  <div class="page-transition__panel" data-transition-panel></div>
+  <div class="page-transition__hook" data-transition-hook>
+    <img src="/images/assets/gancho-completo.png" alt="" width="1365" height="768" loading="eager" decoding="async" />
+  </div>
+  <img class="page-transition__logo" data-transition-logo src="/images/colcranes-logo-oscura.png" alt="" width="1200" height="360" loading="eager" decoding="async" />
+</div>
+
+<style is:global>
+  .page-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    overflow: hidden;
+    background: #f4f5f7;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    contain: layout paint;
+  }
+
+  html.is-page-leaving .page-transition,
+  html.is-page-entering .page-transition {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  html:is(.is-page-leaving, .is-page-entering) { overflow: hidden; }
+
+  .page-transition__panel {
+    position: absolute;
+    inset: 0;
+    background: #2d2e83;
+    border-top: 3px solid #00b2e3;
+    transform: translateY(100%);
+  }
+
+  .page-transition__hook {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(36vw, 23rem);
+    height: 76vh;
+    height: 76svh;
+    margin-left: max(-18vw, -11.5rem);
+    transform: translateY(-110%);
+    filter: drop-shadow(0 10px 12px rgb(0 0 0 / 18%));
+    pointer-events: none;
+  }
+
+  .page-transition__hook img {
+    position: absolute;
+    left: 50%;
+    width: auto;
+    max-width: none;
+    height: 100%;
+    transform: translateX(-47%);
+  }
+
+  .page-transition__logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(65vw, 30rem);
+    height: auto;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+
+  /* Applied by the head script before the destination's first paint. */
+  html.is-page-entering .page-transition { background: #2d2e83; }
+  html.is-page-entering .page-transition__panel { transform: translateY(0); }
+  html.is-page-entering .page-transition__logo { opacity: 1; }
+  html.is-page-entering .page-transition__hook { visibility: hidden; }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  const root = document.documentElement;
+  const overlay = document.querySelector<HTMLElement>("[data-page-transition]");
+  const hook = document.querySelector<HTMLElement>("[data-transition-hook]");
+  const panel = document.querySelector<HTMLElement>("[data-transition-panel]");
+  const logo = document.querySelector<HTMLElement>("[data-transition-logo]");
+  const storageKey = "colcranes:page-transition";
+  let navigating = false;
+
+  if (overlay && hook && panel && logo) {
+    const reset = () => {
+      gsap.killTweensOf([overlay, hook, panel, logo]);
+      root.classList.remove("is-page-leaving", "is-page-entering");
+      root.removeAttribute("aria-busy");
+      gsap.set([overlay, hook, panel, logo], { clearProps: "all" });
+      navigating = false;
+    };
+
+    const wait = (milliseconds: number) => new Promise<void>((resolve) => window.setTimeout(resolve, milliseconds));
+
+    const reveal = async () => {
+      // Do not wait for lazy images, videos or the PDF viewer to finish loading.
+      const heroImage = document.querySelector<HTMLImageElement>(".interior-hero__image, [data-hero-media] img");
+      await Promise.race([
+        Promise.all([
+          heroImage?.decode().catch(() => {}),
+          new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+        ]),
+        wait(700),
+      ]);
+      gsap.to(overlay, { autoAlpha: 0, duration: 0.32, ease: "power2.out", onComplete: reset });
+    };
+
+    if (root.classList.contains("is-page-entering")) void reveal();
+
+    document.addEventListener("click", async (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>("a[href]") : null;
+      if (!link || link.hasAttribute("download") || link.hasAttribute("data-no-transition") || (link.target && link.target !== "_self")) return;
+      const destination = new URL(link.href, location.href);
+      if (destination.origin !== location.origin || !/^https?:$/.test(destination.protocol)) return;
+      if (destination.pathname === location.pathname && destination.search === location.search) return;
+      // Leave assets, PDFs, API endpoints and other non-page requests untouched.
+      if (!/^\/(?:$|(?:equipos|servicios)(?:\/[^/.]+)?\/?$|(?:proyectos|nosotros|contacto|trabaje-con-nosotros|politica-tratamiento-datos)\/?$)/.test(destination.pathname)) return;
+      if (navigating) { event.preventDefault(); return; }
+
+      const rememberDestination = () => sessionStorage.setItem(storageKey, JSON.stringify({
+        path: destination.pathname + destination.search,
+        time: Date.now(),
+      }));
+      // Without storage, use ordinary navigation rather than flashing between documents.
+      try { rememberDestination(); } catch { return; }
+      event.preventDefault();
+      reset();
+      navigating = true;
+      root.classList.add("is-page-leaving");
+      root.setAttribute("aria-busy", "true");
+
+      // Warm the destination's HTTP cache during the animation; never block on it.
+      const controller = new AbortController();
+      void fetch(destination.href, { credentials: "same-origin", signal: controller.signal })
+        .then((response) => response.ok ? response.text().then(() => {}) : undefined)
+        .catch(() => {});
+      const preloadTimeout = window.setTimeout(() => controller.abort(), 1800);
+
+      try {
+        gsap.set(hook, { yPercent: -110, y: 0 });
+        gsap.set(panel, { yPercent: 100, y: 0 });
+        await new Promise<void>((resolve) => {
+          gsap.timeline({ onComplete: resolve })
+            .to(hook, { yPercent: 0, duration: 0.4, ease: "power2.out" }, 0)
+            .to(panel, { yPercent: 0, duration: 0.55, ease: "power2.inOut" }, 0.4)
+            .to(hook, { yPercent: -110, duration: 0.55, ease: "power2.inOut" }, 0.4)
+            .to(logo, { opacity: 1, duration: 0.22, ease: "power2.out" }, 0.78);
+        });
+        try { rememberDestination(); } catch { /* Navigation still works if storage becomes unavailable. */ }
+        location.assign(destination.href);
+      } catch {
+        reset();
+        location.assign(destination.href);
+      } finally {
+        window.clearTimeout(preloadTimeout);
+        controller.abort();
+      }
+    });
+
+    // Back/forward cache can restore the outgoing page with its cover still open.
+    window.addEventListener("pageshow", (event) => { if (event.persisted) reset(); });
+  }
+</script>

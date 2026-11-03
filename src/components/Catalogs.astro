@@ -1,0 +1,104 @@
+---
+/**
+ * Catálogo vigente: vista previa ancha del PDF y acciones de descarga.
+ */
+import { PROMO_IMAGES } from "../data/promos";
+
+const catalogUrl = "/catalogos/colcranes-catalogo-2023.pdf";
+const backdrop = PROMO_IMAGES[7] ?? "/images/planta-bodega.webp";
+const viewerUrl = `${catalogUrl}#page=1&zoom=78,0,0&toolbar=0&navpanes=0`;
+---
+
+<section class="catalogs" id="catalogos">
+  <div class="catalogs__media" aria-hidden="true">
+    <img src={backdrop} alt="" loading="lazy" decoding="async" />
+  </div>
+  <div class="catalogs__hook" aria-hidden="true">
+    <img src="/images/assets/gancho.png" alt="" width="1365" height="768" loading="lazy" decoding="async" />
+  </div>
+
+  <div class="wrap catalogs__grid">
+    <figure class="catalogs__viewer">
+      <div class="catalogs__frame">
+        <iframe
+          src={viewerUrl}
+          data-catalog-viewer
+          data-src={catalogUrl}
+          title="Catálogo Colcranes 2023"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </figure>
+
+    <div class="catalogs__lead">
+      <h2 class="d2 catalogs__title">La línea completa, en un solo catálogo.</h2>
+      <p class="lede catalogs__lede">
+        Puentes grúa, pórticos, grúas bandera y polipastos. Capacidades, configuraciones y alcance de servicio.
+      </p>
+
+      <div class="catalogs__actions">
+        <a class="btn btn--signal" href={catalogUrl} download>
+          Descargar catálogo
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <path d="M12 3v12M6 11l6 6 6-6M4 21h16" />
+          </svg>
+        </a>
+        <a class="link-arrow link-arrow--light" href={catalogUrl} target="_blank" rel="noopener noreferrer">
+          Ver catálogo
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .catalogs__hook {
+    position: absolute;
+    top: -4rem;
+    right: 13%;
+    width: clamp(8rem, 15vw, 14rem);
+    height: clamp(13rem, 23vw, 20rem);
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0 8px 8px rgb(8 12 45 / 28%));
+  }
+
+  .catalogs__hook img {
+    position: absolute;
+    left: 50%;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    transform: translateX(-50%);
+  }
+
+  @media (max-width: 979px) {
+    .catalogs__hook {
+      top: -3rem;
+      right: 8%;
+      width: 7rem;
+      height: 11.5rem;
+    }
+  }
+
+  .catalogs__title {
+    color: #edf3fa;
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f4f7fb 25%,
+      #b9c6d8 48%,
+      #e5edf7 53%,
+      #ffffff 72%,
+      #b5c3d7 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.5px rgb(255 255 255 / 35%);
+    filter: drop-shadow(0 2px 0 #1b2054)
+      drop-shadow(0 4px 0 #171b49)
+      drop-shadow(0 8px 10px rgb(8 12 45 / 45%));
+  }
+</style>

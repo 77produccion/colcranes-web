@@ -2,9 +2,11 @@
 import { existsSync } from "node:fs";
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
+import PageHero from "../../components/PageHero.astro";
 import Quote from "../../components/Quote.astro";
 import Footer from "../../components/Footer.astro";
 import { SERVICES, CONTACT, type ServiceItem } from "../../data/site";
+import { PROMO_IMAGES } from "../../data/promos";
 
 export function getStaticPaths() {
   return SERVICES.map((service) => ({
@@ -20,12 +22,14 @@ interface Props {
 const { service } = Astro.props;
 const hasImage = existsSync(`public${service.image}`);
 const otherServices = SERVICES.filter((item) => item.slug !== service.slug);
+const serviceIndex = SERVICES.findIndex((item) => item.slug === service.slug);
+const heroImage = PROMO_IMAGES[serviceIndex % PROMO_IMAGES.length] ?? service.image;
 ---
 
 <Layout title={service.seoTitle} description={service.seoDescription}>
   <Header />
   <main id="contenido">
-    <section class="page-hero">
+    <PageHero image={heroImage} tone="blue">
       <div class="wrap">
         <nav class="breadcrumbs" aria-label="Ruta de navegación">
           <a href="/">Inicio</a>
@@ -34,7 +38,6 @@ const otherServices = SERVICES.filter((item) => item.slug !== service.slug);
           <span>/</span>
           <span aria-current="page">{service.shortTitle}</span>
         </nav>
-        <p class="eyebrow eyebrow--light">Servicio {service.num} · Cobertura nacional</p>
         <h1 class="d1" style="margin-top:0.75rem;max-width:19ch">
           {service.name}
         </h1>
@@ -51,7 +54,7 @@ const otherServices = SERVICES.filter((item) => item.slug !== service.slug);
           <a class="btn btn--ghost-light" href={CONTACT.whatsappUrl}>Contactar soporte por WhatsApp</a>
         </div>
       </div>
-    </section>
+    </PageHero>
 
     <section class="band">
       <div class="wrap">
@@ -121,18 +124,16 @@ const otherServices = SERVICES.filter((item) => item.slug !== service.slug);
         </header>
         <div class="catalog-cards">
           {otherServices.slice(0, 6).map((item) => (
-            <article class="catalog-card">
-              <p class="mono" style="margin:0;color:var(--navy);font-weight:700">Servicio {item.num}</p>
-              <h3 class="d3" style="margin:0.4rem 0 0">{item.name}</h3>
-              <p class="body-copy" style="margin-top:0.65rem;flex:1">{item.body}</p>
-              <div style="margin-top:1.25rem">
-                <a class="link-arrow" href={`/servicios/${item.slug}`}>
-                  Ver servicio
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M5 12h14M13 5l7 7-7 7" />
+            <article>
+              <a class="related-service" href={`/servicios/${item.slug}`}>
+                <img class="related-service__image" src={item.image} alt="" loading="lazy" decoding="async" />
+                <div class="related-service__content">
+                  <h3 class="d3">{item.name}</h3>
+                  <svg class="related-service__arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path d="M4 12h15M12 5l7 7-7 7" />
                   </svg>
-                </a>
-              </div>
+                </div>
+              </a>
             </article>
           ))}
         </div>
@@ -143,3 +144,84 @@ const otherServices = SERVICES.filter((item) => item.slug !== service.slug);
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .related-service {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 20rem;
+    height: 100%;
+    overflow: hidden;
+    background: var(--ink);
+    color: #fff;
+    text-decoration: none;
+    isolation: isolate;
+  }
+
+  .related-service__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0.92;
+    filter: grayscale(0.4) brightness(0.72);
+    transform: scale(1);
+    transition: transform 0.85s var(--ease-out), opacity 0.6s var(--ease-out), filter 0.85s var(--ease-out);
+  }
+
+  .related-service:is(:hover, :focus-visible, :active) .related-service__image {
+    opacity: 1;
+    filter: grayscale(0) brightness(1);
+    transform: scale(1.04);
+  }
+
+  .related-service::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(0 0 0 / 12%) 20%, rgb(0 0 0 / 85%) 100%);
+    z-index: -1;
+  }
+
+  .related-service__content {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .related-service h3 {
+    flex: 1;
+    margin: 0;
+    color: inherit;
+  }
+
+  .related-service__arrow {
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .related-service:is(:hover, :focus-visible, :active) .related-service__arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .related-service:focus-visible {
+    outline: 3px solid var(--cyan);
+    outline-offset: 4px;
+  }
+
+  @media (hover: none) {
+    .related-service__arrow {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+</style>

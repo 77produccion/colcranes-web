@@ -1,46 +1,71 @@
 ---
 /**
  * Escena de apertura (Hero).
- * - Se retiró la foto de R&M de 200 t (hero-crane.jpg).
- * - Si existe `public/videos/hero-colcranes.mp4` (o `.webm`), reproduce el video corto en bucle.
- * - Si existe `public/images/hero-colcranes.webp` (o `.jpg`), muestra la foto de obra propia.
- * - Mientras se carga el archivo definitivo, muestra el espacio reservado con sus medidas exactas.
+ * - Reproduce en secuencia los clips optimizados de `public/videos/hero/`.
+ * - Cada clip conserva su encuadre original (sin recortar el archivo): sólo se
+ *   ajusta `object-position` para mantener la grúa amarilla dentro del marco.
+ * - Si no hay clips, cae a la fotografía de obra propia o al espacio reservado.
  */
 import { existsSync } from "node:fs";
 
-const hasHeroVideo = existsSync("public/videos/hero-colcranes.mp4");
-const hasHeroWebm = existsSync("public/videos/hero-colcranes.webm");
-const hasHeroImageWebp = existsSync("public/images/hero-colcranes.webp");
-const hasHeroImageJpg = existsSync("public/images/hero-colcranes.jpg");
-const heroPoster = hasHeroImageWebp
-  ? "/images/hero-colcranes.webp"
-  : hasHeroImageJpg
-    ? "/images/hero-colcranes.jpg"
+const HERO_VIDEOS = [
+  { src: "/videos/hero/01-hero.mp4", position: "50% 42%" },
+  { src: "/videos/hero/02-planta-5mas5.mp4", position: "50% 35%" },
+  { src: "/videos/hero/03-planta-amplia.mp4", position: "50% 55%" },
+  { src: "/videos/hero/04-puente-cerrado.mp4", position: "50% 12%" },
+  { src: "/videos/hero/05-planta-5t.mp4", position: "50% 38%" },
+  { src: "/videos/hero/06-cercha-traslacion.mp4", position: "50% 12%" },
+  { src: "/videos/hero/07-viga-y-traslacion.mp4", position: "50% 4%" },
+  { src: "/videos/hero/08-gancho-operacion.mp4", position: "50% 10%" },
+  { src: "/videos/hero/09-izaje-carga.mp4", position: "50% 12%" },
+].filter((video) => existsSync(`public${video.src}`));
+
+const hasHeroVideos = HERO_VIDEOS.length > 0;
+
+const heroPosterWebp = existsSync("public/images/hero-video-poster.webp");
+const heroPosterJpg = existsSync("public/images/hero-video-poster.jpg");
+const heroPoster = heroPosterWebp
+  ? "/images/hero-video-poster.webp"
+  : heroPosterJpg
+    ? "/images/hero-video-poster.jpg"
     : undefined;
+
+const heroFallbackWebp = existsSync("public/images/hero-colcranes-obra.webp");
+const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : undefined;
 ---
 
 <section class="hero" id="inicio" data-hero>
   <div class="hero__media" data-hero-media>
-    {hasHeroVideo || hasHeroWebm ? (
-      <video
-        class="hero__video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        poster={heroPoster}
-      >
-        {hasHeroWebm && <source src="/videos/hero-colcranes.webm" type="video/webm" />}
-        {hasHeroVideo && <source src="/videos/hero-colcranes.mp4" type="video/mp4" />}
-      </video>
-    ) : heroPoster ? (
+    {hasHeroVideos ? (
+      <>
+        {heroPoster && (
+          <img
+            class="hero__poster"
+            src={heroPoster}
+            alt="Puente grúa amarillo Colcranes en operación dentro de una planta industrial"
+            width="1920"
+            height="1080"
+            fetchpriority="high"
+            decoding="async"
+          />
+        )}
+        <div class="hero__videos" data-hero-videos aria-hidden="true">
+          <video class="hero__video is-active" muted playsinline preload="auto"></video>
+          <video class="hero__video" muted playsinline preload="none"></video>
+        </div>
+        <ul data-hero-playlist hidden>
+          {HERO_VIDEOS.map((video) => (
+            <li data-src={video.src} data-position={video.position}></li>
+          ))}
+        </ul>
+      </>
+    ) : heroFallback ? (
       <img
         data-hero-slide
-        src={heroPoster}
+        src={heroFallback}
         alt="Obra propia de Colcranes operando en planta industrial"
         width="1920"
-        height="1080"
+        height="1282"
         fetchpriority="high"
         decoding="async"
       />
@@ -50,8 +75,8 @@ const heroPoster = hasHeroImageWebp
           <span class="media-slot__tag">ESPACIO PARA VIDEO EN BUCLE O FOTO DE OBRA PROPIA</span>
           <p class="media-slot__title">Hero principal · Grúa Colcranes operando</p>
           <p class="media-slot__meta">
-            Video: <code>public/videos/hero-colcranes.mp4</code> (1920 × 1080 px · 16:9 · MP4/WebM · 8–15 s sin audio)<br />
-            Foto / Poster: <code>public/images/hero-colcranes.webp</code> (mín. 2400 × 1350 px · 16:9 · WebP/JPG)
+            Video: <code>public/videos/hero/</code> (1080 × 1920 px · 9:16 · MP4 · sin audio)<br />
+            Foto / Poster: <code>public/images/hero-video-poster.webp</code> (1920 × 1080 px · 16:9 · WebP/JPG)
           </p>
         </div>
       </div>
@@ -60,6 +85,17 @@ const heroPoster = hasHeroImageWebp
   <div class="hero__scrim" aria-hidden="true"></div>
 
   <div class="wrap hero__inner">
+    <span class="hero__logo-wrap">
+      <img
+        class="hero__logo"
+        src="/images/logo-colcranes-dark-480.png"
+        alt="COLCRANES"
+        width="480"
+        height="144"
+        decoding="async"
+        data-hero-fade
+      />
+    </span>
     <h1 class="d1 hero__title">
       <span class="line line--small" data-hero-line><span>Equipos para</span></span>
       <span class="line" data-hero-line><span class="accent">izaje industrial.</span></span>

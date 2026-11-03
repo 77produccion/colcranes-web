@@ -7,6 +7,17 @@ import { COMPANY_STATS } from "../data/site";
 ---
 
 <section class="stats-band" aria-label="Cifras de respaldo de Colcranes">
+  <div class="stats-band__art" aria-hidden="true">
+    <img
+      class="stats-band__crane"
+      src="/images/assets/stats-hoist.webp"
+      alt=""
+      width="732"
+      height="735"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
   <div class="wrap">
     <div class="stats-grid" data-reveal-group>
       {COMPANY_STATS.map((stat) => (

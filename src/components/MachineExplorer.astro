@@ -6,12 +6,12 @@
 import { EQUIPMENT_FAMILIES, HOIST_OPTIONS } from "../data/site";
 
 const families = EQUIPMENT_FAMILIES;
-const hoistOptions = HOIST_OPTIONS;
+const featuredHoist = HOIST_OPTIONS[0];
 
 const tabRules = families
   .map(
     (family) => `
-.explorer__grid #${family.id}:checked ~ .stage-holder #${family.id}-panel { display: block; }
+.explorer__grid #${family.id}:checked ~ .stage-holder #${family.id}-panel { display: block; visibility: visible; pointer-events: auto; }
 .explorer__grid #${family.id}:checked ~ .index-list label[for="${family.id}"] { color: var(--ink); padding-left: 1.6rem; }
 .explorer__grid #${family.id}:checked ~ .index-list label[for="${family.id}"] .index-row__num { color: var(--signal-deep); }
 .explorer__grid #${family.id}:focus-visible ~ .index-list label[for="${family.id}"] { outline: 3px solid var(--cyan); outline-offset: 2px; }`
@@ -75,32 +75,19 @@ const tabRules = families
             aria-label={family.name}
           >
             <div class="stage">
-              {family.id !== "fam-cable" && (
-                <div class="stage__media">
+              <div class="stage__media">
                   <figure class={`stage__fig ${index === 0 ? "is-active" : ""} ${family.photo ? "is-photo" : ""}`}>
-                    <img src={family.image} alt={family.alt} loading="lazy" decoding="async" />
-                    {family.notes.map((note) => (
+                    <img
+                      src={family.id === "fam-cable" ? featuredHoist.image : family.image}
+                      alt={family.id === "fam-cable" ? featuredHoist.alt : family.alt}
+                      loading="eager"
+                      decoding="async"
+                    />
+                    {family.id !== "fam-cable" && family.notes.map((note) => (
                       <span class={`note note--${note.pos}`}>{note.text}</span>
                     ))}
                   </figure>
-                </div>
-              )}
-
-              {family.id === "fam-cable" && (
-                <div class="hoist-range" aria-label="Opciones de polipastos">
-                  {hoistOptions.map((option) => (
-                    <article class="hoist-option">
-                      <div class="hoist-option__image">
-                        <img src={option.image} alt={option.alt} loading="lazy" decoding="async" />
-                      </div>
-                      <div class="hoist-option__copy">
-                        <h3>{option.name}</h3>
-                        <p>{option.detail}</p>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              )}
+              </div>
 
               <div class="stage__foot">
                 <div>
@@ -137,3 +124,84 @@ const tabRules = families
 
   <style is:global set:html={tabRules}></style>
 </section>
+
+<style>
+  .stage-holder {
+    container-type: inline-size;
+    display: grid;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .family {
+    display: block;
+    grid-area: 1 / 1;
+    min-width: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .stage {
+    height: 100%;
+  }
+
+  .stage__fig {
+    display: block;
+    margin: 0;
+    mix-blend-mode: multiply;
+  }
+
+  .stage__fig.is-photo {
+    mix-blend-mode: normal;
+  }
+
+  .stage__foot {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .spec-grid > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  @container (min-width: 36rem) {
+    .stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .stage__media {
+      min-width: 0;
+      padding: 1.25rem;
+    }
+
+    .stage__foot {
+      grid-template-rows: minmax(0, 1fr) auto;
+      border-top: 0;
+      border-left: 1px solid var(--steel-200);
+    }
+
+    .spec-grid {
+      min-height: 12.5rem;
+    }
+
+    .note {
+      white-space: normal;
+      max-width: 48%;
+      font-size: 0.5rem;
+      gap: 0.3rem;
+    }
+
+    .note::before {
+      width: 1rem;
+    }
+  }
+</style>

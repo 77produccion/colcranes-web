@@ -2,7 +2,7 @@
 /**
  * Sección de Proyectos y Casos de Éxito (Punto 4.3).
  * Presenta 4 casos con espacio para fotografía propia (sin fotos de banco ni IA),
- * cliente, capacidad, luz y alcance técnico.
+ * nombre del proyecto, capacidad, luz y alcance técnico.
  */
 import { existsSync } from "node:fs";
 import { CASE_STUDIES } from "../data/site";
@@ -29,7 +29,7 @@ const casesWithStatus = CASE_STUDIES.map((item) => ({
         </p>
         <div style="margin-top:1.25rem">
           <a class="link-arrow" href="/proyectos">
-            Ver portafolio completo y registro técnico
+            Ver portafolio completo
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M5 12h14M13 5l7 7-7 7" />
             </svg>
@@ -45,16 +45,16 @@ const casesWithStatus = CASE_STUDIES.map((item) => ({
             {item.hasImage ? (
               <img
                 src={item.image}
-                alt={item.alt}
+                alt={`Fotografía del proyecto: ${item.title}`}
                 width="1600"
                 height="1000"
                 loading="lazy"
                 decoding="async"
               />
             ) : (
-              <div class="media-slot media-slot--case" role="img" aria-label={`Espacio para fotografía real del proyecto ${item.client}`}>
+              <div class="media-slot media-slot--case" role="img" aria-label={`Espacio para fotografía real del proyecto: ${item.title}`}>
                 <span class="media-slot__tag">ESPACIO PARA FOTO DE PROYECTO PROPIO</span>
-                <span class="media-slot__title">{item.client}</span>
+                <span class="media-slot__title">{item.title}</span>
                 <span class="media-slot__meta">{item.slotSpec}</span>
                 <code class="media-slot__path">{item.image}</code>
               </div>
@@ -63,15 +63,10 @@ const casesWithStatus = CASE_STUDIES.map((item) => ({
           </div>
           <div class="case-card__body">
             <p class="mono case-card__location">{item.location}</p>
-            <h3 class="d3 case-card__client">{item.client}</h3>
-            <p class="case-card__title">{item.title}</p>
+            <h3 class="d3 case-card__client">{item.title}</h3>
             <p class="body-copy case-card__summary">{item.summary}</p>
 
             <dl class="case-card__specs">
-              <div>
-                <dt>Cliente</dt>
-                <dd>{item.client}</dd>
-              </div>
               <div>
                 <dt>Capacidad</dt>
                 <dd>{item.capacity}</dd>
@@ -91,3 +86,9 @@ const casesWithStatus = CASE_STUDIES.map((item) => ({
     </div>
   </div>
 </section>
+
+<style>
+  .case-card__specs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+</style>

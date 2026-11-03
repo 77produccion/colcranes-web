@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import PageHero from "../components/PageHero.astro";
+import { PROMO_IMAGES } from "../data/promos";
 import Quote from "../components/Quote.astro";
 import Footer from "../components/Footer.astro";
 import { CONTACT } from "../data/site";
@@ -24,14 +26,13 @@ const equipmentOptions = [
 >
   <Header />
   <main id="contenido">
-    <section class="page-hero">
+    <PageHero image={PROMO_IMAGES[11] ?? "/images/planta-bodega.webp"} tone="black">
       <div class="wrap">
         <nav class="breadcrumbs" aria-label="Ruta de navegación">
           <a href="/">Inicio</a>
           <span>/</span>
           <span aria-current="page">Contacto</span>
         </nav>
-        <p class="eyebrow eyebrow--light">Atención comercial y soporte técnico</p>
         <h1 class="d1" style="margin-top:0.75rem;max-width:18ch">
           Contacto y sedes en Colombia
         </h1>
@@ -39,7 +40,7 @@ const equipmentOptions = [
           Atendemos requerimientos de proyectos nuevos, mantenimiento, modernizaciones y repuestos desde nuestras sedes de Barranquilla y Bogotá.
         </p>
       </div>
-    </section>
+    </PageHero>
 
     <section class="band">
       <div class="wrap">

@@ -1,0 +1,136 @@
+---
+import { CASE_STUDIES } from "../data/site";
+
+// Presentación pública: sin clientes, ubicaciones ni referencias de expedientes.
+const projects = CASE_STUDIES.map(({ title, image, scope, summary }, index) => ({
+  title,
+  image,
+  scope,
+  description: index === 1
+    ? "Diseño y fabricación de grúas semipórtico y puentes grúa para agilizar el cargue y acopio de perfiles estructurales. Equipos integrados a las condiciones de operación y al espacio disponible."
+    : summary,
+}));
+---
+
+<div class="project-showcase" id="proyectos">
+  {projects.map((project, index) => (
+    <section class:list={["project-feature", { "project-feature--blue": index % 2 === 1, "project-feature--reverse": index % 2 === 1 }]} aria-labelledby={`project-title-${index}`}>
+      <div class="wrap project-feature__layout">
+        <div class="project-feature__content">
+          <h2 class="d2 project-feature__title" id={`project-title-${index}`}>{project.title}</h2>
+          <div class="project-feature__details">
+            <p class="project-feature__description">{project.description}</p>
+            <div class="project-feature__scope">
+              <h3>Qué hicimos</h3>
+              <p>{project.scope}.</p>
+            </div>
+          </div>
+        </div>
+        <figure class="project-feature__photo">
+          <img
+            src={project.image}
+            alt={`Fotografía de obra: ${project.title}`}
+            width="1448"
+            height="1086"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
+    </section>
+  ))}
+</div>
+
+<style>
+  .project-feature {
+    padding-block: clamp(2.5rem, 4vw, 4rem);
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .project-feature--blue {
+    background: var(--navy);
+    color: var(--paper);
+  }
+
+  .project-feature__layout {
+    display: grid;
+    gap: clamp(1.75rem, 3.5vw, 4rem);
+    align-items: center;
+  }
+
+  .project-feature__photo {
+    min-width: 0;
+    margin: 0;
+    background: var(--steel-100);
+  }
+
+  .project-feature__photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .project-feature__content {
+    display: grid;
+    min-width: 0;
+    gap: 1.25rem;
+  }
+
+  .project-feature__title {
+    max-width: 23ch;
+    font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+    line-height: 1.06;
+    overflow-wrap: break-word;
+  }
+
+  .project-feature__details {
+    min-width: 0;
+    max-width: 60ch;
+  }
+
+  .project-feature__description {
+    margin: 0;
+    font-size: clamp(1rem, 1.15vw, 1.125rem);
+    line-height: 1.6;
+  }
+
+  .project-feature__scope {
+    margin-top: 1.75rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--cyan);
+  }
+
+  .project-feature__scope h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .project-feature__scope p {
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  .project-feature--blue .project-feature__scope p {
+    color: rgb(255 255 255 / 80%);
+  }
+
+  @media (min-width: 56rem) {
+    .project-feature__layout {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-feature--reverse .project-feature__photo {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .project-feature--reverse .project-feature__content {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+</style>

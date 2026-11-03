@@ -1,14 +1,14 @@
 ---
-import { CONTACT } from "../data/site";
+import { CONTACT, EQUIPMENT_FAMILIES, SERVICES } from "../data/site";
 
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/";
 
 const nav = [
-  { href: isHome ? "#equipos" : "/equipos", pageHref: "/equipos", label: "Equipos", index: "01" },
-  { href: isHome ? "#ciclo" : "/servicios", pageHref: "/servicios", label: "Servicios", index: "02" },
-  { href: isHome ? "#proyectos" : "/proyectos", pageHref: "/proyectos", label: "Proyectos", index: "03" },
-  { href: isHome ? "#capacidad" : "/nosotros", pageHref: "/nosotros", label: "Nosotros", index: "04" },
+  { href: "/equipos", pageHref: "/equipos", label: "Equipos", index: "01", children: EQUIPMENT_FAMILIES.map((item) => ({ label: item.name, href: `/equipos/${item.slug}` })) },
+  { href: "/servicios", pageHref: "/servicios", label: "Servicios", index: "02", children: SERVICES.map((item) => ({ label: item.name, href: `/servicios/${item.slug}` })) },
+  { href: "/proyectos", pageHref: "/proyectos", label: "Proyectos", index: "03" },
+  { href: "/nosotros", pageHref: "/nosotros", label: "Nosotros", index: "04" },
   { href: "/contacto", pageHref: "/contacto", label: "Contacto", index: "05" },
 ];
 ---
@@ -36,21 +36,38 @@ const nav = [
 
       <nav class="site-nav" aria-label="Navegación principal">
         {nav.map((item) => (
+          <div class="nav-item" data-nav-item>
+            <div class="nav-item__top">
           <a
             href={item.href}
             aria-current={pathname.startsWith(item.pageHref) && item.pageHref !== "/" ? "page" : undefined}
           >
             {item.label}
           </a>
+              {item.children && (
+                <button class="nav-item__toggle" type="button" aria-label={`Desplegar ${item.label.toLowerCase()}`} aria-expanded="false" aria-controls={`submenu-${item.index}`}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                </button>
+              )}
+            </div>
+            {item.children && (
+              <ul class="nav-submenu" id={`submenu-${item.index}`}>
+                <li><a class="nav-submenu__all" href={item.pageHref}>Todos los {item.label.toLowerCase()}</a></li>
+                {item.children.map((child) => (
+                  <li><a href={child.href} aria-current={pathname.replace(/\/$/, "") === child.href ? "page" : undefined}>{child.label}</a></li>
+                ))}
+              </ul>
+            )}
+          </div>
         ))}
       </nav>
 
       <div class="site-header__actions">
-        <a class="header-tel utility" href={CONTACT.salesPhoneHref}>
+        <a class="header-tel utility" href={CONTACT.salesPhoneHref} aria-label="Llamar a ventas">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
             <path d="M4 4h4l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v4a1 1 0 0 1-1 1A17 17 0 0 1 3 5a1 1 0 0 1 1-1Z" />
           </svg>
-          {CONTACT.salesPhone}
+          Llamar
         </a>
         <button class="btn btn--signal header-cta" type="button" data-quote-open>Cotizar</button>
         <button class="menu-toggle" type="button" data-drawer-toggle aria-expanded="false" aria-controls="menu-movil">
@@ -68,7 +85,15 @@ const nav = [
       <div class="wrap">
         <nav aria-label="Navegación móvil">
           {nav.map((item) => (
-            <a href={item.href}>
+            item.children ? (
+              <details class="mobile-nav-group">
+                <summary><a class="mobile-nav-group__page" href={item.href}>{item.label}</a><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+                <div class="mobile-nav-group__links">
+                  <a href={item.pageHref}>Todos los {item.label.toLowerCase()}</a>
+                  {item.children.map((child) => <a href={child.href} aria-current={pathname.replace(/\/$/, "") === child.href ? "page" : undefined}>{child.label}</a>)}
+                </div>
+              </details>
+            ) : <a href={item.href}>
               {item.label}
               <span>{item.index}</span>
             </a>
@@ -82,3 +107,122 @@ const nav = [
     </div>
   </div>
 </header>
+
+<style>
+  .nav-item { position: relative; }
+  .nav-item__top { display: flex; align-items: center; gap: 0.25rem; }
+  .nav-item__toggle {
+    display: grid;
+    place-items: center;
+    padding: 0.5rem 0.2rem;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  .nav-item__toggle svg { transition: transform 0.25s ease; }
+  .nav-item[data-open="true"] .nav-item__toggle svg { transform: rotate(180deg); }
+  .nav-submenu {
+    position: absolute;
+    top: 100%;
+    left: -1.25rem;
+    width: 21rem;
+    max-height: calc(100dvh - 6rem);
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 0.6rem;
+    border-top: 3px solid var(--cyan);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 16px 36px rgb(0 0 0 / 18%);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+  .nav-item[data-open="true"] .nav-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav-submenu a {
+    display: block;
+    padding: 0.65rem 0.8rem;
+    font-size: 0.84rem;
+    line-height: 1.4;
+    opacity: 1;
+  }
+  .nav-submenu a::after { display: none; }
+  .nav-submenu a:is(:hover, :focus-visible, [aria-current="page"]) {
+    background: var(--steel-100);
+    color: var(--navy);
+  }
+  .nav-submenu .nav-submenu__all {
+    color: var(--navy);
+    font-weight: 700;
+    border-bottom: 1px solid var(--line-dark);
+    margin-bottom: 0.35rem;
+  }
+  .mobile-nav-group summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--line-light);
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    list-style: none;
+  }
+  .mobile-nav-group summary::-webkit-details-marker { display: none; }
+  .mobile-nav-group summary .mobile-nav-group__page {
+    flex: 1;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    letter-spacing: inherit;
+  }
+  .mobile-nav-group[open] summary svg { transform: rotate(180deg); }
+  .mobile-nav-group__links { padding-left: 1rem; }
+  .mobile-nav-group__links a {
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    padding-block: 0.7rem;
+  }
+  .mobile-drawer { max-height: calc(100dvh - 4.25rem); overflow-y: auto; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-nav-item]").forEach((item) => {
+    const toggle = item.querySelector<HTMLButtonElement>(".nav-item__toggle");
+    if (!toggle) return;
+    const setOpen = (open: boolean) => {
+      item.dataset.open = String(open);
+      toggle.setAttribute("aria-expanded", String(open));
+    };
+    item.addEventListener("mouseenter", () => setOpen(true));
+    item.addEventListener("mouseleave", () => {
+      if (!item.contains(document.activeElement)) setOpen(false);
+    });
+    item.addEventListener("focusin", () => setOpen(true));
+    item.addEventListener("focusout", (event) => {
+      if (!item.contains(event.relatedTarget as Node | null)) setOpen(false);
+    });
+    toggle.addEventListener("click", () => setOpen(item.dataset.open !== "true"));
+    item.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        toggle.focus();
+        setOpen(false);
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (!item.contains(event.target as Node)) setOpen(false);
+    });
+  });
+</script>

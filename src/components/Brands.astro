@@ -22,7 +22,7 @@ const brandsWithStatus = BRANDS.map((brand) => ({
     <h2 class="brands__label">Marcas aliadas</h2>
     <ul class="brands__row">
       {brandsWithStatus.map((brand) => (
-        <li class="brands__item">
+        <li class:list={["brands__item", { "brands__item--compact": brand.shortName === "Black Bear" }]}>
           {brand.url ? (
             <a
               class="brands__link"
@@ -34,7 +34,6 @@ const brandsWithStatus = BRANDS.map((brand) => ({
             >
               {brand.hasFile ? (
                 <img
-                  class={brand.ownLine ? "brands__img--solid" : undefined}
                   src={brand.img}
                   alt={brand.name}
                   loading="lazy"
@@ -56,7 +55,6 @@ const brandsWithStatus = BRANDS.map((brand) => ({
             >
               {brand.hasFile ? (
                 <img
-                  class={brand.ownLine ? "brands__img--solid" : undefined}
                   src={brand.img}
                   alt={brand.name}
                   loading="lazy"
@@ -76,3 +74,22 @@ const brandsWithStatus = BRANDS.map((brand) => ({
     </ul>
   </div>
 </section>
+
+<style>
+  .brands__item {
+    min-height: clamp(6rem, 8vw, 7rem);
+    min-width: 0;
+  }
+
+  .brands__link {
+    width: 100%;
+  }
+
+  .brands__row img {
+    max-width: min(100%, 14rem);
+  }
+
+  .brands__item--compact img {
+    height: clamp(5.5rem, 7vw, 6.5rem);
+  }
+</style>

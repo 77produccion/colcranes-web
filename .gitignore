@@ -12,6 +12,7 @@ node_modules/
 .vscode/
 docs/
 skills-lock.json
+source-media/
 
 # logs
 npm-debug.log*
@@ -44,3 +45,5 @@ pnpm-debug.log*
 *.psd
 *.ai
 
+# Clips optimizados del hero sí se publican (pesan pocos MB y son parte del sitio)
+!public/videos/hero/*.mp4

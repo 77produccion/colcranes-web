@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import PageHero from "../components/PageHero.astro";
+import { PROMO_IMAGES } from "../data/promos";
 import Quote from "../components/Quote.astro";
 import Footer from "../components/Footer.astro";
 import { CONTACT } from "../data/site";
@@ -31,14 +33,13 @@ const areas = [
 >
   <Header />
   <main id="contenido">
-    <section class="page-hero">
+    <PageHero image={PROMO_IMAGES[2] ?? "/images/planta-bodega.webp"} tone="blue">
       <div class="wrap">
         <nav class="breadcrumbs" aria-label="Ruta de navegación">
           <a href="/">Inicio</a>
           <span>/</span>
           <span aria-current="page">Trabaje con nosotros</span>
         </nav>
-        <p class="eyebrow eyebrow--light">Talento humano · COLCRANES S.A.S.</p>
         <h1 class="d1" style="margin-top:0.75rem;max-width:18ch">
           Trabaje con nosotros
         </h1>
@@ -46,7 +47,7 @@ const areas = [
           Buscamos ingenieros, técnicos electromecánicos, soldadores y profesionales comprometidos con la seguridad y la excelencia en ingeniería de izaje.
         </p>
       </div>
-    </section>
+    </PageHero>
 
     <section class="band">
       <div class="wrap">

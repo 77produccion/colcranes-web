@@ -1,4 +1,6 @@
 ---
+import PageHero from "../../components/PageHero.astro";
+import { PROMO_IMAGES } from "../../data/promos";
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Quote from "../../components/Quote.astro";
@@ -12,14 +14,13 @@ import { EQUIPMENT_FAMILIES } from "../../data/site";
 >
   <Header />
   <main id="contenido">
-    <section class="page-hero">
+    <PageHero image={PROMO_IMAGES[0] ?? "/images/planta-bodega.webp"} tone="black">
       <div class="wrap">
         <nav class="breadcrumbs" aria-label="Ruta de navegación">
           <a href="/">Inicio</a>
           <span>/</span>
           <span aria-current="page">Equipos</span>
         </nav>
-        <p class="eyebrow eyebrow--light">Catálogo de maquinaria y componentes</p>
         <h1 class="d1" style="margin-top:0.75rem;max-width:18ch">
           Equipos para izaje industrial
         </h1>
@@ -28,7 +29,7 @@ import { EQUIPMENT_FAMILIES } from "../../data/site";
           e integramos polipastos, kits y sistemas de electrificación de fabricantes líderes.
         </p>
       </div>
-    </section>
+    </PageHero>
 
     <section class="band">
       <div class="wrap">

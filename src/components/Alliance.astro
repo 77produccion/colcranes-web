@@ -1,0 +1,78 @@
+---
+/**
+ * Aliado operativo: reinterpretación del bloque "Somos su aliado" de la web
+ * anterior. Poca copy, una imagen de fondo que cambia con cada compromiso y
+ * tres filas interactivas en lugar de tarjetas repetidas.
+ */
+import { PROMO_IMAGES } from "../data/promos";
+
+const promo = (fragment: string) =>
+  PROMO_IMAGES.find((src) => decodeURIComponent(src).includes(fragment)) ??
+  "/images/planta-bodega.webp";
+
+const promises = [
+  {
+    title: "Personal experto en todas las marcas",
+    text: "Técnicos propios certificados para intervenir equipos de cualquier fabricante.",
+    img: promo("9.51.47 AM (4)"),
+  },
+  {
+    title: "Mantenimiento preventivo y correctivo",
+    text: "Rutinas programadas y respuesta en planta para no detener su operación.",
+    img: promo("9.51.46 AM (4)"),
+  },
+  {
+    title: "Un equipo fijo durante todo el proyecto",
+    text: "Ingeniería, montaje y puesta en marcha con el mismo responsable de principio a fin.",
+    img: promo("9.51.45 AM (2)"),
+  },
+];
+---
+
+<section class="alliance" id="aliado" data-alliance>
+  <div class="alliance__media" aria-hidden="true">
+    {promises.map((promise, index) => (
+      <img
+        class:list={["alliance__img", { "is-active": index === 0 }]}
+        src={promise.img}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    ))}
+  </div>
+  <div class="alliance__scrim" aria-hidden="true"></div>
+
+  <div class="wrap alliance__grid">
+    <div class="alliance__lead">
+      <p class="eyebrow eyebrow--light">Aliado operativo</p>
+      <h2 class="d2">Un aliado en cada maniobra.</h2>
+      <p class="lede lede--light">
+        Menos interrupciones, un solo responsable y criterio técnico en planta.
+      </p>
+      <a class="link-arrow link-arrow--light alliance__link" href="/nosotros">
+        Conozca cómo trabajamos
+      </a>
+    </div>
+
+    <div class="alliance__list">
+      <div class="alliance__rail" aria-hidden="true">
+        <span class="alliance__rail-fill" data-alliance-rail></span>
+      </div>
+      <div class="alliance__items">
+        {promises.map((promise, index) => (
+          <button
+            type="button"
+            class:list={["alliance__item", { "is-active": index === 0 }]}
+            data-alliance-item
+            data-index={index}
+            aria-pressed={index === 0 ? "true" : "false"}
+          >
+            <span class="alliance__title">{promise.title}</span>
+            <span class="alliance__text">{promise.text}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

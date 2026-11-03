@@ -52,22 +52,22 @@ export const COMPANY_STATS = [
   {
     value: "+800",
     label: "Proyectos ejecutados",
-    detail: "Puentes grúa, pórticos, polipastos y modernizaciones en plantas de Colombia",
+    detail: "Puentes grúa, pórticos, polipastos y modernizaciones en planta.",
   },
   {
     value: "+25",
     label: "Años de experiencia",
-    detail: "Trayectoria en diseño, cálculo estructural, fabricación y montaje de sistemas de izaje",
+    detail: "Diseño, cálculo estructural, fabricación y montaje de sistemas de izaje",
   },
   {
     value: "100%",
     label: "Técnicos propios",
-    detail: "Personal directo certificado en trabajo en alturas, riesgo eléctrico y pruebas de carga",
+    detail: "Personal certificado en trabajo en alturas, riesgo eléctrico y pruebas de carga.",
   },
   {
-    value: "2",
+    value: "3",
     label: "Sedes en Colombia",
-    detail: "Barranquilla (planta de fabricación de 3.000 m²) y Bogotá, con cobertura nacional",
+    detail: "Barranquilla, Bogotá y Medellín.",
   },
 ];
 
@@ -136,7 +136,7 @@ export const BRANDS: BrandItem[] = [
   {
     name: "NOVALIFT · Línea propia COLCRANES",
     shortName: "NOVALIFT (Línea propia)",
-    img: "/images/marks-logo/novalift-logo.png",
+    img: "/images/marks-logo/novalift-logo-white.png",
     url: null,
     ownLine: true,
   },

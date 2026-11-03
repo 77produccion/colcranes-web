@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import { SITE_URL, CONTACT } from '../data/site';
+import WhatsAppWidget from '../components/WhatsAppWidget.astro';
+import PageTransition from '../components/PageTransition.astro';
 
 interface Props {
   title?: string;
@@ -23,6 +25,23 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (() => {
+        const key = "colcranes:page-transition";
+        try {
+          const pending = JSON.parse(sessionStorage.getItem(key) || "null");
+          sessionStorage.removeItem(key);
+          if (pending && pending.path === location.pathname + location.search && Date.now() - pending.time < 15000) {
+            document.documentElement.classList.add("is-page-entering");
+            // Never leave the page covered if the animation module fails to load.
+            window.setTimeout(() => {
+              document.documentElement.classList.remove("is-page-entering");
+              document.documentElement.removeAttribute("aria-busy");
+            }, 4000);
+          }
+        } catch { /* Storage is optional; normal navigation remains available. */ }
+      })();
+    </script>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -113,8 +132,11 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
   </head>
 
   <body>
+    <PageTransition />
     <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
     <slot />
+
+    <WhatsAppWidget />
 
     <script>
       import '../scripts/motion.ts';

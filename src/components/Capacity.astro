@@ -3,6 +3,11 @@
  * Capacidad, planta y compañía.
  * Usa exclusivamente fotografía real de Colcranes (cero banco de imágenes / cero IA).
  */
+import { PROMO_IMAGES } from "../data/promos";
+
+/* Si la carpeta aún no tiene imágenes, se conserva la foto de planta. */
+const slides = PROMO_IMAGES.length ? PROMO_IMAGES : ["/images/planta-bodega.webp"];
+
 const capabilities = [
   {
     num: "01",
@@ -31,15 +36,15 @@ const showcase = [
     num: "01",
     title: "Proyectos",
     text: "Puentes grúa, pórticos y grúas bandera para planta nueva o ampliación.",
-    img: "/images/galeria/montaje-equipo.webp",
-    alt: "Equipo de izaje y estructura amarilla dispuestos para montaje en patio",
+    img: encodeURI("/images/imagenes-promocionales/WhatsApp Image 2026-10-23 at 9.51.44 AM.jpeg"),
+    alt: "Puente grúa Colcranes de 80 toneladas instalado en una nave industrial",
   },
   {
     num: "02",
     title: "Servicios",
     text: "Mantenimiento, montaje y puesta en marcha de equipos en operación.",
-    img: "/images/galeria/servicio-tecnico.webp",
-    alt: "Técnicos revisando el gancho de un polipasto de 55 toneladas",
+    img: encodeURI("/images/imagenes-promocionales/WhatsApp Image 2026-10-23 at 9.51.47 AM (4).jpeg"),
+    alt: "Técnico sobre una plataforma elevadora interviniendo un puente grúa Colcranes",
   },
   {
     num: "03",
@@ -60,15 +65,18 @@ const showcase = [
 
 <section class="capacity" id="capacidad">
   <div class="capacity__stage">
-    <img
-      class="capacity__bg"
-      src="/images/planta-bodega.webp"
-      alt="Dos puentes grúa Colcranes de 2,5 toneladas en operación dentro de una planta industrial"
-      width="1672"
-      height="941"
-      loading="lazy"
-      decoding="async"
-    />
+    <div class="capacity__slides" data-capacity-slides data-sources={JSON.stringify(slides)}>
+      <img
+        class="capacity__bg is-active"
+        src={slides[0]}
+        alt=""
+        width="1600"
+        height="1200"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <img class="capacity__bg" alt="" aria-hidden="true" decoding="async" />
+    </div>
     <div class="wrap capacity__stage-inner">
       <header class="sec-head sec-head--split capacity__head">
         <div>
