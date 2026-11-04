@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/fonts.css';
 import { SITE_URL, CONTACT } from '../data/site';
 import WhatsAppWidget from '../components/WhatsAppWidget.astro';
 import PageTransition from '../components/PageTransition.astro';
@@ -8,6 +9,7 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  preloadImage?: { src: string; srcset?: string; sizes?: string };
 }
 
 const {
@@ -15,9 +17,11 @@ const {
   description =
     "Colcranes S.A.S. diseña, fabrica, monta y mantiene puentes grúa, pórticos, grúas bandera y polipastos en Colombia. Más de 25 años de experiencia y 800 proyectos desde Barranquilla y Bogotá.",
   ogImage = `${SITE_URL}/images/og-colcranes.jpg`,
+  preloadImage,
 } = Astro.props;
 
-const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
+const canonicalPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const canonicalUrl = new URL(canonicalPath, SITE_URL).toString();
 ---
 
 <!doctype html>
@@ -25,6 +29,7 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage.src} imagesrcset={preloadImage.srcset} imagesizes={preloadImage.sizes} fetchpriority="high" />}
     <script is:inline>
       (() => {
         const key = "colcranes:page-transition";
@@ -68,12 +73,8 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Saira:ital,wdth,wght@0,75..125,600..900;1,75..125,600..800&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/fonts/saira-normal-600-900-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/barlow-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <script
       type="application/ld+json"
@@ -139,7 +140,22 @@ const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
     <WhatsAppWidget />
 
     <script>
-      import '../scripts/motion.ts';
+      // Let the critical HTML/CSS paint before downloading and initializing motion.
+      let motionReady: Promise<unknown> | undefined;
+      const loadMotion = () => motionReady ??= import('../scripts/motion.ts');
+      // Early interactions on slow networks must not be lost while the module loads.
+      document.addEventListener('click', (event) => {
+        if (document.documentElement.classList.contains('js')) return;
+        const control = event.target instanceof Element
+          ? event.target.closest<HTMLElement>('[data-drawer-toggle], [data-quote-open], [data-wa-open], a[href="#cotizar"]') : null;
+        if (!control) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        void loadMotion().then(() => control.click());
+      }, { capture: true });
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        void loadMotion();
+      }));
     </script>
   </body>
 </html>

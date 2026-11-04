@@ -30,6 +30,9 @@ const heroPoster = heroPosterWebp
 
 const heroFallbackWebp = existsSync("public/images/hero-colcranes-obra.webp");
 const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : undefined;
+const posterAvifSrcset = [640, 960, 1600]
+  .filter((width) => existsSync(`public/images/hero-video-poster.w${width}.avif`))
+  .map((width) => `/images/hero-video-poster.w${width}.avif ${width}w`).join(", ");
 ---
 
 <section class="hero" id="inicio" data-hero>
@@ -37,6 +40,8 @@ const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : und
     {hasHeroVideos ? (
       <>
         {heroPoster && (
+          <picture>
+          {posterAvifSrcset && <source type="image/avif" srcset={posterAvifSrcset} sizes="100vw" />}
           <img
             class="hero__poster"
             src={heroPoster}
@@ -47,6 +52,7 @@ const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : und
             fetchpriority="high"
             decoding="async"
           />
+          </picture>
         )}
         <div class="hero__videos" data-hero-videos aria-hidden="true">
           <video class="hero__video is-active" muted playsinline preload="none"></video>
@@ -83,17 +89,21 @@ const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : und
     )}
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
+  {hasHeroVideos && <button class="hero__playback" type="button" data-hero-playback aria-label="Pausar video de portada" aria-pressed="false" hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path data-playback-icon d="M6 4h4v16H6zM14 4h4v16h-4z" /></svg>
+  </button>}
 
   <div class="wrap hero__inner">
     <span class="hero__logo-wrap">
       <img
         class="hero__logo"
         src="/images/logo-colcranes-dark-480.webp"
+        {...await responsiveImage("/images/logo-colcranes-dark-480.webp", "(min-width: 1000px) 325px, 232px")}
         alt="COLCRANES"
         width="480"
         height="144"
+        fetchpriority="high"
         decoding="async"
-        data-hero-fade
       />
     </span>
     <h1 class="d1 hero__title">
@@ -119,3 +129,17 @@ const heroFallback = heroFallbackWebp ? "/images/hero-colcranes-obra.webp" : und
     </div>
   </div>
 </section>
+
+<style>
+  /* First-fold entrances run from CSS: no JS download is needed to reveal them. */
+  .hero :global([data-hero-media] img) { animation: hero-image-settle 1.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .hero :global([data-hero-line] > span) { animation: hero-line-rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both; }
+  .hero :global([data-hero-line] + [data-hero-line] > span) { animation-delay: 0.25s; }
+  .hero :global([data-hero-fade]) { animation: hero-copy-rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both; }
+  .hero :global(.hero__ctas[data-hero-fade]) { animation-delay: 0.79s; }
+  @keyframes hero-image-settle { from { transform: scale(1.07); } to { transform: scale(1); } }
+  @keyframes hero-line-rise { from { transform: translateY(108%); } to { transform: translateY(0); } }
+  @keyframes hero-copy-rise { from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .hero__playback { position: absolute; right: var(--gutter); bottom: 1rem; z-index: 5; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgb(255 255 255 / 55%); background: rgb(0 0 0 / 45%); color: white; cursor: pointer; }
+  .hero__playback[hidden] { display: none; }
+</style>

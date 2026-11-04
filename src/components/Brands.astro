@@ -10,6 +10,7 @@
  */
 import { existsSync } from "node:fs";
 import { BRANDS } from "../data/site";
+import { responsiveImage } from "../utils/media";
 
 const brandsWithStatus = BRANDS.map((brand) => ({
   ...brand,
@@ -21,7 +22,7 @@ const brandsWithStatus = BRANDS.map((brand) => ({
   <div class="wrap">
     <h2 class="brands__label">Marcas aliadas</h2>
     <ul class="brands__row">
-      {brandsWithStatus.map((brand) => (
+      {brandsWithStatus.map(async (brand) => (
         <li class:list={["brands__item", { "brands__item--compact": brand.shortName === "Black Bear" }]}>
           {brand.url ? (
             <a
@@ -35,6 +36,7 @@ const brandsWithStatus = BRANDS.map((brand) => ({
               {brand.hasFile ? (
                 <img
                   src={brand.img}
+                  {...await responsiveImage(brand.img, "(min-width: 560px) 180px, 40vw")}
                   alt={brand.name}
                   loading="lazy"
                   decoding="async"
@@ -56,6 +58,7 @@ const brandsWithStatus = BRANDS.map((brand) => ({
               {brand.hasFile ? (
                 <img
                   src={brand.img}
+                  {...await responsiveImage(brand.img, "(min-width: 560px) 180px, 40vw")}
                   alt={brand.name}
                   loading="lazy"
                   decoding="async"

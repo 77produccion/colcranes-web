@@ -7,6 +7,7 @@
  */
 import { existsSync } from "node:fs";
 import { CLIENTS } from "../data/site";
+import { responsiveImage } from "../utils/media";
 
 const clients = CLIENTS.map((client) => ({
   ...client,
@@ -27,7 +28,7 @@ const marquee = [...clients, ...clients];
 
   <div class="clients-band__marquee">
     <ul class="clients-band__track">
-      {marquee.map((client, index) => {
+      {marquee.map(async (client, index) => {
         const isDuplicate = index >= clients.length;
         return (
           <li
@@ -37,6 +38,7 @@ const marquee = [...clients, ...clients];
             {client.hasFile ? (
               <img
                 src={client.logo}
+                {...await responsiveImage(client.logo, "240px")}
                 alt={isDuplicate ? "" : `Logo de ${client.name}`}
                 loading="lazy"
                 decoding="async"

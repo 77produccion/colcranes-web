@@ -4,6 +4,7 @@
  * Pestañas con radios nativos + enlace directo a cada página individual SEO (/equipos/[slug]).
  */
 import { EQUIPMENT_FAMILIES, HOIST_OPTIONS } from "../data/site";
+import { responsiveImage } from "../utils/media";
 
 const families = EQUIPMENT_FAMILIES;
 const featuredHoist = HOIST_OPTIONS[0];
@@ -74,7 +75,7 @@ const tabRules = families
       </div>
 
       <div class="stage-holder">
-        {families.map((family, index) => (
+        {families.map(async (family, index) => (
           <div
             class={`family ${index === 0 ? "is-active" : ""}`}
             id={`${family.id}-panel`}
@@ -93,6 +94,7 @@ const tabRules = families
                   <figure class={`stage__fig ${index === 0 ? "is-active" : ""} ${family.photo ? "is-photo" : ""}`}>
                     <img
                       src={family.id === "fam-cable" ? featuredHoist.image : family.image}
+                      {...await responsiveImage(family.id === "fam-cable" ? featuredHoist.image : family.image, "(min-width: 1000px) 40vw, 92vw")}
                       alt={family.id === "fam-cable" ? featuredHoist.alt : family.alt}
                       loading="lazy"
                       decoding="async"

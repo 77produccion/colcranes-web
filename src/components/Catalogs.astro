@@ -7,7 +7,6 @@ import { responsiveImage } from "../utils/media";
 
 const catalogUrl = "/catalogos/colcranes-catalogo-2023.pdf";
 const backdrop = PROMO_IMAGES[7] ?? "/images/planta-bodega.webp";
-const viewerUrl = `${catalogUrl}#page=1&zoom=78,0,0&toolbar=0&navpanes=0`;
 ---
 
 <section class="catalogs" id="catalogos">
@@ -27,11 +26,10 @@ const viewerUrl = `${catalogUrl}#page=1&zoom=78,0,0&toolbar=0&navpanes=0`;
             <span data-pdf-status role="status">Cargando catálogo…</span>
             <button type="button" data-pdf-next aria-label="Página siguiente" disabled>→</button>
           </div>
-          <div class="catalogs__pdf-page" data-pdf-page aria-label="Página del catálogo"></div>
+          <div class="catalogs__pdf-page" data-pdf-page role="region" aria-label="Página del catálogo" tabindex="0"></div>
           <a class="catalogs__pdf-fallback" href={catalogUrl} target="_blank" rel="noopener noreferrer">Abrir PDF completo</a>
         </div>
         <iframe
-          src={viewerUrl}
           data-catalog-viewer
           data-src={catalogUrl}
           title="Catálogo Colcranes 2023"
@@ -160,7 +158,7 @@ const viewerUrl = `${catalogUrl}#page=1&zoom=78,0,0&toolbar=0&navpanes=0`;
             canvas.width = Math.ceil(viewport.width);
             canvas.height = Math.ceil(viewport.height);
             canvas.setAttribute("role", "img");
-            canvas.setAttribute("aria-label", `Catálogo Colcranes, página ${number}. Para consultar el documento accesible use Abrir PDF completo.`);
+            canvas.setAttribute("aria-label", `Catálogo Colcranes, página ${number}. Para abrir el documento original use Abrir PDF completo.`);
             await page.render({ canvas, viewport }).promise;
             if (current !== revision) return;
             host.replaceChildren(canvas);

@@ -58,12 +58,13 @@ const equipmentOptions = [
         </div>
 
         <div class="quote-contacts" data-reveal>
+          <div class="quote-contacts__primary">
+            <span>Línea principal · Ventas</span>
+            <a href={CONTACT.salesPhoneHref}>{CONTACT.salesPhone}</a>
+          </div>
           <details class="quote-contacts__accordion">
             <summary aria-label="Mostrar otros teléfonos" title="Mostrar otros teléfonos">
-              <span class="quote-contacts__primary">
-                <span>Línea principal · Ventas</span>
-                <a href={CONTACT.salesPhoneHref}>{CONTACT.salesPhone}</a>
-              </span>
+              <span>Otros teléfonos</span>
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
             </summary>
             <div class="quote-contacts__details">

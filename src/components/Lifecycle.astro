@@ -8,6 +8,7 @@
  */
 import { existsSync } from "node:fs";
 import { SERVICES } from "../data/site";
+import { responsiveImage } from "../utils/media";
 
 const servicesWithStatus = SERVICES.map((service) => ({
   ...service,
@@ -25,12 +26,13 @@ const servicesWithStatus = SERVICES.map((service) => ({
       </p>
     </header>
     <div class="services-list">
-      {servicesWithStatus.map((service) => (
+      {servicesWithStatus.map(async (service) => (
         <a class="service-line" href={`/servicios/${service.slug}`}>
           {service.hasImage ? (
             <img
               class="service-line__img"
               src={service.image}
+              {...await responsiveImage(service.image, "(min-width: 1181px) 23vw, (min-width: 761px) 30vw, (min-width: 481px) 46vw, 92vw")}
               alt={service.alt}
               loading="lazy"
               decoding="async"

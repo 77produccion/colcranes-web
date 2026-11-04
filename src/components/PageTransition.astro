@@ -5,9 +5,9 @@
 <div class="page-transition" data-page-transition aria-hidden="true">
   <div class="page-transition__panel" data-transition-panel></div>
   <div class="page-transition__hook" data-transition-hook>
-    <img src="/images/assets/gancho-completo.webp" alt="" width="1365" height="768" loading="eager" decoding="async" />
+    <img data-transition-src="/images/assets/gancho-completo.webp" alt="" width="1365" height="768" decoding="async" />
   </div>
-  <img class="page-transition__logo" data-transition-logo src="/images/colcranes-logo-oscura.webp" alt="" width="1200" height="360" loading="eager" decoding="async" />
+  <img class="page-transition__logo" data-transition-logo data-transition-src="/images/colcranes-logo-oscura.webp" alt="" width="1200" height="360" decoding="async" />
 </div>
 
 <style is:global>
@@ -80,7 +80,20 @@
 </style>
 
 <script>
-  import { gsap } from "gsap";
+  const warmTransitionImages = () => {
+    document.querySelectorAll<HTMLImageElement>("[data-transition-src]").forEach((image) => {
+      if (!image.getAttribute("src")) image.src = image.dataset.transitionSrc!;
+    });
+  };
+  if (document.documentElement.classList.contains("is-page-entering")) warmTransitionImages();
+  const warmOnIntent = (event: Event) => {
+    const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('a[href]') : null;
+    if (link && link.origin === location.origin && link.pathname !== location.pathname) warmTransitionImages();
+  };
+  document.addEventListener("pointerover", warmOnIntent, { passive: true });
+  document.addEventListener("focusin", warmOnIntent);
+  await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+  const { gsap } = await import("gsap");
 
   const root = document.documentElement;
   const overlay = document.querySelector<HTMLElement>("[data-page-transition]");
@@ -134,6 +147,7 @@
       // Without storage, use ordinary navigation rather than flashing between documents.
       try { rememberDestination(); } catch { return; }
       event.preventDefault();
+      warmTransitionImages();
       reset();
       navigating = true;
       root.classList.add("is-page-leaving");

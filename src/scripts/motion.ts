@@ -54,12 +54,13 @@ function setupQuoteDrawer() {
   let previousFocus: HTMLElement | null = null;
   const close = () => {
     if (drawer.getAttribute("aria-hidden") === "true") return;
-    gsap.to(panel, { x: "100%", duration: 0.5, ease: "power3.in", onComplete: () => {
+    gsap.to(panel, { x: "100%", duration: 0.5, ease: "power3.in", overwrite: true, onComplete: () => {
       drawer.setAttribute("aria-hidden", "true");
       drawer.inert = true;
       drawer.style.display = "none";
       document.body.classList.remove("quote-open");
-      previousFocus?.focus();
+      if (previousFocus?.getClientRects().length) previousFocus.focus();
+      else document.querySelector<HTMLElement>(".header-cta")?.focus();
     } });
     if (scrim) gsap.to(scrim, { autoAlpha: 0, duration: 0.35 });
   };
@@ -70,7 +71,8 @@ function setupQuoteDrawer() {
     drawer.style.visibility = "visible";
     drawer.setAttribute("aria-hidden", "false");
     document.body.classList.add("quote-open");
-    gsap.fromTo(panel, { x: "100%" }, { x: "0%", duration: 0.68, ease: "power3.out", overwrite: true, onComplete: () => panel.focus() });
+    panel.focus({ preventScroll: true });
+    gsap.fromTo(panel, { x: "100%" }, { x: "0%", duration: 0.68, ease: "power3.out", overwrite: true });
     if (scrim) gsap.fromTo(scrim, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, overwrite: true });
   };
   openButtons.forEach((button) => button.addEventListener("click", (event) => { event.preventDefault(); open(); }));
@@ -79,7 +81,21 @@ function setupQuoteDrawer() {
   });
   if (window.location.hash === "#cotizar") open();
   drawer.querySelectorAll("[data-quote-close]").forEach((button) => button.addEventListener("click", close));
-  document.addEventListener("keydown", (event) => { if (event.key === "Escape") close(); });
+  document.addEventListener("keydown", (event) => {
+    if (drawer.getAttribute("aria-hidden") === "true") return;
+    if (event.key === "Escape") close();
+    if (event.key !== "Tab") return;
+    const focusable = Array.from(panel.querySelectorAll<HTMLElement>('a[href], button, input, select, textarea, [tabindex="0"]'))
+      .filter((element) => element.getClientRects().length && !element.matches(":disabled") && !element.closest("[inert]"));
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if (!first || !last) { event.preventDefault(); panel.focus(); return; }
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === panel || !panel.contains(document.activeElement))) {
+      event.preventDefault(); last.focus();
+    } else if (!event.shiftKey && (document.activeElement === last || !panel.contains(document.activeElement))) {
+      event.preventDefault(); first.focus();
+    }
+  });
 }
 
 function setupQuoteContacts() {
@@ -154,8 +170,8 @@ function setupExplorer() {
     });
     moveMarker(index, animate);
 
-    // Mobile product navigation intentionally always animates, including reduced-motion mode.
-    if (!animate || !previous || (!mobile && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+    // Preserve the requested transitions on both layouts, including reduced-motion mode.
+    if (!animate || !previous) return;
 
     const incomingMedia = next.querySelector<HTMLElement>(".stage__media");
     const incomingFigure = next.querySelector<HTMLElement>(".stage__fig");
@@ -311,43 +327,22 @@ function animateLifecycle() {
 }
 
 function setupGenericReveals() {
-  const groups = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal-group]"));
-  groups.forEach((group) => {
-    const items = Array.from(group.querySelectorAll<HTMLElement>("[data-reveal]"));
-    if (!items.length) return;
-    gsap.fromTo(
-      items,
-      { y: 26, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.65,
-        stagger: 0.07,
-        ease: "power2.out",
-        immediateRender: false,
-        clearProps: "transform,opacity",
-        scrollTrigger: { trigger: group, start: "top 84%", once: true },
-      }
-    );
-  });
-
-  const singles = Array.from(
-    document.querySelectorAll<HTMLElement>("[data-reveal]:not([data-reveal-group] [data-reveal])")
-  );
-  singles.forEach((el) => {
-    gsap.fromTo(
-      el,
-      { y: 26, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.65,
-        ease: "power2.out",
-        immediateRender: false,
-        clearProps: "transform,opacity",
-        scrollTrigger: { trigger: el, start: "top 88%", once: true },
-      }
-    );
+  // One observer instead of measuring every off-screen heading/card at startup.
+  // Content stays visible until its animation actually begins, including without JS.
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      const items = entry.target.hasAttribute("data-reveal-group")
+        ? entry.target.querySelectorAll<HTMLElement>("[data-reveal]") : entry.target;
+      gsap.fromTo(items, { y: 26, opacity: 0 }, {
+        y: 0, opacity: 1, duration: 0.65, stagger: 0.07,
+        ease: "power2.out", clearProps: "transform,opacity",
+      });
+    });
+  }, { rootMargin: "0px 0px -12% 0px" });
+  document.querySelectorAll<HTMLElement>("[data-reveal-group], [data-reveal]:not([data-reveal-group] [data-reveal])").forEach((element) => {
+    observer.observe(element);
   });
 }
 
@@ -378,6 +373,8 @@ function setupHeroPlaylist() {
   let started = false;
   let readyToStart = false;
   let advancing = false;
+  let userPaused = false;
+  const playback = document.querySelector<HTMLButtonElement>("[data-hero-playback]");
 
   const load = (video: HTMLVideoElement, index: number) => {
     const item = items[index];
@@ -389,11 +386,11 @@ function setupHeroPlaylist() {
   };
 
   const start = (video: HTMLVideoElement) => {
-    if (inView && !document.hidden) video.play()?.catch(() => {});
+    if (inView && !document.hidden && !userPaused) video.play()?.catch(() => {});
   };
 
   const syncPlayback = () => {
-    if (!inView || document.hidden) {
+    if (!inView || document.hidden || userPaused) {
       videos.forEach((video) => video.pause());
       return;
     }
@@ -406,7 +403,7 @@ function setupHeroPlaylist() {
   };
 
   const prepareNext = () => {
-    if (!inView || document.hidden) return;
+    if (!inView || document.hidden || userPaused) return;
     const nextIndex = (currentIndex + 1) % items.length;
     const next = videos[1 - activeSlot];
     if (next.dataset.playlistIndex !== String(nextIndex)) load(next, nextIndex);
@@ -460,6 +457,16 @@ function setupHeroPlaylist() {
     syncPlayback();
   }, { threshold: 0 }).observe(container);
   document.addEventListener("visibilitychange", syncPlayback);
+  if (playback) {
+    playback.hidden = false;
+    playback.addEventListener("click", () => {
+      userPaused = !userPaused;
+      playback.setAttribute("aria-pressed", String(userPaused));
+      playback.setAttribute("aria-label", userPaused ? "Reanudar video de portada" : "Pausar video de portada");
+      playback.querySelector("[data-playback-icon]")?.setAttribute("d", userPaused ? "M7 3v18l14-9z" : "M6 4h4v16H6zM14 4h4v16h-4z");
+      syncPlayback();
+    });
+  }
   const begin = () => window.setTimeout(() => { readyToStart = true; syncPlayback(); }, 350);
   if (document.readyState === "complete") begin();
   else window.addEventListener("load", begin, { once: true });
@@ -723,6 +730,8 @@ function setupCatalogViewer() {
   let resizeTimer: number | undefined;
 
   const fit = () => {
+    // Do not initialize a hidden native viewer alongside the mobile PDF renderer.
+    if (window.matchMedia("(max-width: 999px)").matches) return;
     const width = iframe.clientWidth;
     if (!width) return;
     const zoom = Math.max(30, Math.min(120, Math.round(width / 9.5)));
@@ -867,36 +876,6 @@ function run() {
   const mm = gsap.matchMedia();
 
   mm.add("all", () => {
-    /* --- Portada: revelado por elevación --- */
-    const hero = document.querySelector<HTMLElement>("[data-hero]");
-    if (hero) {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.fromTo(
-        "[data-hero-media] img",
-        { scale: 1.07 },
-        { scale: 1, duration: 1.6, ease: "power2.out" },
-        0
-      )
-        .fromTo(
-          "[data-hero-line] > span",
-          { yPercent: 108 },
-          { yPercent: 0, duration: 1, stagger: 0.1 },
-          0.15
-        )
-        .fromTo(
-          "[data-hero-fade]",
-          { y: 18, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.75,
-            stagger: 0.09,
-            clearProps: "transform,opacity",
-          },
-          0.7
-        );
-    }
-
     animateLifecycle();
     setupGenericReveals();
 

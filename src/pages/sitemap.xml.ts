@@ -2,8 +2,6 @@ import type { APIRoute } from "astro";
 import { SITE_URL, EQUIPMENT_FAMILIES, SERVICES } from "../data/site";
 
 export const GET: APIRoute = () => {
-  const now = new Date().toISOString().split("T")[0];
-
   const staticRoutes = [
     { path: "/", priority: "1.0", changefreq: "weekly" },
     { path: "/equipos", priority: "0.9", changefreq: "weekly" },
@@ -35,7 +33,6 @@ ${allRoutes
   .map(
     (route) => `  <url>
     <loc>${SITE_URL}${route.path}</loc>
-    <lastmod>${now}</lastmod>
     <changefreq>${route.changefreq}</changefreq>
     <priority>${route.priority}</priority>
   </url>`

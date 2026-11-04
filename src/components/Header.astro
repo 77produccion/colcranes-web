@@ -1,5 +1,6 @@
 ---
 import { CONTACT, EQUIPMENT_FAMILIES, SERVICES } from "../data/site";
+import { responsiveImage } from "../utils/media";
 
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/";
@@ -25,6 +26,7 @@ const nav = [
         <img
           class="logo--ink"
           src="/images/colcranes-logo-oscura.webp"
+          {...await responsiveImage("/images/colcranes-logo-oscura.webp", "120px")}
           alt="COLCRANES · Heavy Lifting Engineering"
           width="1200"
           height="360"
@@ -32,6 +34,7 @@ const nav = [
         <img
           class="logo--paper"
           src="/images/colcranes-logo-clara.webp"
+          {...await responsiveImage("/images/colcranes-logo-clara.webp", "120px")}
           alt=""
           aria-hidden="true"
           width="1200"

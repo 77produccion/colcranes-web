@@ -407,7 +407,7 @@ section[id] { scroll-margin-top: 5.5rem; }
   align-items: baseline;
   gap: 1rem;
 }
-.mobile-drawer a span { font-family: var(--font-mono); font-size: 0.65rem; color: var(--steel-300); }
+.mobile-drawer a span { font-family: var(--font-mono); font-size: 0.65rem; color: var(--cyan); }
 
 @media (min-width: 1000px) {
   .site-nav { display: flex; }
@@ -1595,7 +1595,7 @@ section[id] { scroll-margin-top: 5.5rem; }
 .quote-contacts__extras p > span:first-child { font: 500 .62rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.55); }
 .quote-contacts__extras p > a,
 .quote-contacts__extras p > span:last-child { color: #fff; font-size: .8rem; line-height: 1.5; }
-.quote-contacts__accordion summary { display: flex; justify-content: space-between; align-items: center; min-height: 2rem; padding: .35rem 0; color: var(--signal); cursor: pointer; list-style: none; border-bottom: 1px solid var(--line-light); }
+.quote-contacts__accordion summary { display: flex; justify-content: space-between; align-items: center; min-height: 44px; padding: .35rem 0; font-size: .8rem; color: var(--signal); cursor: pointer; list-style: none; border-bottom: 1px solid var(--line-light); }
 .quote-contacts__accordion summary::-webkit-details-marker { display: none; }
 .quote-contacts__accordion summary svg { transition: transform .35s var(--ease-out); }
 .quote-contacts__accordion[open] summary svg { transform: rotate(180deg); }
@@ -2238,10 +2238,6 @@ body.quote-open { overflow: hidden; }
   list-style: none;
   animation: clients-marquee 42s linear infinite;
   will-change: transform;
-}
-.clients-band__marquee:hover .clients-band__track,
-.clients-band__marquee:focus-within .clients-band__track {
-  animation-play-state: paused;
 }
 
 @keyframes clients-marquee {
@@ -2983,7 +2979,7 @@ body.quote-open { overflow: hidden; }
 }
 .wa-line__detail {
   font-size: 0.8rem;
-  color: rgba(29, 29, 27, 0.6);
+  color: rgba(29, 29, 27, 0.68);
 }
 .wa-line:hover .wa-line__detail { color: var(--navy); }
 

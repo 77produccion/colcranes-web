@@ -9,8 +9,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "optimize:images": "node scripts/optimize-media.mjs images",
+    "optimize:logos": "node scripts/optimize-logos.mjs",
+    "optimize:critical": "node scripts/optimize-critical-media.mjs",
+    "check": "astro check",
     "optimize:videos": "node scripts/optimize-media.mjs videos",
     "check:media": "node scripts/check-media.mjs",
+    "check:site": "node scripts/check-site.mjs",
+    "audit:browser": "node scripts/audit-browser.mjs",
+    "audit:load": "node scripts/audit-load.mjs",
+    "audit:lighthouse": "lighthouse http://127.0.0.1:4322 --chrome-flags=\"--headless=new\" --output=json --output-path=./.astro/lighthouse-mobile.json --quiet",
+    "sync:fonts": "node scripts/sync-fonts.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -21,8 +29,13 @@
     "pdfjs-dist": "^6.5.438"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
     "@tailwindcss/vite": "^4.3.3",
+    "lighthouse": "13.5.0",
+    "playwright": "^1.64.1",
     "sharp": "^0.35.5",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
   }
 }
