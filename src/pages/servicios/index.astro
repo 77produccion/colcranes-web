@@ -55,7 +55,7 @@ const servicesWithStatus = SERVICES.map((service) => ({
               </div>
               <p class="mono" style="margin:0;color:var(--navy);font-weight:700">Servicio {service.num}</p>
               <h2 class="d3" style="margin:0.4rem 0 0">{service.name}</h2>
-              <p class="body-copy" style="margin-top:0.75rem;flex:1">{service.body}</p>
+              <p class="body-copy service-card-description" style="margin-top:0.75rem;flex:1">{service.body}</p>
               <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--line-dark);display:flex;justify-content:space-between;align-items:center">
                 <a class="link-arrow" href={`/servicios/${service.slug}`}>
                   Ver alcance del servicio

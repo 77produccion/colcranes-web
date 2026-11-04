@@ -48,6 +48,13 @@ const tabRules = families
         />
       ))}
 
+      <div class="explorer__mobile-controls">
+        <label class="mono" for="mobile-family">Seleccione un producto</label>
+        <select id="mobile-family" data-family-select>
+          {families.map((family) => <option value={family.id}>{family.name}</option>)}
+        </select>
+      </div>
+
       <div class="index-list">
         <span class="index-list__rail" aria-hidden="true"></span>
         <span class="index-list__marker" data-marker aria-hidden="true"></span>
@@ -75,7 +82,14 @@ const tabRules = families
             aria-label={family.name}
           >
             <div class="stage">
+              <h3 class="explorer__mobile-title">{family.name}</h3>
               <div class="stage__media">
+                  <button class="explorer__image-arrow explorer__image-arrow--prev" type="button" data-family-prev aria-label="Producto anterior">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m14 5-7 7 7 7" /></svg>
+                  </button>
+                  <button class="explorer__image-arrow explorer__image-arrow--next" type="button" data-family-next aria-label="Producto siguiente">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m10 5 7 7-7 7" /></svg>
+                  </button>
                   <figure class={`stage__fig ${index === 0 ? "is-active" : ""} ${family.photo ? "is-photo" : ""}`}>
                     <img
                       src={family.id === "fam-cable" ? featuredHoist.image : family.image}
@@ -126,6 +140,22 @@ const tabRules = families
 </section>
 
 <style>
+  .explorer__mobile-controls, .explorer__mobile-title, .explorer__image-arrow { display: none; }
+  @media (max-width: 999px) {
+    .explorer__description, .index-list { display: none; }
+    .explorer__mobile-controls { display: grid; gap: 0.75rem; order: 0; }
+    .explorer__mobile-controls select { width: 100%; min-height: 48px; padding: 0.75rem; border: 1px solid var(--steel-300); border-radius: 0; background: var(--paper); color: var(--ink); font: inherit; font-size: 1rem; }
+    .explorer__image-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; display: grid; place-items: center; width: 44px; height: 48px; padding: 0; border: 0; outline: 0; background: transparent; box-shadow: none; color: var(--navy); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .explorer__image-arrow--prev { left: 0; }
+    .explorer__image-arrow--next { right: 0; }
+    .explorer__image-arrow:focus-visible svg { filter: drop-shadow(0 0 3px var(--cyan)); }
+    .stage__media { padding-inline: 2.75rem; touch-action: pan-y; }
+    .explorer__mobile-title { display: block; grid-column: 1 / -1; margin: 0; padding: 1rem 1.25rem; border-bottom: 1px solid var(--steel-200); font-family: var(--font-display); font-size: 1.4rem; text-transform: uppercase; }
+    .family { display: none; }
+    .family.is-active { display: block; }
+    .stage { display: flex; flex-direction: column; }
+    .stage__foot { border-left: 0; border-top: 1px solid var(--steel-200); }
+  }
   .stage-holder {
     container-type: inline-size;
     display: grid;
@@ -171,6 +201,7 @@ const tabRules = families
     overflow-wrap: anywhere;
   }
 
+  @media (min-width: 1000px) {
   @container (min-width: 36rem) {
     .stage {
       display: grid;
@@ -203,5 +234,6 @@ const tabRules = families
     .note::before {
       width: 1rem;
     }
+  }
   }
 </style>

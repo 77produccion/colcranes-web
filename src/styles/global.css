@@ -2083,12 +2083,23 @@ body.quote-open { overflow: hidden; }
   }
 }
 @media (max-width: 520px) {
-  .stats-band { padding-block: 2.75rem; }
-  .stats-grid { grid-template-columns: 1fr; }
-  /* En pantallas estrechas el polipasto queda fuera de la zona de lectura. */
-  .stat-card__value { font-size: 3.25rem; }
-  .stat-card__label { font-size: 1.25rem; }
-  .stat-card__detail { max-width: 38ch; }
+  .stats-band { padding-block: 1.75rem; }
+}
+@media (max-width: 999px) {
+  .site-header__bar { gap: 0.5rem; }
+  .menu-toggle { justify-content: center; flex: 0 0 44px; min-height: 44px; padding: 0; }
+  .site-header__logo { margin-right: auto; min-width: 0; }
+  .site-header__logo img { width: clamp(7rem, 26vw, 10rem); height: auto; }
+  .site-header__actions { gap: 0; }
+  .stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(0.35rem, 1.5vw, 1rem); }
+  .stat-card { padding-left: clamp(0.3rem, 1vw, 0.8rem); border-left-width: 1px; }
+  .stat-card__value { font-size: clamp(1.6rem, 5.5vw, 3rem); }
+  .stat-card__label { font-size: clamp(0.65rem, 2vw, 1rem); }
+  .stat-card__detail { font-size: clamp(0.6rem, 1.65vw, 0.875rem); line-height: 1.4; overflow-wrap: break-word; }
+  .service-line__content p, .service-card-description { display: none; }
+}
+@media (max-width: 559px) {
+  .brands__tooltip { width: max-content; max-width: calc((100vw - 2 * var(--gutter) - 1rem) / 2); white-space: normal; text-align: center; }
 }
 
 /* --------------------------------------------------------------------------

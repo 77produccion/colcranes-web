@@ -111,6 +111,7 @@ function setupExplorer() {
   const rows = Array.from(explorer.querySelectorAll<HTMLElement>(".index-row"));
   const families = Array.from(explorer.querySelectorAll<HTMLElement>(".family"));
   const marker = explorer.querySelector<HTMLElement>("[data-marker]");
+  const select = explorer.querySelector<HTMLSelectElement>("[data-family-select]");
   let activeIndex = -1;
   let transition: gsap.core.Timeline | undefined;
   let outgoingImage: HTMLElement | undefined;
@@ -126,17 +127,22 @@ function setupExplorer() {
     }
   };
 
-  const activate = (index: number, animate = true) => {
+  const activate = (index: number, animate = true, slideDirection?: number) => {
     if (index === activeIndex) return;
     const previousIndex = activeIndex;
     const previous = families[previousIndex];
     const next = families[index];
-    const direction = index > previousIndex ? 1 : -1;
+    const direction = slideDirection ?? (index > previousIndex ? 1 : -1);
+    const mobile = window.matchMedia("(max-width: 999px)").matches;
     transition?.kill();
     outgoingImage?.remove();
     outgoingImage = undefined;
+    const previousFigure = previous?.querySelector<HTMLElement>(".stage__fig");
+    if (previousFigure) gsap.set(previousFigure, { clearProps: "transform,opacity,visibility" });
+    const figureBounds = previousFigure?.getBoundingClientRect();
     activeIndex = index;
     inputs[index].checked = true;
+    if (select) select.value = inputs[index].id;
     families.forEach((fam, i) => {
       const isActive = i === index;
       fam.classList.toggle("is-active", isActive);
@@ -148,13 +154,13 @@ function setupExplorer() {
     });
     moveMarker(index, animate);
 
-    if (!animate || !previous) return;
+    // Mobile product navigation intentionally always animates, including reduced-motion mode.
+    if (!animate || !previous || (!mobile && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
 
     const incomingMedia = next.querySelector<HTMLElement>(".stage__media");
-    const previousFigure = previous.querySelector<HTMLElement>(".stage__fig");
     const incomingFigure = next.querySelector<HTMLElement>(".stage__fig");
     const incomingText = next.querySelector<HTMLElement>(".stage__foot");
-    if (!incomingMedia || !previousFigure || !incomingFigure || !incomingText) return;
+    if (!incomingMedia || !previousFigure || !figureBounds || !incomingFigure || !incomingText) return;
     const incomingNotes = Array.from(incomingFigure.querySelectorAll<HTMLElement>(".note"));
     const incomingCopy = [incomingText, ...incomingNotes];
     // Hide copy immediately, including when a previous transition was interrupted.
@@ -162,7 +168,6 @@ function setupExplorer() {
 
     // Keep the viewport and its background stationary. Only the two figures
     // move, so an opaque outgoing panel cannot hide the incoming product.
-    const figureBounds = previousFigure.getBoundingClientRect();
     const mediaBounds = incomingMedia.getBoundingClientRect();
     const outgoing = previousFigure.cloneNode(true) as HTMLElement;
     gsap.set(outgoing.querySelectorAll(".note"), { autoAlpha: 0 });
@@ -180,10 +185,11 @@ function setupExplorer() {
     });
     incomingMedia.append(outgoing);
     outgoingImage = outgoing;
-    const travel = incomingMedia.clientHeight;
+    const travel = mobile ? incomingMedia.clientWidth : incomingMedia.clientHeight;
+    const axis = mobile ? "x" : "y";
 
     transition = gsap.timeline({
-      defaults: { duration: 0.95, ease: "power2.inOut" },
+      defaults: { duration: mobile ? 0.7 : 0.95, ease: "power2.inOut" },
       onComplete: () => {
         outgoing.remove();
         outgoingImage = undefined;
@@ -193,10 +199,29 @@ function setupExplorer() {
       },
     });
     transition
-      .to(outgoing, { y: -travel * direction }, 0)
-      .fromTo(incomingFigure, { y: travel * direction }, { y: 0 }, 0)
+      .to(outgoing, { [axis]: -travel * direction }, 0)
+      .fromTo(incomingFigure, { [axis]: travel * direction }, { [axis]: 0 }, 0)
       .to(incomingCopy, { autoAlpha: 1, duration: 0.45, ease: "power2.out" });
   };
+
+  select?.addEventListener("change", () => activate(inputs.findIndex((input) => input.id === select.value)));
+  explorer.querySelectorAll("[data-family-prev]").forEach((button) => button.addEventListener("click", () => activate((activeIndex - 1 + inputs.length) % inputs.length, true, -1)));
+  explorer.querySelectorAll("[data-family-next]").forEach((button) => button.addEventListener("click", () => activate((activeIndex + 1) % inputs.length, true, 1)));
+  let touchStart: { x: number; y: number } | undefined;
+  const stage = explorer.querySelector<HTMLElement>(".stage-holder");
+  stage?.addEventListener("touchstart", (event) => {
+    touchStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
+  }, { passive: true });
+  stage?.addEventListener("touchend", (event) => {
+    if (!touchStart || !window.matchMedia("(max-width: 999px)").matches) return;
+    const dx = event.changedTouches[0].clientX - touchStart.x;
+    const dy = event.changedTouches[0].clientY - touchStart.y;
+    touchStart = undefined;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      const direction = dx < 0 ? 1 : -1;
+      activate((activeIndex + direction + inputs.length) % inputs.length, true, direction);
+    }
+  }, { passive: true });
 
   inputs.forEach((input, index) => {
     input.addEventListener("change", () => {
@@ -772,12 +797,48 @@ function setupHeader() {
   }
 
   if (drawer && toggle) {
+    drawer.querySelectorAll<HTMLDetailsElement>(".mobile-nav-group").forEach((group) => {
+      const summary = group.querySelector<HTMLElement>("summary");
+      const links = group.querySelector<HTMLElement>(".mobile-nav-group__links");
+      if (!summary || !links) return;
+      let expanded = group.open;
+      summary.setAttribute("aria-expanded", String(expanded));
+      summary.addEventListener("click", (event) => {
+        event.preventDefault();
+        expanded = !expanded;
+        gsap.killTweensOf(links);
+        group.dataset.expanded = String(expanded);
+        summary.setAttribute("aria-expanded", String(expanded));
+        links.inert = !expanded;
+        if (!group.open) {
+          group.open = true;
+          gsap.set(links, { height: 0, autoAlpha: 0, y: -10 });
+        } else {
+          gsap.set(links, { height: links.getBoundingClientRect().height });
+        }
+        gsap.set(links, { overflow: "hidden" });
+        // Keep these user-triggered submenu transitions active in reduced-motion mode too.
+        gsap.to(links, {
+          height: expanded ? links.scrollHeight : 0,
+          autoAlpha: expanded ? 1 : 0,
+          y: expanded ? 0 : -10,
+          duration: 0.42,
+          ease: "power2.inOut",
+          onComplete: () => {
+            group.open = expanded;
+            gsap.set(links, { clearProps: "height,overflow,opacity,visibility,transform" });
+          },
+        });
+      });
+    });
     const setOpen = (open: boolean) => {
       drawer.dataset.open = String(open);
+      drawer.inert = !open;
       toggle.setAttribute("aria-expanded", String(open));
-      toggle.querySelector("[data-drawer-label]")!.textContent = open ? "Cerrar" : "Menú";
+      toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
     };
     toggle.addEventListener("click", () => setOpen(drawer.dataset.open !== "true"));
+    drawer.inert = drawer.dataset.open !== "true";
     drawer.querySelectorAll("a").forEach((link) =>
       link.addEventListener("click", () => setOpen(false))
     );

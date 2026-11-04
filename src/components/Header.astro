@@ -16,6 +16,11 @@ const nav = [
 <header class={`site-header ${isHome ? "" : "is-solid"}`} data-header>
   <div class="wrap">
     <div class="site-header__bar">
+      <button class="menu-toggle" type="button" data-drawer-toggle aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
       <a href="/" class="site-header__logo" aria-label="COLCRANES · Inicio">
         <img
           class="logo--ink"
@@ -70,12 +75,6 @@ const nav = [
           Llamar
         </a>
         <button class="btn btn--signal header-cta" type="button" data-quote-open>Cotizar</button>
-        <button class="menu-toggle" type="button" data-drawer-toggle aria-expanded="false" aria-controls="menu-movil">
-          <span data-drawer-label>Menú</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M3 6h18M3 12h18M3 18h18" />
-          </svg>
-        </button>
       </div>
     </div>
   </div>
@@ -87,7 +86,7 @@ const nav = [
           {nav.map((item) => (
             item.children ? (
               <details class="mobile-nav-group">
-                <summary><a class="mobile-nav-group__page" href={item.href}>{item.label}</a><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary>
+                <summary><span>{item.label}</span><span class="mobile-nav-group__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></span></summary>
                 <div class="mobile-nav-group__links">
                   <a href={item.pageHref}>Todos los {item.label.toLowerCase()}</a>
                   {item.children.map((child) => <a href={child.href} aria-current={pathname.replace(/\/$/, "") === child.href ? "page" : undefined}>{child.label}</a>)}
@@ -178,6 +177,9 @@ const nav = [
     list-style: none;
   }
   .mobile-nav-group summary::-webkit-details-marker { display: none; }
+  .mobile-nav-group__icon { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line-light); color: var(--cyan); }
+  .mobile-nav-group summary svg { transition: transform 0.2s ease; }
+  .mobile-nav-group summary:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
   .mobile-nav-group summary .mobile-nav-group__page {
     flex: 1;
     padding: 0;
@@ -186,6 +188,7 @@ const nav = [
     letter-spacing: inherit;
   }
   .mobile-nav-group[open] summary svg { transform: rotate(180deg); }
+  .mobile-nav-group[data-expanded="false"] summary svg { transform: rotate(0deg); }
   .mobile-nav-group__links { padding-left: 1rem; }
   .mobile-nav-group__links a {
     font-family: inherit;
