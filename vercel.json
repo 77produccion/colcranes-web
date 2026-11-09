@@ -18,6 +18,7 @@
     }
   ],
   "redirects": [
+    { "source": "/catalogos/colcranes-catalogo-2023.pdf", "destination": "/catalogos/colcranes-catalogo-2026.pdf", "permanent": true },
     { "source": "/cotizador_proyectos/:path*", "destination": "/contacto", "permanent": true },
     { "source": "/cotizador_servicios/:path*", "destination": "/contacto", "permanent": true },
     { "source": "/cotizador_repuestos/:path*", "destination": "/contacto", "permanent": true },

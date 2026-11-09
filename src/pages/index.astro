@@ -12,14 +12,14 @@ import Clients from "../components/Clients.astro";
 import Catalogs from "../components/Catalogs.astro";
 import Capacity from "../components/Capacity.astro";
 import Quote from "../components/Quote.astro";
-import { responsiveImage } from "../utils/media";
 import Footer from "../components/Footer.astro";
+import ProjectGallery from "../components/ProjectGallery.astro";
 ---
 
 <Layout
   title="COLCRANES | Fabricación, montaje y mantenimiento de puentes grúa y polipastos en Colombia"
   description="Colcranes S.A.S. diseña, fabrica, monta y mantiene puentes grúa, pórticos, grúas bandera y polipastos en Colombia. Más de 25 años de trayectoria y 800 proyectos desde Barranquilla y Bogotá."
-  preloadImage={{ src: "/images/logo-colcranes-dark-480.webp", ...await responsiveImage("/images/logo-colcranes-dark-480.webp", "(min-width: 1000px) 325px, 232px") }}
+  preloadImage={{ src: "/images/hero-video-poster.w1600.avif", srcset: "/images/hero-video-poster.w640.avif 640w, /images/hero-video-poster.w960.avif 960w, /images/hero-video-poster.w1600.avif 1600w", sizes: "100vw" }}
 >
   <span
     data-header-sentinel
@@ -35,6 +35,7 @@ import Footer from "../components/Footer.astro";
     <MachineExplorer />
     <Lifecycle />
     <Projects />
+    <ProjectGallery />
     <Clients />
     <Catalogs />
     <Capacity />

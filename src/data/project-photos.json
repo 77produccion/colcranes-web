@@ -1,0 +1,604 @@
+[
+  {
+    "image": "/images/proyecto-1/vista-aerea-naves-equipos-izaje.webp",
+    "alt": "Vista aérea de naves en construcción con estructura metálica y equipos de izaje amarillos en su interior",
+    "caption": "La escala del conjunto y la distribución de los equipos.",
+    "description": "La vista aérea permite apreciar la distribución de los equipos de izaje amarillos dentro de las naves y su relación con la estructura metálica del conjunto.",
+    "source": "DJI_0452.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/equipos-izaje-interior-nave.webp",
+    "alt": "Equipos de izaje amarillos bajo la estructura metálica de una nave industrial en construcción",
+    "caption": "Los equipos de izaje, vistos desde el interior de la nave.",
+    "description": "Desde el interior se observan los equipos de izaje y sus apoyos bajo la estructura de cubierta, junto con el espacio disponible dentro de la nave en construcción.",
+    "source": "DJI_0458.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/vista-exterior-nave-industrial.webp",
+    "alt": "Vista exterior de una nave industrial con cubierta y cerramientos durante la obra",
+    "caption": "Una vista exterior de la nave durante la obra.",
+    "description": "El exterior muestra la cubierta y los cerramientos de la nave durante la obra. Este encuadre complementa el registro de los equipos instalados en su interior.",
+    "source": "DJI_0512.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/estructura-metalica-en-montaje.webp",
+    "alt": "Estructura metálica de una nave en montaje con plataformas elevadoras y grúa móvil",
+    "caption": "La estructura de la nave durante el montaje.",
+    "description": "La grúa móvil y las plataformas elevadoras acompañan los trabajos de montaje de la estructura metálica. La imagen registra una de las etapas visibles de la obra.",
+    "source": "DJI_0388.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/cubierta-nave-vista-aerea.webp",
+    "alt": "Vista aérea de la cubierta parcialmente instalada sobre una nave industrial",
+    "caption": "El avance de la cubierta, registrado desde el aire.",
+    "description": "La toma aérea muestra la cubierta parcialmente instalada y permite distinguir la organización de las naves y las zonas que continúan en construcción.",
+    "source": "DJI_0484.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/montaje-cerramiento-nave.webp",
+    "alt": "Plataformas elevadoras junto al cerramiento exterior de una nave industrial en construcción",
+    "caption": "Detalle de los trabajos en el cerramiento exterior.",
+    "description": "Las plataformas elevadoras facilitan el acceso a la fachada durante los trabajos de cerramiento. El detalle muestra el encuentro entre los paneles y la estructura de la nave.",
+    "source": "DJI_0508.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0459.webp",
+    "alt": "Equipos de izaje en el interior de la nave Registro DJI_0459",
+    "caption": "Equipos de izaje en el interior de la nave.",
+    "description": "En el interior de la nave se observan puentes grúa y grúas bandera amarillas, sus apoyos y la estructura de cubierta. La fotografía permite apreciar la disposición de los equipos y el espacio de trabajo.",
+    "source": "DJI_0459.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0520.webp",
+    "alt": "Equipos de izaje en el interior de la nave Registro DJI_0520",
+    "caption": "Equipos de izaje en el interior de la nave.",
+    "description": "En el interior de la nave se observan puentes grúa y grúas bandera amarillas, sus apoyos y la estructura de cubierta. La fotografía permite apreciar la disposición de los equipos y el espacio de trabajo.",
+    "source": "DJI_0520.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0521.webp",
+    "alt": "Equipos de izaje en el interior de la nave Registro DJI_0521",
+    "caption": "Equipos de izaje en el interior de la nave.",
+    "description": "En el interior de la nave se observan puentes grúa y grúas bandera amarillas, sus apoyos y la estructura de cubierta. La fotografía permite apreciar la disposición de los equipos y el espacio de trabajo.",
+    "source": "DJI_0521.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0377.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0377",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0377.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0378.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0378",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0378.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0379.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0379",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0379.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0380.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0380",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0380.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0381.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0381",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0381.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0382.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0382",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0382.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0383.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0383",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0383.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0384.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0384",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0384.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0385.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0385",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0385.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0386.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0386",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0386.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0387.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0387",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0387.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0389.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0389",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0389.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0390.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0390",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0390.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0398.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0398",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0398.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0399.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0399",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0399.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0400.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0400",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0400.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0401.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0401",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0401.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0402.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0402",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0402.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0403.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0403",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0403.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0404.webp",
+    "alt": "Estructura metálica de las naves durante la obra Registro DJI_0404",
+    "caption": "Estructura metálica de las naves durante la obra.",
+    "description": "Registro de la estructura metálica y del entorno de las naves durante la obra. Este encuadre complementa las vistas de los equipos y de las distintas zonas del conjunto.",
+    "source": "DJI_0404.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0453.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0453",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0453.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0454.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0454",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0454.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0455.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0455",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0455.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0456.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0456",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0456.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0457.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0457",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0457.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0460.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0460",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0460.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0461.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0461",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0461.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0462.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0462",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0462.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0463.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0463",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0463.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0464.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0464",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0464.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0465.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0465",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0465.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0466.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0466",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0466.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0467.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0467",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0467.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0468.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0468",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0468.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0470.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0470",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0470.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0471.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0471",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0471.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0474.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0474",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0474.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0475.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0475",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0475.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0476.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0476",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0476.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0477.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0477",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0477.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0478.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0478",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0478.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0479.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0479",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0479.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0481.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0481",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0481.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0482.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0482",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0482.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0483.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0483",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0483.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0485.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0485",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0485.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0486.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0486",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0486.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0487.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0487",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0487.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0488.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0488",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0488.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0489.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0489",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0489.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0490.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0490",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0490.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0491.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0491",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0491.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0492.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0492",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0492.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0493.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0493",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0493.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0494.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0494",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0494.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0495.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0495",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0495.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0496.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0496",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0496.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0497.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0497",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0497.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0498.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0498",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0498.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0499.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0499",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0499.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0500.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0500",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0500.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0501.webp",
+    "alt": "Avance de las cubiertas y vista del conjunto industrial Registro DJI_0501",
+    "caption": "Avance de las cubiertas y vista del conjunto industrial.",
+    "description": "Vista del avance de la obra y de las cubiertas de las naves. La fotografía forma parte del registro del conjunto industrial desde distintos puntos de observación.",
+    "source": "DJI_0501.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0502.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0502",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0502.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0503.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0503",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0503.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0504.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0504",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0504.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0505.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0505",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0505.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0506.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0506",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0506.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0507.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0507",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0507.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0509.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0509",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0509.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0510.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0510",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0510.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0511.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0511",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0511.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0513.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0513",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0513.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0514.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0514",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0514.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0515.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0515",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0515.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0516.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0516",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0516.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0517.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0517",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0517.JPG"
+  },
+  {
+    "image": "/images/proyecto-1/nave-industrial-dji-0518.webp",
+    "alt": "Detalle exterior de la nave durante la obra Registro DJI_0518",
+    "caption": "Detalle exterior de la nave durante la obra.",
+    "description": "Registro del exterior de la nave, sus cerramientos y el entorno de obra. La imagen complementa las fotografías de la estructura y de los equipos de izaje en el interior.",
+    "source": "DJI_0518.JPG"
+  }
+]

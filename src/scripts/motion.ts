@@ -170,7 +170,7 @@ function setupExplorer() {
     });
     moveMarker(index, animate);
 
-    // Preserve the requested transitions on both layouts, including reduced-motion mode.
+    // Preserve the requested transitions on both layouts.
     if (!animate || !previous) return;
 
     const incomingMedia = next.querySelector<HTMLElement>(".stage__media");
@@ -346,132 +346,6 @@ function setupGenericReveals() {
   });
 }
 
-/* Conteo animado de las cifras: conserva prefijo/sufijo (+ y %) y la
-   tipografía original; sólo cambia el número mientras entra en pantalla. */
-function setupHeroPlaylist() {
-  const container = document.querySelector<HTMLElement>("[data-hero-videos]");
-  const playlist = document.querySelector<HTMLElement>("[data-hero-playlist]");
-  if (!container || !playlist) return;
-
-  const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
-  if (connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType ?? "")) return;
-  const mobile = window.matchMedia("(max-width: 767px)").matches || connection?.effectiveType === "3g";
-
-  const videos = Array.from(container.querySelectorAll<HTMLVideoElement>("video"));
-  const items = Array.from(playlist.querySelectorAll<HTMLLIElement>("li"))
-    .map((li) => ({
-      src: (mobile ? li.dataset.mobileSrc : li.dataset.src) ?? li.dataset.src ?? "",
-      position: li.dataset.position ?? "50% 50%",
-    }))
-    .filter((item) => item.src);
-
-  if (videos.length < 2 || !items.length) return;
-
-  let activeSlot = 0;
-  let currentIndex = 0;
-  let inView = false;
-  let started = false;
-  let readyToStart = false;
-  let advancing = false;
-  let userPaused = false;
-  const playback = document.querySelector<HTMLButtonElement>("[data-hero-playback]");
-
-  const load = (video: HTMLVideoElement, index: number) => {
-    const item = items[index];
-    video.preload = "auto";
-    video.style.objectPosition = item.position;
-    video.src = item.src;
-    video.dataset.playlistIndex = String(index);
-    video.load();
-  };
-
-  const start = (video: HTMLVideoElement) => {
-    if (inView && !document.hidden && !userPaused) video.play()?.catch(() => {});
-  };
-
-  const syncPlayback = () => {
-    if (!inView || document.hidden || userPaused) {
-      videos.forEach((video) => video.pause());
-      return;
-    }
-    if (!readyToStart) return;
-    if (!started) {
-      started = true;
-      videos[0].addEventListener("canplay", () => start(videos[0]), { once: true });
-      load(videos[0], 0);
-    } else start(videos[activeSlot]);
-  };
-
-  const prepareNext = () => {
-    if (!inView || document.hidden || userPaused) return;
-    const nextIndex = (currentIndex + 1) % items.length;
-    const next = videos[1 - activeSlot];
-    if (next.dataset.playlistIndex !== String(nextIndex)) load(next, nextIndex);
-  };
-
-  const advance = () => {
-    if (advancing) return;
-    advancing = true;
-    const from = videos[activeSlot];
-    const to = videos[1 - activeSlot];
-    const nextIndex = (currentIndex + 1) % items.length;
-
-    const swap = () => {
-      start(to);
-      to.classList.add("is-active");
-      from.classList.remove("is-active");
-
-      activeSlot = 1 - activeSlot;
-      currentIndex = nextIndex;
-      advancing = false;
-
-      /* Liberar el slot anterior tras el fundido. El siguiente clip se carga
-         sólo cuando falten pocos segundos para terminar el actual. */
-      window.setTimeout(() => {
-        from.pause();
-        from.removeAttribute("src");
-        from.load();
-        delete from.dataset.playlistIndex;
-      }, 1100);
-    };
-
-    if (to.dataset.playlistIndex === String(nextIndex) && to.readyState >= 3) swap();
-    else {
-      to.addEventListener("canplay", swap, { once: true });
-      if (to.dataset.playlistIndex !== String(nextIndex)) load(to, nextIndex);
-    }
-  };
-
-  videos.forEach((video) => {
-    // Cargar el siguiente clip sólo al acercarse al final del actual.
-    video.addEventListener("timeupdate", () => {
-      if (video === videos[activeSlot] && video.duration - video.currentTime < 3) prepareNext();
-    });
-    video.addEventListener("ended", () => {
-      if (video === videos[activeSlot]) advance();
-    });
-  });
-
-  new IntersectionObserver(([entry]) => {
-    inView = entry.isIntersecting;
-    syncPlayback();
-  }, { threshold: 0 }).observe(container);
-  document.addEventListener("visibilitychange", syncPlayback);
-  if (playback) {
-    playback.hidden = false;
-    playback.addEventListener("click", () => {
-      userPaused = !userPaused;
-      playback.setAttribute("aria-pressed", String(userPaused));
-      playback.setAttribute("aria-label", userPaused ? "Reanudar video de portada" : "Pausar video de portada");
-      playback.querySelector("[data-playback-icon]")?.setAttribute("d", userPaused ? "M7 3v18l14-9z" : "M6 4h4v16H6zM14 4h4v16h-4z");
-      syncPlayback();
-    });
-  }
-  const begin = () => window.setTimeout(() => { readyToStart = true; syncPlayback(); }, 350);
-  if (document.readyState === "complete") begin();
-  else window.addEventListener("load", begin, { once: true });
-}
-
 /* Fondo rotativo de "Ingeniería y fabricación": sólo avanza cuando la sección
    está visible, sin descargar toda la galería mientras el usuario ve el hero. */
 function setupCapacitySlides() {
@@ -481,7 +355,9 @@ function setupCapacitySlides() {
   const layers = Array.from(root.querySelectorAll<HTMLImageElement>("img"));
   let sources: string[] = [];
   try {
-    sources = JSON.parse(root.dataset.sources ?? "[]");
+    sources = (JSON.parse(root.dataset.sources ?? "[]") as string[]).map((src) =>
+      window.matchMedia("(max-width: 767px)").matches ? src.replace(/\.webp$/, ".w960.webp") : src
+    );
   } catch {
     return;
   }
@@ -531,6 +407,8 @@ function setupCapacitySlides() {
         next.onload = null;
         swap();
       };
+      next.removeAttribute("srcset");
+      next.removeAttribute("sizes");
       next.src = sources[nextIndex];
     }
   };
@@ -826,7 +704,7 @@ function setupHeader() {
           gsap.set(links, { height: links.getBoundingClientRect().height });
         }
         gsap.set(links, { overflow: "hidden" });
-        // Keep these user-triggered submenu transitions active in reduced-motion mode too.
+        // Keep these user-triggered submenu transitions active.
         gsap.to(links, {
           height: expanded ? links.scrollHeight : 0,
           autoAlpha: expanded ? 1 : 0,
@@ -866,7 +744,6 @@ function run() {
   setupQuoteDrawer();
   setupQuoteContacts();
   setupHeroSlides();
-  setupHeroPlaylist();
   setupCapacitySlides();
   setupAlliance();
   setupWhatsAppWidget();

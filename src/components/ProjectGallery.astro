@@ -1,0 +1,72 @@
+---
+import { PROJECT_GALLERY } from "../data/project-gallery";
+import { responsiveImage } from "../utils/media";
+
+const photos = PROJECT_GALLERY;
+---
+
+{photos.length > 0 && <section class="project-record" id="registro-nave-industrial" aria-labelledby="project-record-title" data-project-record>
+  <div class="wrap project-record__layout">
+    <div class="project-record__media">
+      <div class="project-record__gallery" data-project-gallery tabindex="0" role="region" aria-roledescription="carrusel" aria-label="Fotografías de la nave industrial. Arrastre, deslice o use las teclas de dirección.">
+        {photos.map(async (photo, index) => (
+          <figure class="project-record__figure" role="group" aria-roledescription="diapositiva" aria-label={`${index + 1} de ${photos.length}`} data-photo-file={photo.image} data-photo-source={photo.source}>
+            <picture>
+              <source type="image/avif" srcset={`${photo.image.replace(/\.webp$/, ".w640.avif")} 640w, ${photo.image.replace(/\.webp$/, ".avif")} 1600w`} sizes="(min-width: 896px) 46vw, 92vw" />
+              <img src={photo.image} {...await responsiveImage(photo.image, "(min-width: 896px) 46vw, 92vw")} alt={photo.alt} loading="lazy" decoding="async" draggable="false" />
+            </picture>
+          </figure>
+        ))}
+      </div>
+      <div class="project-record__dots" role="group" aria-label="Elegir fotografía">
+        {photos.map((photo, index) => (
+          <button class="project-record__dot" type="button" data-project-dot={index} title={photo.source} aria-label={`Ver fotografía ${index + 1}: ${photo.caption} (${photo.source})`} aria-current={index === 0 ? "true" : "false"}><span aria-hidden="true"></span></button>
+        ))}
+      </div>
+    </div>
+    <div class="project-record__content">
+      <h2 class="d2 project-record__title" id="project-record-title">Equipos de izaje en una nave industrial en construcción</h2>
+      <p class="project-record__intro">Un recorrido por la estructura, los equipos y el avance de la obra, desde el interior de la nave hasta su vista aérea.</p>
+      <div class="project-record__details">
+        <h3>Descripción:</h3>
+        <div class="project-record__descriptions">
+          {photos.map((photo, index) => (
+            <p class:list={["project-record__description", { "is-active": index === 0 }]} data-project-description={index} aria-hidden={index !== 0 ? "true" : "false"}>{photo.description}</p>
+          ))}
+        </div>
+      </div>
+      <p class="sr-only" data-project-status role="status" aria-live="polite" aria-atomic="true">Fotografía 1 de {photos.length}. {photos[0].caption}</p>
+    </div>
+  </div>
+</section>}
+
+<style>
+  .project-record { padding-block: clamp(2.5rem, 4vw, 4rem); background: var(--steel-100); color: var(--ink); }
+  .project-record__layout { display: grid; gap: clamp(1.75rem, 3.5vw, 4rem); align-items: center; }
+  .project-record__media, .project-record__content { min-width: 0; }
+  .project-record__gallery { display: flex; width: 100%; aspect-ratio: 4 / 3; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; touch-action: pan-x pan-y pinch-zoom; }
+  .project-record__gallery::-webkit-scrollbar { display: none; }
+  .project-record__gallery.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+  .project-record__gallery.is-animating { scroll-snap-type: none; }
+  .project-record__figure { flex: 0 0 100%; min-width: 0; margin: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+  .project-record__figure picture, .project-record__figure img { display: block; width: 100%; height: 100%; }
+  .project-record__figure img { aspect-ratio: 4 / 3; object-fit: cover; user-select: none; }
+  .project-record__dots { position: relative; display: flex; justify-content: safe center; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .project-record__dots::-webkit-scrollbar { display: none; }
+  .project-record__dot { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+  .project-record__dot span { width: 8px; height: 8px; border: 1px solid currentColor; border-radius: 50%; transition: background-color 0.2s, transform 0.2s; }
+  .project-record__dot[aria-current="true"] span { background: currentColor; transform: scale(1.25); }
+  .project-record__title { max-width: 23ch; font-size: clamp(1.8rem, 2.5vw, 2.8rem); line-height: 1.06; overflow-wrap: break-word; }
+  .project-record__intro { max-width: 60ch; margin: 1.25rem 0 0; font-size: clamp(1rem, 1.15vw, 1.125rem); line-height: 1.6; }
+  .project-record__details { margin-top: 1.75rem; padding-left: 1.25rem; border-left: 2px solid var(--cyan); }
+  .project-record__details h3 { margin: 0 0 0.35rem; font-size: 1rem; font-weight: 600; }
+  .project-record__descriptions { display: grid; }
+  .project-record__description { grid-area: 1 / 1; margin: 0; line-height: 1.65; opacity: 0; visibility: hidden; transform: translateY(5px); transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s; }
+  .project-record__description.is-active { opacity: 1; visibility: visible; transform: none; }
+  @media (min-width: 56rem) { .project-record__layout { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+
+<script>
+  import { setupProjectGalleries } from "../scripts/project-gallery";
+  setupProjectGalleries();
+</script>

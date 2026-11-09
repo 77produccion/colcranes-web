@@ -96,3 +96,46 @@ Se intentó la API de PageSpeed Insights para esa URL; respondió HTTP 429 `RESO
 - Probar manualmente en iPhone/Safari y Android físicos, en redes lentas, con VoiceOver/TalkBack y teclado. WebKit emulado no sustituye estas pruebas.
 - El canvas del PDF es una vista visual; no sustituye una capa de texto accesible ni certifica que el PDF original esté etiquetado. Se conserva el enlace al documento original.
 - El formulario mantiene su flujo actual por WhatsApp; no se ha incorporado un backend de correo ni se ha enviado una solicitud real durante las pruebas.
+
+## Actualización de contenido y medios — 6 de noviembre de 2026
+
+- Se retiró el logo duplicado sobre el H1 y los diez logos superpuestos en servicios. La fotografía de servicios queda más abierta en la parte superior. El hero reserva espacio inferior para que WhatsApp no tape los botones; se eliminó una regla de espaciado duplicada que anulaba ese margen.
+- Se conserva la viga amarilla y el polipasto por decisión del cliente: texto oscuro sin sombras, cuatro columnas en escritorio y 2 × 2 hasta 1100 px. En móvil se reserva espacio propio para la maquinaria, sin tapar las cifras. El componente compartido actualiza también proyectos y las demás páginas que lo usan.
+- Nuevo registro fotográfico compartido entre inicio (tres fotografías) y proyectos (seis), con WebP/AVIF, variantes responsivas, leyendas y galería horizontal móvil accesible por controles. Se describe lo visible sin inventar cliente, ubicación, capacidades o alcance contractual.
+- Tres fragmentos reales DJI de siete segundos se suman al hero. Los dos videos HMV de modelado 3D quedan archivados y no se publican. Escritorio: 1920 × 1080, 2,99–3,52 MiB por clip; móvil: recorte 864 × 1080, 1,40–1,79 MiB. H.264, 24 fps, sin audio, descarga progresiva. Se revisaron fotogramas comprimidos en ambos encuadres.
+- Las fotos promocionales usan nombres descriptivos y una lista editorial explícita. Cuatro imágenes coincidentes con el proyecto se sustituyeron por derivados de los originales de cámara. Se actualizaron también las referencias directas en capacidad y la búsqueda de imágenes del bloque aliado.
+- Sólo se publica el catálogo 2026 (ocho páginas, 6,73 MiB, con carga diferida). Se retiró el documento 2023 y su URL anterior redirige al vigente mediante Vercel. El original se conserva fuera del despliegue; QPDF verificó la estructura del nuevo documento.
+- Fuera de `public/` y de Git: 84 originales JPG (449 MiB), carpeta nueva de videos/fotos (2539 MiB) y un ZIP antiguo detectado en `public/videos` (1730 MiB). Todos permanecen en `source-media/`; no se borraron originales. La publicación completa es de 70,49 MiB, no la transferencia inicial del home.
+- `check:media` comprueba ausencia de originales de cámara, nombres WhatsApp, catálogos antiguos, archivos de edición/ZIP y videos de más de 5 MiB. Los derivados optimizados necesarios para compilar sí se versionan.
+
+Validación local final:
+
+- `npm run check`, `npm run build`, `npm run check:site` y `npm run check:media`: correctos. Persiste únicamente el aviso informativo preexistente de importación no utilizada en empleo.
+- `npm run audit:browser`: 24 páginas sin errores de navegador, desbordamientos ni infracciones automáticas de accesibilidad; interacciones existentes comprobadas.
+- `npm run audit:2026`: inicio y proyectos a 320, 390, 768, 1440 y 1920 px; cifras, polipasto, galería y accesibilidad correctos. Video móvil y paginación del catálogo 2026 comprobados. Capturas y resultados en `.astro/review/` (ignorado por Git).
+- `npm run audit:load`: tres muestras Lighthouse móvil sobre preview local. Rendimiento 89/87/89; mediana FCP 1,812 s, LCP 3,685 s, TBT 13 ms y CLS 0,015. Transferencia observada en esa ventana inicial: 678 317 bytes; **no incluye el consumo posterior de toda la secuencia de videos ni del PDF**. No equivale a una medición del despliegue ni elimina los límites indicados arriba.
+
+### Corrección posterior: reproducción del hero y ficha compacta
+
+- Se reprodujo el fallo: con movimiento reducido o ahorro de datos, el reproductor anterior no asignaba ninguna fuente (readyState 0). El primer fragmento ahora tiene fuentes responsivas en el HTML y `autoplay muted playsinline`, con bucle nativo si JavaScript no ejecuta. La secuencia selecciona cuatro fragmentos; su controlador independiente no espera a GSAP ni a `window.load` y no excluye dispositivos por sus preferencias de datos/movimiento.
+- Se añaden recuperación ante error de archivo (otra variante y después otro fragmento), control visible al bloquearse autoplay y reproducción iniciada desde el gesto del usuario. Se conserva pausa manual y al salir de pantalla. Las restricciones de batería/autoplay del navegador no se pueden anular desde una web; en ese caso se ofrece reproducción con un toque. Los fundidos se omiten con movimiento reducido.
+- La ficha nueva ya no es un mosaico: una imagen 4:3 a la izquierda y texto a la derecha, alternando con la imagen a la derecha del siguiente proyecto. Mismo componente en inicio y proyectos, seis fotos, únicamente puntos debajo de la imagen y una descripción específica por foto con fundido suave. Arrastre con mouse, desplazamiento táctil nativo y teclado, sin flechas ni avance automático; altura estable al cambiar el texto.
+- `npm run audit:hero`: reproducción real verificada en Chrome y WebKit, escritorio y móvil, movimiento reducido, ahorro de datos/2G simulado, módulo de animaciones bloqueado, JavaScript desactivado, bloqueo de autoplay y archivo realmente inexistente. Comprobados también pausa, reanudación y cambio al siguiente fragmento. Resultados en `.astro/review/hero-playback.json`.
+- `npm run audit:2026`: inicio/proyectos a 320–1920 px, puntos y texto sincronizados, imagen a la izquierda, altura compacta en escritorio, arrastre de mouse, teclado y gesto táctil nativo comprobados. `audit:browser`: las 24 páginas siguen sin errores, desbordamientos ni infracciones automáticas detectadas.
+- `check`, `build`, `check:site` y `check:media` correctos. La medición Lighthouse de la sección anterior precede a esta carga inmediata del video y **no certifica el rendimiento de esta estrategia nueva**. No se ha desplegado ni probado en dispositivos físicos.
+
+### Ajuste solicitado: sin controles de video
+
+- Retirados el botón de reproducción/pausa, sus estilos y toda su lógica. No hay controles visibles ni condiciones de movimiento reducido en `src/`; se mantienen los fundidos y el desplazamiento suave de la galería.
+- El hero conserva autoplay silencioso y la recuperación de archivos. Ante un bloqueo del navegador, reintenta desde la primera interacción con la página, sin insertar botones.
+- Verificados `check`, `build`, `check:media`, `audit:hero` (Chrome y WebKit, incluidos bloqueo de autoplay y archivo inexistente) y `audit:2026` (320–1920 px, mouse, teclado y touch).
+- Límite de accesibilidad: retirar la pausa de contenido en movimiento continuo requiere revisión manual del criterio WCAG 2.2.2; las pruebas automáticas no certifican ese criterio.
+
+### Galería completa para selección del cliente
+
+- A petición del cliente se incorporan las 86 fotografías: 84 de la carpeta original de imágenes y dos JPG de la carpeta de videos. No se descartó ningún original, incluidas tomas similares o repetidas.
+- Se conservan los seis nombres de imágenes existentes y se agregan los demás con identificador de cámara. Los interiores DJI_0459, DJI_0520 y DJI_0521 se sitúan después de la selección inicial para facilitar su revisión.
+- 430 derivados WebP/AVIF (43,40 MiB en conjunto), con tamaños adaptables y carga diferida; no equivalen a la transferencia inicial. Se verificó la correspondencia exacta entre los 86 originales y el manifiesto `src/data/project-photos.json`.
+- Los puntos se mantienen en una sola tira horizontal desplazable, sin aumentar la altura de la ficha. Los originales se identifican al pasar el cursor por el punto correspondiente y mediante atributos de la fotografía.
+- El cliente puede descartar una foto borrando su WebP principal en `public/images/proyecto-1/`; el siguiente build la omite sin regenerarla. Para liberar espacio debe retirar también los derivados del mismo nombre. Las imágenes reutilizadas como fondos promocionales tienen alternativa si se descartan. Los originales siguen fuera de Git y del despliegue.
+- La importación completa se repite explícitamente con `node scripts/import-project-photos.mjs`; no forma parte del build y restauraría las imágenes descartadas. Verificados build, tipos, SEO y referencias de medios; navegación a la última fotografía y ausencia de desbordamiento comprobadas a 390 y 1440 px.

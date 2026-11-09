@@ -7,25 +7,21 @@
 import { PROMO_IMAGES } from "../data/promos";
 import { responsiveImage } from "../utils/media";
 
-const promo = (fragment: string) =>
-  PROMO_IMAGES.find((src) => decodeURIComponent(src).includes(fragment)) ??
-  "/images/planta-bodega.webp";
-
 const promises = [
   {
     title: "Personal experto en todas las marcas",
     text: "Técnicos propios certificados para intervenir equipos de cualquier fabricante.",
-    img: promo("9.51.47 AM (4)"),
+    img: PROMO_IMAGES[13],
   },
   {
     title: "Mantenimiento preventivo y correctivo",
     text: "Rutinas programadas y respuesta en planta para no detener su operación.",
-    img: promo("9.51.46 AM (4)"),
+    img: PROMO_IMAGES[8],
   },
   {
     title: "Un equipo fijo durante todo el proyecto",
     text: "Ingeniería, montaje y puesta en marcha con el mismo responsable de principio a fin.",
-    img: promo("9.51.45 AM (2)"),
+    img: PROMO_IMAGES[2],
   },
 ];
 ---

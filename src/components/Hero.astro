@@ -2,26 +2,23 @@
 /**
  * Escena de apertura (Hero).
  * - Reproduce en secuencia los clips optimizados de `public/videos/hero/`.
- * - Cada clip conserva su encuadre original (sin recortar el archivo): sólo se
- *   ajusta `object-position` para mantener la grúa amarilla dentro del marco.
+ * - Fuentes nativas desde el HTML: no depende del módulo de animaciones.
+ * - Recortes específicos para móvil y escritorio, todos sin audio.
  * - Si no hay clips, cae a la fotografía de obra propia o al espacio reservado.
  */
 import { existsSync } from "node:fs";
 import { responsiveImage } from "../utils/media";
 
 const HERO_VIDEOS = [
+  { src: "/videos/hero/11-equipos-en-nave.mp4", position: "50% 50%" },
   { src: "/videos/hero/01-hero.mp4", position: "50% 42%" },
-  { src: "/videos/hero/02-planta-5mas5.mp4", position: "50% 35%" },
-  { src: "/videos/hero/03-planta-amplia.mp4", position: "50% 55%" },
-  { src: "/videos/hero/04-puente-cerrado.mp4", position: "50% 12%" },
-  { src: "/videos/hero/05-planta-5t.mp4", position: "50% 38%" },
-  { src: "/videos/hero/06-cercha-traslacion.mp4", position: "50% 12%" },
-  { src: "/videos/hero/07-viga-y-traslacion.mp4", position: "50% 4%" },
-  { src: "/videos/hero/08-gancho-operacion.mp4", position: "50% 10%" },
-  { src: "/videos/hero/09-izaje-carga.mp4", position: "50% 12%" },
+  { src: "/videos/hero/12-gruas-en-nave.mp4", position: "50% 50%" },
+  { src: "/videos/hero/10-nave-industrial.mp4", position: "50% 50%" },
 ].filter((video) => existsSync(`public${video.src}`));
 
 const hasHeroVideos = HERO_VIDEOS.length > 0;
+const firstVideo = HERO_VIDEOS[0];
+const firstMobile = firstVideo?.src.replace(/\.mp4$/, "-mobile.mp4");
 
 const heroPosterWebp = existsSync("public/images/hero-video-poster.webp");
 const heroPoster = heroPosterWebp
@@ -55,12 +52,15 @@ const posterAvifSrcset = [640, 960, 1600]
           </picture>
         )}
         <div class="hero__videos" data-hero-videos aria-hidden="true">
-          <video class="hero__video is-active" muted playsinline preload="none"></video>
+          <video class="hero__video is-active" autoplay muted playsinline loop preload="auto" poster={heroPoster} style={`object-position: ${firstVideo.position}`}>
+            <source src={existsSync(`public${firstMobile}`) ? firstMobile : firstVideo.src} type="video/mp4" media="(max-width: 767px)" />
+            <source src={firstVideo.src} type="video/mp4" />
+          </video>
           <video class="hero__video" muted playsinline preload="none"></video>
         </div>
         <ul data-hero-playlist hidden>
           {HERO_VIDEOS.map((video) => (
-            <li data-src={video.src} data-mobile-src={video.src.replace(/\.mp4$/, "-mobile.mp4")} data-position={video.position}></li>
+             <li data-src={video.src} data-mobile-src={existsSync(`public${video.src.replace(/\.mp4$/, "-mobile.mp4")}`) ? video.src.replace(/\.mp4$/, "-mobile.mp4") : video.src} data-position={video.position}></li>
           ))}
         </ul>
       </>
@@ -89,23 +89,8 @@ const posterAvifSrcset = [640, 960, 1600]
     )}
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
-  {hasHeroVideos && <button class="hero__playback" type="button" data-hero-playback aria-label="Pausar video de portada" aria-pressed="false" hidden>
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path data-playback-icon d="M6 4h4v16H6zM14 4h4v16h-4z" /></svg>
-  </button>}
 
   <div class="wrap hero__inner">
-    <span class="hero__logo-wrap">
-      <img
-        class="hero__logo"
-        src="/images/logo-colcranes-dark-480.webp"
-        {...await responsiveImage("/images/logo-colcranes-dark-480.webp", "(min-width: 1000px) 325px, 232px")}
-        alt="COLCRANES"
-        width="480"
-        height="144"
-        fetchpriority="high"
-        decoding="async"
-      />
-    </span>
     <h1 class="d1 hero__title">
       <span class="line line--small" data-hero-line><span>Equipos para</span></span>
       <span class="line" data-hero-line><span class="accent">izaje industrial.</span></span>
@@ -140,6 +125,9 @@ const posterAvifSrcset = [640, 960, 1600]
   @keyframes hero-image-settle { from { transform: scale(1.07); } to { transform: scale(1); } }
   @keyframes hero-line-rise { from { transform: translateY(108%); } to { transform: translateY(0); } }
   @keyframes hero-copy-rise { from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-  .hero__playback { position: absolute; right: var(--gutter); bottom: 1rem; z-index: 5; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgb(255 255 255 / 55%); background: rgb(0 0 0 / 45%); color: white; cursor: pointer; }
-  .hero__playback[hidden] { display: none; }
 </style>
+
+<script>
+  import { setupHeroVideo } from "../scripts/hero-video";
+  setupHeroVideo();
+</script>

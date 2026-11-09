@@ -47,3 +47,8 @@ pnpm-debug.log*
 
 # Clips optimizados del hero sí se publican (pesan pocos MB y son parte del sitio)
 !public/videos/hero/*.mp4
+
+# Los originales se archivan fuera de public; sólo se versionan derivados web.
+public/images/proyecto-1/*.[jJ][pP][gG]
+public/videos/videos-proyecto-1/
+public/catalogos/Brochure*.pdf

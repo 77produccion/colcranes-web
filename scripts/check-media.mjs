@@ -33,9 +33,20 @@ for (const file of files.filter((file) => /\.(html|css)$/.test(file))) {
 const missing = [...references].filter((url) => !existsSync(join("dist", url)) && !existsSync(join("dist", url, "index.html")));
 assert.deepEqual(missing, [], `Referencias locales inexistentes: ${missing.join(", ")}`);
 assert.ok(!files.some((file) => /\.(zip|dng|psd|mov)$/i.test(file)), "No publicar originales pesados.");
+assert.ok(!files.some((file) => /(?:DJI_.*\.(?:jpe?g|mp4)|HMV.*\.mp4|WhatsApp Image)/i.test(file)), "No publicar originales de cámara ni nombres de WhatsApp.");
+assert.ok(!files.some((file) => /catalogo-2023|Brochure Colcranes/i.test(file)), "Sólo se publica el catálogo vigente.");
+assert.ok(files.some((file) => file.endsWith("colcranes-catalogo-2026.pdf")), "Falta el catálogo 2026.");
+for (const file of files.filter((file) => file.endsWith(".mp4"))) {
+  assert.ok((await stat(file)).size <= 5 * 1048576, `Video demasiado pesado para el hero: ${file}`);
+}
 assert.equal(pages.length, 24);
 const home = await readFile("dist/index.html", "utf8");
-assert.equal((home.match(/data-mobile-src=/g) ?? []).length, 9);
+assert.equal((home.match(/data-mobile-src=/g) ?? []).length, 4);
+assert.match(home, /<video[^>]*autoplay[^>]*>[\s\S]*?<source[^>]*src="\/videos\/hero\//, "El primer video debe tener fuente nativa y autoplay, sin depender de GSAP.");
+assert.ok(!home.includes("service-line__logo"), "Sobran logos repetidos en servicios.");
+assert.ok(!home.includes("hero__logo"), "Sobra el logo duplicado del hero.");
+assert.ok(!home.includes("hero__playback"), "No se deben publicar controles de reproducción del hero.");
+assert.ok(home.includes("registro-nave-industrial"), "Falta el nuevo registro de obra.");
 assert.ok(home.includes("srcset="), "Faltan imágenes adaptativas.");
 assert.ok(home.includes("gancho-completo.webp"), "Falta la transición del gancho.");
 const bytes = (await Promise.all(files.map(async (file) => (await stat(file)).size))).reduce((sum, value) => sum + value, 0);

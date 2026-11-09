@@ -37,14 +37,14 @@ const showcase = [
     num: "01",
     title: "Proyectos",
     text: "Puentes grúa, pórticos y grúas bandera para planta nueva o ampliación.",
-    img: encodeURI("/images/imagenes-promocionales/WhatsApp Image 2026-10-23 at 9.51.44 AM.webp"),
+    img: PROMO_IMAGES[0],
     alt: "Puente grúa Colcranes de 80 toneladas instalado en una nave industrial",
   },
   {
     num: "02",
     title: "Servicios",
     text: "Mantenimiento, montaje y puesta en marcha de equipos en operación.",
-    img: encodeURI("/images/imagenes-promocionales/WhatsApp Image 2026-10-23 at 9.51.47 AM (4).webp"),
+    img: PROMO_IMAGES[13],
     alt: "Técnico sobre una plataforma elevadora interviniendo un puente grúa Colcranes",
   },
   {
@@ -70,6 +70,7 @@ const showcase = [
       <img
         class="capacity__bg is-active"
         src={slides[0]}
+        {...await responsiveImage(slides[0])}
         alt=""
         width="1600"
         height="1200"

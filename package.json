@@ -16,6 +16,8 @@
     "check:media": "node scripts/check-media.mjs",
     "check:site": "node scripts/check-site.mjs",
     "audit:browser": "node scripts/audit-browser.mjs",
+    "audit:2026": "node scripts/audit-2026.mjs",
+    "audit:hero": "node scripts/audit-hero.mjs",
     "audit:load": "node scripts/audit-load.mjs",
     "audit:lighthouse": "lighthouse http://127.0.0.1:4322 --chrome-flags=\"--headless=new\" --output=json --output-path=./.astro/lighthouse-mobile.json --quiet",
     "sync:fonts": "node scripts/sync-fonts.mjs",
