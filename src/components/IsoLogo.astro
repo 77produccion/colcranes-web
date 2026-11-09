@@ -1,0 +1,21 @@
+---
+import { responsiveImage } from "../utils/media";
+
+interface Props { white?: boolean; }
+const { white = false } = Astro.props;
+const src = "/images/logos/iso-logo.webp";
+---
+
+<img
+  class:list={["iso-logo", { "iso-logo--white": white }]}
+  src={src}
+  {...await responsiveImage(src)}
+  alt="Logo ISO — Certificación ISO 45001 de COLCRANES"
+  loading="lazy"
+  decoding="async"
+/>
+
+<style>
+  .iso-logo { display: block; width: clamp(4.5rem, 8vw, 7rem); height: auto; flex-shrink: 0; }
+  .iso-logo--white { width: 5rem; filter: brightness(0) invert(1); }
+</style>

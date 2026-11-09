@@ -1,5 +1,6 @@
 ---
 import { CONTACT, EQUIPMENT_FAMILIES, SERVICES } from "../data/site";
+import IsoLogo from "./IsoLogo.astro";
 
 const company = [
   { href: "/nosotros", label: "Nosotros y planta" },
@@ -96,6 +97,13 @@ const socialIcons: Record<string, string> = {
         &nbsp;·&nbsp;
         <a href={`mailto:${CONTACT.commercialEmail}`}>{CONTACT.commercialEmail}</a>
       </p>
+      <div class="site-footer__certification">
+        <IsoLogo white />
+      </div>
     </div>
   </div>
 </footer>
+
+<style>
+  .site-footer__certification { margin-inline-start: auto; flex-shrink: 0; }
+</style>
