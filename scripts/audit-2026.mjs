@@ -24,7 +24,17 @@ try {
       await page.waitForTimeout(700);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `Overflow ${route} at ${width}px`);
       assert.equal(await page.locator(".stats-grid").evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(" ").length), width <= 1100 ? 2 : 4);
-      assert.equal(await page.locator(".stats-band__crane").isVisible(), true);
+      assert.equal(await page.locator(".stats-band__crane").isVisible(), width >= 768);
+      if (width < 768) {
+        const stats = await page.locator(".stats-band").evaluate((element) => ({
+          background: getComputedStyle(element).backgroundColor,
+          image: getComputedStyle(element).backgroundImage,
+          colors: [...element.querySelectorAll(".stat-card__value, .stat-card__label, .stat-card__detail")].map((item) => getComputedStyle(item).color),
+        }));
+        assert.equal(stats.background, "rgb(45, 46, 131)");
+        assert.equal(stats.image, "none");
+        assert.ok(stats.colors.every((color) => color === "rgb(255, 255, 255)"));
+      }
       assert.equal(await page.locator(".hero__logo, .service-line__logo").count(), 0);
       if (route === "/") {
         await page.waitForTimeout(1000);
