@@ -6,6 +6,7 @@ export const GET: APIRoute = () => {
     { path: "/", priority: "1.0", changefreq: "weekly" },
     { path: "/equipos", priority: "0.9", changefreq: "weekly" },
     { path: "/servicios", priority: "0.9", changefreq: "weekly" },
+    { path: "/estimador", priority: "0.8", changefreq: "monthly" },
     { path: "/proyectos", priority: "0.9", changefreq: "monthly" },
     { path: "/nosotros", priority: "0.8", changefreq: "monthly" },
     { path: "/contacto", priority: "0.8", changefreq: "monthly" },

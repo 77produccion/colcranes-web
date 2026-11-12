@@ -1,0 +1,75 @@
+/* The estimator shares the site's live brand tokens; no independent theme. */
+.estimator { padding-block: clamp(2rem, 4vw, 4rem) clamp(3rem, 6vw, 6rem); }
+.estimator [hidden] { display: none !important; }
+.estimator__intro { display: grid; gap: .75rem; margin-bottom: 2rem; }
+.estimator__intro p { margin: 0; max-width: 65ch; }
+.estimator__jump { color: var(--navy); text-decoration: underline; text-underline-offset: 4px; justify-self: start; }
+.estimator__layout { display: grid; align-items: start; gap: 2rem; }
+.estimator__layout > *, .estimator__fields > * { min-width: 0; }
+.estimator__controls { min-width: 0; margin: 0; padding: 0; border: 0; }
+.estimator__section { min-width: 0; border: 0; border-top: 1px solid var(--line-dark); padding: 1.25rem 0 2.25rem; margin: 0; }
+.estimator__section legend { float: left; width: 100%; padding: 0; margin-bottom: 1rem; font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; line-height: 1.25; color: var(--navy); }
+.estimator__section legend + * { clear: both; }
+.estimator__section legend span { font: 400 1rem var(--font-body); color: var(--ink); }
+.estimator__hint { margin: 0 0 1rem; font-size: .95rem; line-height: 1.5; }
+.estimator__hint a { text-decoration: underline; text-underline-offset: 3px; color: var(--navy); }
+.estimator__services { display: grid; gap: .65rem; }
+.estimator__service { display: flex; align-items: flex-start; gap: .8rem; padding: 1rem; border: 1px solid var(--line-dark); cursor: pointer; }
+.estimator__service:has(:checked) { border-color: var(--navy); background: var(--steel-100); box-shadow: inset 3px 0 var(--navy); }
+.estimator__service input, .estimator__check input { flex: none; width: 18px; height: 18px; accent-color: var(--navy); margin-top: .25rem; }
+.estimator__service strong { display: block; color: var(--navy); font-size: 1rem; line-height: 1.3; }
+.estimator__service small { display: block; font-size: .9rem; line-height: 1.45; margin-top: .35rem; }
+.estimator__fields { display: grid; gap: 1rem; margin-bottom: 1rem; }
+.estimator__field { display: grid; align-content: start; gap: .4rem; font-size: .95rem; min-width: 0; }
+.estimator__field > span { font-weight: 600; }
+.estimator__field :is(input, select), .estimator__fallback { width: 100%; max-width: 100%; min-width: 0; border: 1px solid var(--line-dark); background: white; color: var(--ink); padding: .65rem .7rem; min-height: 46px; font: inherit; border-radius: 0; }
+.estimator__field select { padding-right: 1.5rem; text-overflow: ellipsis; }
+.estimator__field :is(input, select):focus-visible { outline-color: var(--navy); }
+.estimator__field small, .estimator__check small { display: block; font-size: .8rem; color: var(--navy); }
+.estimator__equipment { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 44px; gap: .75rem; padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--line-dark); align-items: end; }
+.estimator__equipment > :first-child { grid-column: 1 / -1; }
+.estimator__remove { border: 1px solid var(--line-dark); height: 46px; width: 44px; background: white; color: var(--navy); font-size: 1.5rem; cursor: pointer; }
+.estimator__remove:disabled { opacity: .35; cursor: not-allowed; }
+.estimator__add { min-height: 44px; text-align: left; color: var(--navy); background: none; padding: .5rem 0; font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; border: 0; }
+.estimator__check { display: flex; align-items: flex-start; gap: .7rem; cursor: pointer; min-height: 44px; padding-block: .4rem; }
+.estimator__summary { background: var(--steel-100); scroll-margin-top: 6rem; }
+.estimator__price { background: var(--navy); color: white; padding: 1.5rem; border-top: 4px solid var(--cyan); }
+.estimator__price h2 { margin: 0; font: 600 1.2rem var(--font-display); }
+.estimator__currency { margin: .35rem 0 1.25rem; font-size: .9rem; }
+.estimator__range { margin: 0; font: 700 clamp(1.8rem, 2.5vw, 2.4rem)/1.15 var(--font-display); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.estimator__range span { display: block; margin-top: .3rem; }
+.estimator__scope { font-size: .9rem; margin: 1rem 0 0; }
+.estimator__result { padding: 1.5rem; }
+.estimator__facts, .estimator__breakdown dl { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; margin: 0; font-size: .95rem; }
+.estimator__facts dd, .estimator__breakdown dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.estimator__breakdown { margin-top: 1.25rem; border-block: 1px solid var(--line-dark); }
+.estimator__breakdown summary { min-height: 44px; padding-block: .7rem; font-weight: 600; cursor: pointer; color: var(--navy); }
+.estimator__breakdown dl { padding-block: .5rem 1rem; font-size: .9rem; }
+.estimator__notes p, .estimator__notice { border-left: 3px solid var(--cyan); padding-left: .8rem; font-size: .9rem; margin: 1rem 0; }
+.estimator__annual { font-size: .9rem; margin: 1rem 0; }
+.estimator__disclaimer { font-size: .9rem; margin: 1rem 0 1.25rem; }
+.estimator__actions { display: grid; gap: .65rem; }
+.estimator__actions a { display: flex; justify-content: center; align-items: center; min-height: 48px; text-align: center; padding: .7rem; font-weight: 600; }
+.estimator__primary { background: var(--navy); color: white; border: 1px solid var(--navy); }
+.estimator__primary:hover { background: var(--ink); }
+.estimator__secondary { border: 1px solid var(--navy); color: var(--navy); }
+.estimator__secondary:hover { background: var(--steel-200); }
+.estimator__actions [aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
+.estimator__copy { min-height: 44px; background: none; border: 0; text-decoration: underline; text-underline-offset: 4px; color: var(--navy); cursor: pointer; font: inherit; font-size: .9rem; }
+.estimator__copy:disabled { opacity: .5; cursor: not-allowed; }
+.estimator__status { font-size: .9rem; margin: .5rem 0; }
+.estimator__status:empty { display: none; }
+.estimator__fallback { height: 12rem; font-size: .9rem; }
+.estimator__email { display: block; overflow-wrap: anywhere; font-size: .9rem; text-align: center; text-decoration: underline; text-underline-offset: 3px; margin-top: .7rem; color: var(--navy); }
+@media (min-width: 600px) {
+  .estimator__services, .estimator__fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .estimator__fields--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .estimator__field--wide { grid-column: 1 / -1; }
+  .estimator__equipment { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) 5rem 44px; }
+  .estimator__equipment > :first-child { grid-column: auto; }
+}
+@media (min-width: 1080px) {
+  .estimator__layout { grid-template-columns: minmax(0, 1fr) minmax(20rem, .55fr); gap: clamp(2rem, 4vw, 4rem); }
+  .estimator__summary { position: sticky; top: 6rem; }
+  .estimator__jump { display: none; }
+}

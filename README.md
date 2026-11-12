@@ -23,6 +23,16 @@ npm run preview
 
 Las imágenes publicadas se encuentran en `public/images`. El archivo resultante del build se genera en `dist/` y no se versiona.
 
+## Estimador de servicio
+
+- Ruta nativa: `/estimador`, enlazada desde Servicios, menú y footer; se despliega con el resto del sitio, sin WordPress ni iframe.
+- Opciones y tarifas: `src/data/estimator.ts`. Cálculos y mensaje: `src/utils/estimator.ts`. Interfaz: `src/components/ServiceEstimator.astro`, `src/scripts/estimator.ts` y `src/styles/estimator.css`.
+- Conserva los supuestos del HTML original del 10 de noviembre de 2026. Confirmar con Presupuestos antes de publicar: andamios y coordinación de alturas tienen valor pendiente y se indican como excluidos del rango.
+- Las solicitudes se preparan para WhatsApp de ventas y `soporte.ventas@colcranes.com`; el usuario debe enviarlas. No hay almacenamiento ni envío automático del formulario.
+- Las tarifas se calculan en el navegador y son inspeccionables, aunque no hay controles públicos para editarlas. No son información confidencial.
+- `npm run check:estimator` verifica 288 combinaciones contra una referencia validada. Si existe el archivo local `docs/estimador-colcranes.html`, también compara directamente sus resultados. Los cambios intencionales de tarifas requieren actualizar la referencia de pruebas.
+- Para pruebas de interacción, accesibilidad y capturas responsivas: ejecutar `npm run preview -- --host 127.0.0.1 --port 4322` y luego `npm run check:estimator -- --browser` (Chrome instalado). Las capturas se guardan en `.astro/estimator/`.
+
 ## Optimización multimedia
 
 - Fotografías y transparencias: WebP, con variantes `.w640.webp` y `.w960.webp` para pantallas pequeñas.

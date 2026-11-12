@@ -12,6 +12,7 @@
     "optimize:logos": "node scripts/optimize-logos.mjs",
     "optimize:critical": "node scripts/optimize-critical-media.mjs",
     "check": "astro check",
+    "check:estimator": "node scripts/check-estimator.mjs",
     "optimize:videos": "node scripts/optimize-media.mjs videos",
     "check:media": "node scripts/check-media.mjs",
     "check:site": "node scripts/check-site.mjs",

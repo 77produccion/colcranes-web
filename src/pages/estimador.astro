@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import ServiceEstimator from '../components/ServiceEstimator.astro';
+import Quote from '../components/Quote.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Estimador de inspección y mantenimiento | COLCRANES" description="Estime el costo de inspección o mantenimiento de puentes grúa y polipastos. Configure equipos, ubicación y apoyos y solicite una cotización a COLCRANES.">
+  <Header />
+  <main id="contenido">
+    <PageHero image="/images/servicios/02-mantenimiento-preventivo.webp" tone="blue">
+      <div class="wrap estimator-hero">
+        <nav class="breadcrumbs" aria-label="Ruta de navegación"><a href="/">Inicio</a><span>/</span><a href="/servicios">Servicios</a><span>/</span><span aria-current="page">Estimador</span></nav>
+        <h1 class="d1">Estime su inspección o mantenimiento</h1>
+        <p class="lede lede--light">Planee el presupuesto de sus puentes grúa y polipastos con un rango de costo según las condiciones de su planta.</p>
+      </div>
+    </PageHero>
+    <ServiceEstimator />
+    <section class="estimator-help">
+      <div class="wrap estimator-help__inner">
+        <div><h2 class="d3">¿No tiene definido el alcance?</h2><p>Cuéntenos qué equipo tiene y qué necesita revisar. Nuestro equipo le orienta antes de cotizar.</p></div>
+        <button class="btn btn--ink" type="button" data-quote-open>Consultar con COLCRANES</button>
+      </div>
+    </section>
+    <Quote />
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .estimator-hero h1 { max-width: 22ch; margin-block: 1rem 1.25rem; }
+  .estimator-hero .lede { max-width: 62ch; }
+  .estimator-help { background: var(--steel-100); border-top: 1px solid var(--line-dark); padding-block: 3rem; }
+  .estimator-help__inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .estimator-help p { max-width: 65ch; margin: 1rem 0 0; }
+  .estimator-help .btn { flex-shrink: 0; }
+  @media (max-width: 760px) { .estimator-help__inner { align-items: flex-start; flex-direction: column; } }
+</style>

@@ -53,6 +53,9 @@ const heroImage = PROMO_IMAGES[serviceIndex % PROMO_IMAGES.length] ?? service.im
             </svg>
           </button>
           <a class="btn btn--ghost-light" href={CONTACT.whatsappUrl}>Contactar soporte por WhatsApp</a>
+          {['mantenimiento-preventivo', 'contratos-mantenimiento-repuestos', 'servicios-tecnicos'].includes(service.slug) && (
+            <a class="btn btn--ghost-light" href="/estimador">Estimar costo del servicio</a>
+          )}
         </div>
       </div>
     </PageHero>

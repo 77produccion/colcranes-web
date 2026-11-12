@@ -7,7 +7,7 @@ const isHome = pathname === "/";
 
 const nav = [
   { href: "/equipos", pageHref: "/equipos", label: "Equipos", index: "01", children: EQUIPMENT_FAMILIES.map((item) => ({ label: item.name, href: `/equipos/${item.slug}` })) },
-  { href: "/servicios", pageHref: "/servicios", label: "Servicios", index: "02", children: SERVICES.map((item) => ({ label: item.name, href: `/servicios/${item.slug}` })) },
+  { href: "/servicios", pageHref: "/servicios", label: "Servicios", index: "02", children: [...SERVICES.map((item) => ({ label: item.name, href: `/servicios/${item.slug}` })), { label: "Estimar inspección o mantenimiento", href: "/estimador" }] },
   { href: "/proyectos", pageHref: "/proyectos", label: "Proyectos", index: "03" },
   { href: "/nosotros", pageHref: "/nosotros", label: "Nosotros", index: "04" },
   { href: "/contacto", pageHref: "/contacto", label: "Contacto", index: "05" },

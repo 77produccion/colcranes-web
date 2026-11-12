@@ -1,0 +1,116 @@
+---
+import { SERVICE_OPTIONS, EQUIPMENT_OPTIONS, CAPACITY_OPTIONS, ZONE_OPTIONS, SCHEDULE_OPTIONS, INITIAL_STATE, ESTIMATOR_EMAIL } from '../data/estimator';
+import { estimate, money } from '../utils/estimator';
+import '../styles/estimator.css';
+
+const initial = estimate(INITIAL_STATE);
+---
+
+<div class="estimator wrap" data-estimator>
+  <div class="estimator__intro">
+    <h2 class="d3">Configure su visita de servicio</h2>
+    <p>El estimado se actualiza al cambiar las condiciones. No es una cotización definitiva.</p>
+    <a class="estimator__jump" href="#estimado">Ver mi estimado</a>
+  </div>
+  <noscript>
+    <p class="estimator__notice">Active JavaScript para calcular el estimado o escriba a <a href={`mailto:${ESTIMATOR_EMAIL}`}>{ESTIMATOR_EMAIL}</a> para solicitar una cotización.</p>
+  </noscript>
+  <div class="estimator__layout">
+    <form class="estimator__form" aria-label="Condiciones del servicio">
+      <fieldset class="estimator__controls" disabled data-controls>
+        <fieldset class="estimator__section">
+          <legend>Tipo de servicio</legend>
+          <p class="estimator__hint">Seleccione el alcance que necesita para sus equipos.</p>
+          <div class="estimator__services">
+            {SERVICE_OPTIONS.map(service => (
+              <label class="estimator__service">
+                <input type="radio" name="service" value={service.id} checked={service.id === INITIAL_STATE.service} />
+                <span><strong>{service.name}</strong><small>{service.description}</small></span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset class="estimator__section">
+          <legend>Equipos a intervenir</legend>
+          <p class="estimator__hint" id="equipment-help">Agrupe los equipos del mismo tipo y capacidad. Use la capacidad nominal de placa.</p>
+          <div data-rows class="estimator__rows" aria-describedby="equipment-help">
+            <div class="estimator__equipment" data-row>
+              <label class="estimator__field"><span>Tipo de equipo</span><select name="type" data-row-key="type">{EQUIPMENT_OPTIONS.map(item => <option value={item.id} selected={item.id === 'mono'}>{item.name}</option>)}</select></label>
+              <label class="estimator__field"><span>Capacidad</span><select name="capacity" data-row-key="capacity">{CAPACITY_OPTIONS.map(item => <option value={item.id}>{item.name}</option>)}</select></label>
+              <label class="estimator__field"><span>Cantidad</span><input name="quantity" data-row-key="quantity" type="number" min="1" max="99" step="1" value="1" inputmode="numeric" required /></label>
+              <button class="estimator__remove" type="button" data-remove disabled aria-label="Quitar grupo de equipos 1">×</button>
+            </div>
+          </div>
+          <button class="estimator__add" type="button" data-add>+ Agregar otro grupo de equipos</button>
+        </fieldset>
+
+        <fieldset class="estimator__section">
+          <legend>Ubicación y horario</legend>
+          <div class="estimator__fields">
+            <label class="estimator__field estimator__field--wide"><span>Ubicación de la planta</span><select name="zone">{ZONE_OPTIONS.map(item => <option value={item.id}>{item.name}</option>)}</select></label>
+            <label class="estimator__field"><span>Horario del servicio</span><select name="schedule">{SCHEDULE_OPTIONS.map(item => <option value={item.id}>{item.name}</option>)}</select></label>
+            <label class="estimator__field"><span>Cuadrilla</span><select name="technicians"><option value="2">2 técnicos</option><option value="1">1 técnico</option></select></label>
+          </div>
+          <p class="estimator__hint">Fuera del perímetro urbano: Soledad, Galapa, Malambo, Mosquera, Funza, Itagüí y municipios cercanos.</p>
+          <label class="estimator__check"><input type="checkbox" name="vehicle" /><span>Requiere vehículo de COLCRANES para trasladar herramienta o equipos.</span></label>
+        </fieldset>
+
+        <fieldset class="estimator__section">
+          <legend>Personal y equipos de apoyo</legend>
+          <p class="estimator__hint">Seleccione los apoyos que exige su planta. El alquiler se calcula por día de servicio.</p>
+          <div class="estimator__fields">
+            <label class="estimator__check"><input type="checkbox" name="siso" /><span>Coordinador SISO en sitio</span></label>
+            <label class="estimator__check"><input type="checkbox" name="heights" /><span>Coordinador de alturas <small>Valor por confirmar</small></span></label>
+          </div>
+          <div class="estimator__fields estimator__fields--three">
+            <label class="estimator__field"><span>Andamios de 6 m</span><input type="number" name="scaffold" min="0" max="20" step="1" value="0" inputmode="numeric" /><small>Valor por confirmar</small></label>
+            <label class="estimator__field"><span>Plataformas tipo tijera</span><input type="number" name="scissor" min="0" max="10" step="1" value="0" inputmode="numeric" /></label>
+            <label class="estimator__field"><span>Manlift</span><input type="number" name="manlift" min="0" max="10" step="1" value="0" inputmode="numeric" /></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="estimator__section">
+          <legend>Datos para la solicitud <span>(opcional)</span></legend>
+          <p class="estimator__hint">Se incluirán en el mensaje que usted envíe. Este formulario no guarda sus datos.</p>
+          <div class="estimator__fields">
+            <label class="estimator__field"><span>Empresa</span><input type="text" name="company" autocomplete="organization" maxlength="160" /></label>
+            <label class="estimator__field"><span>Nombre de contacto</span><input type="text" name="contactName" autocomplete="name" maxlength="120" /></label>
+            <label class="estimator__field"><span>Teléfono</span><input type="tel" name="phone" autocomplete="tel" maxlength="40" /></label>
+            <label class="estimator__field"><span>Ciudad o municipio de la planta</span><input type="text" name="city" autocomplete="address-level2" maxlength="120" /></label>
+          </div>
+          <p class="estimator__hint">Consulte nuestra <a href="/politica-tratamiento-datos">política de tratamiento de datos</a> antes de compartir información personal.</p>
+        </fieldset>
+      </fieldset>
+    </form>
+
+    <aside class="estimator__summary" id="estimado" aria-labelledby="estimate-title" tabindex="-1">
+      <div class="estimator__price">
+        <h2 id="estimate-title">Su estimado de servicio</h2>
+        <p class="estimator__currency">Pesos colombianos · antes de IVA</p>
+        <p class="estimator__range" data-range aria-live="polite" aria-atomic="true">{money(initial.low)}<span>a {money(initial.high)}</span></p>
+        <p class="estimator__scope" data-scope>{initial.service.name} · 1 equipo</p>
+      </div>
+      <div class="estimator__result">
+        <dl class="estimator__facts" data-facts><dt>Tiempo en sitio</dt><dd>{initial.days} jornada</dd><dt>Personal técnico</dt><dd>2 técnicos</dd></dl>
+        <details class="estimator__breakdown"><summary>Ver desglose del estimado</summary><dl data-breakdown></dl></details>
+        <div class="estimator__notes" data-notes></div>
+        <p class="estimator__annual" data-annual></p>
+        <p class="estimator__disclaimer">No incluye repuestos ni IVA. Presupuestos confirma el alcance y el precio final antes de programar.</p>
+        <div class="estimator__actions">
+          <a class="estimator__primary" data-whatsapp aria-disabled="true">Solicitar por WhatsApp</a>
+          <a class="estimator__secondary" data-email aria-disabled="true">Solicitar por correo</a>
+          <button class="estimator__copy" type="button" data-copy disabled>Copiar resumen de la solicitud</button>
+        </div>
+        <p class="estimator__status" data-status role="status"></p>
+        <textarea class="estimator__fallback" data-fallback aria-label="Resumen para copiar manualmente" readonly hidden></textarea>
+        <a class="estimator__email" href={`mailto:${ESTIMATOR_EMAIL}`}>{ESTIMATOR_EMAIL}</a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+  import { initEstimator } from '../scripts/estimator';
+  document.querySelectorAll<HTMLElement>('[data-estimator]').forEach(initEstimator);
+</script>
