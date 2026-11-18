@@ -664,9 +664,9 @@ export const SERVICES: ServiceItem[] = [
       "Pinzas mecánicas, eslingas y accesorios de sujeción industrial",
       "Memoria de cálculo y placa de identificación de capacidad nominal",
     ],
-    image: "/images/servicios/05-accesorios-bajo-gancho.webp",
+    image: "/images/servicios/bajo-gancho-1.webp",
     slotSpec: "1200 × 1500 px · Proporción 4:5 · Sin filtro de color",
-    alt: "Accesorios de elevación bajo gancho, balancín y gancho C para bobinas",
+    alt: "Balancín de elevación bajo gancho COLCRANES de 2 toneladas en planta de fabricación",
   },
   {
     num: "06",
