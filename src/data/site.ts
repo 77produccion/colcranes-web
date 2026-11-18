@@ -756,9 +756,9 @@ export const SERVICES: ServiceItem[] = [
       "Respaldo directo de fábrica con nuestros proveedores internacionales",
       "Verificación en planta y acompañamiento postventa",
     ],
-    image: "/images/servicios/09-servicio-garantia.webp",
+    image: "/images/servicios/servicio-garantias.webp",
     slotSpec: "1200 × 1500 px · Proporción 4:5 · Sin filtro de color",
-    alt: "Respaldo técnico y atención de garantía en equipos suministrados por Colcranes",
+    alt: "Técnico de COLCRANES inspeccionando un polipasto de 2 toneladas para el servicio de garantías",
   },
   {
     num: "10",
