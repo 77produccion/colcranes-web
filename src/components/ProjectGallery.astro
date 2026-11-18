@@ -8,7 +8,7 @@ const photos = PROJECT_GALLERY;
 {photos.length > 0 && <section class="project-record" id="registro-nave-industrial" aria-labelledby="project-record-title" data-project-record>
   <div class="wrap project-record__layout">
     <div class="project-record__media">
-      <div class="project-record__gallery" data-project-gallery tabindex="0" role="region" aria-roledescription="carrusel" aria-label="Fotografías de la nave industrial. Arrastre, deslice o use las teclas de dirección.">
+      <div class="project-record__gallery" data-project-gallery tabindex="0" role="region" aria-roledescription="carrusel" aria-label="Fotografías de bodegas en estructura metálica. Arrastre, deslice o use las teclas de dirección.">
         {photos.map(async (photo, index) => (
           <figure class="project-record__figure" role="group" aria-roledescription="diapositiva" aria-label={`${index + 1} de ${photos.length}`} data-photo-file={photo.image} data-photo-source={photo.source}>
             <picture>
@@ -25,10 +25,11 @@ const photos = PROJECT_GALLERY;
       </div>
     </div>
     <div class="project-record__content">
-      <h2 class="d2 project-record__title" id="project-record-title">Equipos de izaje en una nave industrial en construcción</h2>
-      <p class="project-record__intro">Un recorrido por la estructura, los equipos y el avance de la obra, desde el interior de la nave hasta su vista aérea.</p>
+      <p class="eyebrow">Línea 02 · Estructura metálica</p>
+      <h2 class="d2 project-record__title" id="project-record-title">Bodegas en estructura metálica</h2>
+      <p class="project-record__intro">Diseñamos, fabricamos y montamos la nave completa. El mismo equipo de ingeniería que calcula el puente grúa calcula la estructura que lo soporta.</p>
       <div class="project-record__details">
-        <h3>Descripción:</h3>
+        <h3>Registro de obra</h3>
         <div class="project-record__descriptions">
           {photos.map((photo, index) => (
             <p class:list={["project-record__description", { "is-active": index === 0 }]} data-project-description={index} aria-hidden={index !== 0 ? "true" : "false"}>{photo.description}</p>

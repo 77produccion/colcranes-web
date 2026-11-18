@@ -1,44 +1,44 @@
 [
   {
     "image": "/images/proyecto-1/vista-aerea-naves-equipos-izaje.webp",
-    "alt": "Vista aérea de naves en construcción con estructura metálica y equipos de izaje amarillos en su interior",
-    "caption": "La escala del conjunto y la distribución de los equipos.",
-    "description": "La vista aérea permite apreciar la distribución de los equipos de izaje amarillos dentro de las naves y su relación con la estructura metálica del conjunto.",
+    "alt": "Vista aérea de bodegas en estructura metálica en construcción, con equipos de izaje amarillos en su interior",
+    "caption": "Vista aérea de las bodegas en estructura metálica.",
+    "description": "La vista aérea muestra la estructura metálica de las bodegas en construcción y su integración con los equipos de izaje. Se aprecian las columnas, las vigas y la estructura de cubierta del conjunto.",
     "source": "DJI_0452.JPG"
   },
   {
     "image": "/images/proyecto-1/equipos-izaje-interior-nave.webp",
-    "alt": "Equipos de izaje amarillos bajo la estructura metálica de una nave industrial en construcción",
-    "caption": "Los equipos de izaje, vistos desde el interior de la nave.",
-    "description": "Desde el interior se observan los equipos de izaje y sus apoyos bajo la estructura de cubierta, junto con el espacio disponible dentro de la nave en construcción.",
+    "alt": "Interior de una bodega en estructura metálica en construcción, con equipos de izaje amarillos",
+    "caption": "La estructura y el sistema de izaje desde el interior de la bodega.",
+    "description": "Desde el interior de la bodega se observa la estructura de cubierta y su relación con los apoyos de los equipos de izaje, junto con el espacio disponible para la operación industrial.",
     "source": "DJI_0458.JPG"
   },
   {
     "image": "/images/proyecto-1/vista-exterior-nave-industrial.webp",
-    "alt": "Vista exterior de una nave industrial con cubierta y cerramientos durante la obra",
-    "caption": "Una vista exterior de la nave durante la obra.",
-    "description": "El exterior muestra la cubierta y los cerramientos de la nave durante la obra. Este encuadre complementa el registro de los equipos instalados en su interior.",
+    "alt": "Vista exterior de una bodega en estructura metálica con cubierta y cerramientos durante la obra",
+    "caption": "La cubierta y los cerramientos de la bodega durante la obra.",
+    "description": "La vista exterior registra el avance de la cubierta y los cerramientos de la bodega, elementos que completan la envolvente de la estructura metálica.",
     "source": "DJI_0512.JPG"
   },
   {
     "image": "/images/proyecto-1/estructura-metalica-en-montaje.webp",
-    "alt": "Estructura metálica de una nave en montaje con plataformas elevadoras y grúa móvil",
-    "caption": "La estructura de la nave durante el montaje.",
-    "description": "La grúa móvil y las plataformas elevadoras acompañan los trabajos de montaje de la estructura metálica. La imagen registra una de las etapas visibles de la obra.",
+    "alt": "Montaje de la estructura metálica de una bodega con plataformas elevadoras y grúa móvil",
+    "caption": "Montaje de la estructura metálica en sitio.",
+    "description": "La grúa móvil y las plataformas elevadoras acompañan el izaje y montaje de la estructura metálica de la bodega. La fotografía registra esta etapa de ejecución en sitio.",
     "source": "DJI_0388.JPG"
   },
   {
     "image": "/images/proyecto-1/cubierta-nave-vista-aerea.webp",
-    "alt": "Vista aérea de la cubierta parcialmente instalada sobre una nave industrial",
-    "caption": "El avance de la cubierta, registrado desde el aire.",
-    "description": "La toma aérea muestra la cubierta parcialmente instalada y permite distinguir la organización de las naves y las zonas que continúan en construcción.",
+    "alt": "Vista aérea de la cubierta parcialmente instalada sobre bodegas en estructura metálica",
+    "caption": "Avance del montaje de la cubierta de las bodegas.",
+    "description": "La toma aérea muestra la cubierta parcialmente instalada sobre la estructura metálica y permite distinguir las zonas de las bodegas que continúan en construcción.",
     "source": "DJI_0484.JPG"
   },
   {
     "image": "/images/proyecto-1/montaje-cerramiento-nave.webp",
-    "alt": "Plataformas elevadoras junto al cerramiento exterior de una nave industrial en construcción",
-    "caption": "Detalle de los trabajos en el cerramiento exterior.",
-    "description": "Las plataformas elevadoras facilitan el acceso a la fachada durante los trabajos de cerramiento. El detalle muestra el encuentro entre los paneles y la estructura de la nave.",
+    "alt": "Plataformas elevadoras junto al cerramiento exterior de una bodega en estructura metálica en construcción",
+    "caption": "Montaje de fachada y cerramientos de la bodega.",
+    "description": "Las plataformas elevadoras facilitan el acceso a la fachada durante los trabajos de cerramiento. El detalle muestra el encuentro entre los paneles y la estructura metálica de la bodega.",
     "source": "DJI_0508.JPG"
   },
   {
